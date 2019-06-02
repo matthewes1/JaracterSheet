@@ -1,0 +1,1977 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.Double?>
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckMenuItem?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.input.KeyCodeCombination?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Polygon?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<ScrollPane fx:id="mainPane" fitToHeight="true" fitToWidth="true" minHeight="725.0" minWidth="1250.0" pannable="true" prefHeight="721.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/8.0.211" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Rain.MainPackage.CharacterSheetController">
+   <content>
+      <TabPane minHeight="723.0" minWidth="1248.0">
+         <tabs>
+            <Tab closable="false" text="Character">
+               <content>
+                  <GridPane fx:id="characterPane" prefHeight="739.0" prefWidth="1311.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1257.0" minWidth="10.0" prefWidth="212.3333282470703" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="658.0" minWidth="10.0" prefWidth="449.33331298828125" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="919.6666259765625" minWidth="10.0" prefWidth="589.6666870117188" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="25.0" minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="709.6666679382324" minHeight="193.0" prefHeight="192.99998474121094" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="709.6666679382324" minHeight="10.0" prefHeight="132.00001525878906" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="709.6666679382324" minHeight="10.0" prefHeight="44.666656494140625" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="491.3333282470703" minHeight="10.0" prefHeight="302.3333435058594" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <MenuBar fx:id="menuPane" prefHeight="25.0" prefWidth="1262.0" GridPane.columnSpan="3">
+                          <menus>
+                            <Menu fx:id="file" mnemonicParsing="false" text="File">
+                                 <items>
+                                    <MenuItem fx:id="save" mnemonicParsing="false" onAction="#saveButton" text="Save">
+                                       <accelerator>
+                                          <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                                       </accelerator>
+                                    </MenuItem>
+                                    <MenuItem fx:id="load" mnemonicParsing="false" onAction="#load" text="Load" />
+                                 </items>
+                              </Menu>
+                            <Menu fx:id="options" mnemonicParsing="false" text="Options">
+                                 <items>
+                                    <MenuItem fx:id="colorOptions" mnemonicParsing="false" onAction="#colorOptions" text="ColorOptions" />
+                                 </items>
+                              </Menu>
+                          </menus>
+                        </MenuBar>
+                        <GridPane fx:id="statisticPane" prefHeight="683.0" prefWidth="236.0" GridPane.rowIndex="1" GridPane.rowSpan="4">
+                          <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="80.0" prefWidth="80.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="155.0" minWidth="125.0" prefWidth="155.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Pane fx:id="strengthPane" style="-fx-border-color: BLACK;">
+                                 <children>
+                                     <!--Strength Octogon-->
+                                    <Polygon fx:id="strengthOctagon" fill="WHITE" layoutX="-532.0" layoutY="-518.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: TOMATO;">
+                                      <points>
+                                        <Double fx:value="558" />
+                                        <Double fx:value="532" />
+                                        <Double fx:value="542" />
+                                        <Double fx:value="532" />
+                                        <Double fx:value="532" />
+                                        <Double fx:value="542" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="542" />
+                                      </points>
+                                    </Polygon>
+            
+                                                                                           <!--Strength Number-->
+                                     <TextField fx:id="strengthField" alignment="CENTER" layoutX="-9.0" layoutY="15.0" minHeight="-1000000000" minWidth="20.0" prefHeight="35.0" prefWidth="53.0" promptText="10" style="-fx-background-color: NULL;">
+                                         <font>
+                                             <Font name="Times New Roman Bold" size="10.0" />
+                                         </font>
+                                     </TextField>
+            
+                                                                                           <!--Strength Label-->
+                                     <Text fx:id="strengthLabel" layoutX="1.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Strength" textAlignment="CENTER">
+                                         <font>
+                                             <Font name="Times New Roman" size="14.0" />
+                                         </font>
+                                     </Text>
+            
+                                                                                           <!--Strength Modifier Octagon and field-->
+                                     <Polygon fx:id="strengthModifierOctagon" fill="WHITE" layoutX="-507.0" layoutY="-458.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: TOMATO;">
+                                       <points>
+                                          <Double fx:value="558" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="542" />
+                                       </points>
+                                    </Polygon>
+                                    <TextField fx:id="strengthModifierField" alignment="CENTER" editable="false" focusTraversable="false" layoutX="16.0" layoutY="75.0" maxHeight="35.0" maxWidth="53.0" prefHeight="35.0" prefWidth="53.0" promptText="0" style="-fx-background-color: NULL;" />
+                                    <Polygon fill="WHITE" layoutX="-507.0" layoutY="-493.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: TOMATO;">
+                                       <points>
+                                          <Double fx:value="558" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="542" />
+                                       </points>
+                                    </Polygon>
+                                    <TextField fx:id="strengthSymbol" alignment="CENTER" editable="false" focusTraversable="false" layoutX="16.0" layoutY="35.0" maxHeight="35.0" maxWidth="53.0" prefHeight="35.0" prefWidth="53.0" style="-fx-background-color: NULL;">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </TextField>
+                                 </children>
+                              </Pane>
+                        
+                                                                         <!--Str Prof-->
+                              <Pane fx:id="strengthProficiencies" prefHeight="114.0" prefWidth="44.0" style="-fx-border-color: BLACK;" GridPane.columnIndex="1">
+                                 <children>
+                                    <Pane layoutX="-5.0" layoutY="-3.0" style="-fx-background-color: NULL;">
+                                       <children>
+                                    
+                                                                              
+                                          <ChoiceBox fx:id="strengthChoice" scaleX="0.75" scaleY="0.75" value="0">
+                                            <items>
+                                                <FXCollections fx:factory="observableArrayList">
+                                                    <String fx:value="0" />
+                                                    <String fx:value="1" />
+                                                    <String fx:value="2" />
+                                                </FXCollections>
+                                            </items>
+                                          </ChoiceBox>
+                                          <TextField fx:id="strengthSave" editable="false" focusTraversable="false" layoutX="17.0" layoutY="-3.0" prefHeight="30.0" prefWidth="146.0" scaleX="0.75" scaleY="0.75" style="-fx-background-color: NULL;" text="Saving Throw: 0">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </Pane>
+                                    <Pane layoutX="-5.0" layoutY="16.0" style="-fx-background-color: NULL;">
+                                       <children>
+                                          <ChoiceBox fx:id="athleticsChoice" scaleX="0.75" scaleY="0.75" value="0">
+                                             <items>
+                                                <FXCollections fx:factory="observableArrayList">
+                                                   <String fx:value="0" />
+                                                   <String fx:value="1" />
+                                                   <String fx:value="2" />
+                                                </FXCollections>
+                                             </items>
+                                          </ChoiceBox>
+                                          <TextField fx:id="athletics" editable="false" focusTraversable="false" layoutX="17.0" layoutY="-3.0" prefHeight="30.0" prefWidth="146.0" scaleX="0.75" scaleY="0.75" style="-fx-background-color: NULL;" text="Athletics: 0">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </Pane>
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="dexterityPane" style="-fx-border-color: BLACK;" GridPane.rowIndex="1">
+                                 <children>
+                                    <Polygon fill="WHITE" layoutX="-532.0" layoutY="-518.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: GREENYELLOW;">
+                                       <points>
+                                          <Double fx:value="558" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="542" />
+                                       </points>
+                                    </Polygon>
+                                    <TextField fx:id="dexterityField" alignment="CENTER" layoutX="-9.0" layoutY="15.0" minHeight="35.0" minWidth="53.0" prefHeight="35.0" prefWidth="53.0" promptText="10" style="-fx-background-color: NULL;">
+                                       <font>
+                                          <Font name="Times New Roman Bold" size="10.0" />
+                                       </font>
+                                    </TextField>
+                                    <Text layoutX="1.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dexterity" textAlignment="CENTER">
+                                       <font>
+                                          <Font name="Times New Roman" size="14.0" />
+                                       </font>
+                                    </Text>
+                                    <Polygon fill="WHITE" layoutX="-507.0" layoutY="-458.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: GREENYELLOW;">
+                                       <points>
+                                          <Double fx:value="558" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="542" />
+                                       </points>
+                                    </Polygon>
+                                    <TextField fx:id="dexterityModifier" alignment="CENTER" editable="false" focusTraversable="false" layoutX="16.0" layoutY="75.0" maxHeight="35.0" maxWidth="53.0" prefHeight="35.0" prefWidth="53.0" promptText="0" style="-fx-background-color: NULL;" />
+                                    <Polygon fill="WHITE" layoutX="-507.0" layoutY="-493.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: GREENYELLOW;">
+                                       <points>
+                                          <Double fx:value="558" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="542" />
+                                       </points>
+                                    </Polygon>
+                                    <TextField fx:id="dexteritySymbol" alignment="CENTER" editable="false" layoutX="16.0" layoutY="35.0" maxHeight="35.0" maxWidth="53.0" prefHeight="35.0" prefWidth="53.0" style="-fx-background-color: NULL;">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </TextField>
+                                 </children>
+                              </Pane>
+                        
+                                                                         <!--Dex Prof-->
+                              <Pane fx:id="dexterityProficiencies" prefHeight="114.0" prefWidth="113.0" style="-fx-border-color: BLACK;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <children>
+                                    <Pane layoutX="-5.0" layoutY="-3.0" style="-fx-background-color: NULL;">
+                                       <children>
+                                          <ChoiceBox fx:id="dexterityChoice" scaleX="0.75" scaleY="0.75" value="0">
+                                             <items>
+                                                <FXCollections fx:factory="observableArrayList">
+                                                   <String fx:value="0" />
+                                                   <String fx:value="1" />
+                                                   <String fx:value="2" />
+                                                </FXCollections>
+                                             </items>
+                                          </ChoiceBox>
+                                          <TextField fx:id="dexteritySave" editable="false" focusTraversable="false" layoutX="17.0" layoutY="-3.0" prefHeight="30.0" prefWidth="146.0" scaleX="0.75" scaleY="0.75" style="-fx-background-color: NULL;" text="Saving Throw: 0">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </Pane>
+                                    <Pane layoutX="-5.0" layoutY="16.0" prefHeight="30.0" prefWidth="133.0" style="-fx-background-color: NULL;">
+                                       <children>
+                                          <TextField fx:id="acrobatics" editable="false" focusTraversable="false" layoutX="17.0" layoutY="-3.0" prefHeight="30.0" prefWidth="146.0" scaleX="0.75" scaleY="0.75" style="-fx-background-color: NULL;" text="Acrobatics: 0">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TextField>
+                                          <ChoiceBox fx:id="acrobaticsChoice" scaleX="0.75" scaleY="0.75" value="0">
+                                             <items>
+                                                <FXCollections fx:factory="observableArrayList">
+                                                   <String fx:value="0" />
+                                                   <String fx:value="1" />
+                                                   <String fx:value="2" />
+                                                </FXCollections>
+                                             </items>
+                                          </ChoiceBox>
+                                       </children>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </Pane>
+                                    <Pane layoutX="-5.0" layoutY="35.0" prefHeight="30.0" prefWidth="166.0" style="-fx-background-color: NULL;">
+                                       <children>
+                                          <ChoiceBox fx:id="sleightOfHandChoice" scaleX="0.75" scaleY="0.75" value="0">
+                                             <items>
+                                                <FXCollections fx:factory="observableArrayList">
+                                                   <String fx:value="0" />
+                                                   <String fx:value="1" />
+                                                   <String fx:value="2" />
+                                                </FXCollections>
+                                             </items>
+                                          </ChoiceBox>
+                                          <TextField fx:id="sleightOfHand" editable="false" focusTraversable="false" layoutX="17.0" layoutY="-3.0" prefHeight="30.0" prefWidth="146.0" scaleX="0.75" scaleY="0.75" style="-fx-background-color: NULL;" text="Sleight Of Hand: 0">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </Pane>
+                                    <Pane layoutX="-5.0" layoutY="54.0" style="-fx-background-color: NULL;">
+                                       <children>
+                                          <ChoiceBox fx:id="stealthChoice" scaleX="0.75" scaleY="0.75" value="0">
+                                             <items>
+                                                <FXCollections fx:factory="observableArrayList">
+                                                   <String fx:value="0" />
+                                                   <String fx:value="1" />
+                                                   <String fx:value="2" />
+                                                </FXCollections>
+                                             </items>
+                                          </ChoiceBox>
+                                          <TextField fx:id="stealth" editable="false" focusTraversable="false" layoutX="17.0" layoutY="-3.0" prefHeight="30.0" prefWidth="146.0" scaleX="0.75" scaleY="0.75" style="-fx-background-color: NULL;" text="Stealth: 0">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </Pane>
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="constitution" style="-fx-border-color: BLACK;" GridPane.rowIndex="2">
+                                 <children>
+                                    <Polygon fill="WHITE" layoutX="-532.0" layoutY="-518.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: SIENNA;">
+                                       <points>
+                                          <Double fx:value="558" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="542" />
+                                       </points>
+                                    </Polygon>
+                                    <TextField fx:id="constitutionField" alignment="CENTER" layoutX="-9.0" layoutY="15.0" minHeight="35.0" minWidth="53.0" prefHeight="35.0" prefWidth="53.0" promptText="10" style="-fx-background-color: NULL;">
+                                       <font>
+                                          <Font name="Times New Roman Bold" size="10.0" />
+                                       </font>
+                                    </TextField>
+                                    <Text layoutX="1.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Constitution" textAlignment="CENTER">
+                                       <font>
+                                          <Font name="Times New Roman" size="14.0" />
+                                       </font>
+                                    </Text>
+                                    <Polygon fill="WHITE" layoutX="-507.0" layoutY="-458.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: SIENNA;">
+                                       <points>
+                                          <Double fx:value="558" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="542" />
+                                       </points>
+                                    </Polygon>
+                                    <TextField fx:id="constitutionModifier" alignment="CENTER" editable="false" focusTraversable="false" layoutX="16.0" layoutY="75.0" maxHeight="35.0" maxWidth="53.0" prefHeight="35.0" prefWidth="53.0" promptText="0" style="-fx-background-color: NULL;" />
+                                    <Polygon fill="WHITE" layoutX="-507.0" layoutY="-493.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: SIENNA;">
+                                       <points>
+                                          <Double fx:value="558" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="542" />
+                                       </points>
+                                    </Polygon>
+                                    <TextField fx:id="constitutionSymbol" alignment="CENTER" editable="false" focusTraversable="false" layoutX="16.0" layoutY="35.0" maxHeight="35.0" maxWidth="53.0" prefHeight="35.0" prefWidth="53.0" style="-fx-background-color: NULL;">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </TextField>
+                                 </children>
+                              </Pane>
+                        
+                                                                               <!--Const Prof-->
+                              <Pane fx:id="constitutionProficiencies" prefHeight="114.0" prefWidth="137.0" style="-fx-border-color: BLACK;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <children>
+                                    <Pane layoutX="-5.0" layoutY="-3.0" prefHeight="30.0" prefWidth="173.0" style="-fx-background-color: NULL;">
+                                       <children>
+                                          <ChoiceBox fx:id="constitutionChoice" scaleX="0.75" scaleY="0.75" value="0">
+                                             <items>
+                                                <FXCollections fx:factory="observableArrayList">
+                                                   <String fx:value="0" />
+                                                   <String fx:value="1" />
+                                                   <String fx:value="2" />
+                                                </FXCollections>
+                                             </items>
+                                          </ChoiceBox>
+                                          <TextField fx:id="constitutionSave" editable="false" focusTraversable="false" layoutX="17.0" layoutY="-3.0" prefHeight="25.0" prefWidth="146.0" scaleX="0.75" scaleY="0.75" style="-fx-background-color: NULL;" text="Saving Throw: 0">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </Pane>
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="intelligence" style="-fx-border-color: BLACK;" GridPane.rowIndex="3">
+                                 <children>
+                                    <Polygon fill="WHITE" layoutX="-532.0" layoutY="-518.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: TURQUOISE;">
+                                       <points>
+                                          <Double fx:value="558" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="542" />
+                                       </points>
+                                    </Polygon>
+                                    <TextField fx:id="intelligenceField" alignment="CENTER" layoutX="-9.0" layoutY="15.0" minHeight="35.0" minWidth="53.0" prefHeight="35.0" prefWidth="53.0" promptText="10" style="-fx-background-color: NULL;">
+                                       <font>
+                                          <Font name="Times New Roman Bold" size="10.0" />
+                                       </font>
+                                    </TextField>
+                                    <Text layoutX="1.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Intelligence" textAlignment="CENTER">
+                                       <font>
+                                          <Font name="Times New Roman" size="14.0" />
+                                       </font>
+                                    </Text>
+                                    <Polygon fill="WHITE" layoutX="-507.0" layoutY="-458.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: TURQUOISE;">
+                                       <points>
+                                          <Double fx:value="558" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="542" />
+                                       </points>
+                                    </Polygon>
+                                    <TextField fx:id="intelligenceModifier" alignment="CENTER" editable="false" focusTraversable="false" layoutX="16.0" layoutY="75.0" maxHeight="35.0" maxWidth="53.0" prefHeight="35.0" prefWidth="53.0" promptText="0" style="-fx-background-color: NULL;" />
+                                    <Polygon fill="WHITE" layoutX="-507.0" layoutY="-493.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: TURQUOISE;">
+                                       <points>
+                                          <Double fx:value="558" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="542" />
+                                       </points>
+                                    </Polygon>
+                                    <TextField fx:id="intelligenceSymbol" alignment="CENTER" editable="false" focusTraversable="false" layoutX="16.0" layoutY="35.0" maxHeight="35.0" maxWidth="53.0" prefHeight="35.0" prefWidth="53.0" style="-fx-background-color: NULL;">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </TextField>
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="intelligenceProficiencies" prefHeight="114.0" prefWidth="113.0" style="-fx-border-color: BLACK;" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                 <children>
+                                    <Pane layoutX="-5.0" layoutY="-3.0" style="-fx-background-color: NULL;">
+                                       <children>
+                                          <ChoiceBox fx:id="intelligenceChoice" scaleX="0.75" scaleY="0.75" value="0">
+                                             <items>
+                                                <FXCollections fx:factory="observableArrayList">
+                                                   <String fx:value="0" />
+                                                   <String fx:value="1" />
+                                                   <String fx:value="2" />
+                                                </FXCollections>
+                                             </items>
+                                          </ChoiceBox>
+                                          <TextField fx:id="intelligenceSave" editable="false" focusTraversable="false" layoutX="17.0" layoutY="-3.0" prefHeight="25.0" prefWidth="146.0" scaleX="0.75" scaleY="0.75" style="-fx-background-color: NULL;" text="Saving Throw: 0">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </Pane>
+                                    <Pane layoutX="-5.0" layoutY="16.0" prefWidth="146.0" style="-fx-background-color: NULL;">
+                                       <children>
+                                          <ChoiceBox fx:id="arcanaChoice" scaleX="0.75" scaleY="0.75" value="0">
+                                             <items>
+                                                <FXCollections fx:factory="observableArrayList">
+                                                   <String fx:value="0" />
+                                                   <String fx:value="1" />
+                                                   <String fx:value="2" />
+                                                </FXCollections>
+                                             </items>
+                                          </ChoiceBox>
+                                          <TextField fx:id="arcana" editable="false" focusTraversable="false" layoutX="17.0" layoutY="-3.0" prefHeight="25.0" prefWidth="146.0" scaleX="0.75" scaleY="0.75" style="-fx-background-color: NULL;" text="Arcana: 0">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </Pane>
+                                    <Pane layoutX="-5.0" layoutY="35.0" style="-fx-background-color: NULL;">
+                                       <children>
+                                          <ChoiceBox fx:id="historyChoice" scaleX="0.75" scaleY="0.75" value="0">
+                                             <items>
+                                                <FXCollections fx:factory="observableArrayList">
+                                                   <String fx:value="0" />
+                                                   <String fx:value="1" />
+                                                   <String fx:value="2" />
+                                                </FXCollections>
+                                             </items>
+                                          </ChoiceBox>
+                                          <TextField fx:id="history" alignment="TOP_LEFT" editable="false" focusTraversable="false" layoutX="17.0" layoutY="-3.0" prefHeight="25.0" prefWidth="146.0" scaleX="0.75" scaleY="0.75" style="-fx-background-color: NULL;" text="History: 0">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </Pane>
+                                    <Pane layoutX="-5.0" layoutY="54.0" prefWidth="146.0" style="-fx-background-color: NULL;">
+                                       <children>
+                                          <ChoiceBox fx:id="investigationChoice" scaleX="0.75" scaleY="0.75" value="0">
+                                             <items>
+                                                <FXCollections fx:factory="observableArrayList">
+                                                   <String fx:value="0" />
+                                                   <String fx:value="1" />
+                                                   <String fx:value="2" />
+                                                </FXCollections>
+                                             </items>
+                                          </ChoiceBox>
+                                          <TextField fx:id="investigation" editable="false" focusTraversable="false" layoutX="17.0" layoutY="-3.0" prefHeight="25.0" prefWidth="146.0" scaleX="0.75" scaleY="0.75" style="-fx-background-color: NULL;" text="Investigation: 0">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </Pane>
+                                    <Pane layoutX="-5.0" layoutY="73.0" style="-fx-background-color: NULL;">
+                                       <children>
+                                          <ChoiceBox fx:id="natureChoice" scaleX="0.75" scaleY="0.75" value="0">
+                                             <items>
+                                                <FXCollections fx:factory="observableArrayList">
+                                                   <String fx:value="0" />
+                                                   <String fx:value="1" />
+                                                   <String fx:value="2" />
+                                                </FXCollections>
+                                             </items>
+                                          </ChoiceBox>
+                                          <TextField fx:id="nature" editable="false" focusTraversable="false" layoutX="17.0" layoutY="-3.0" prefHeight="25.0" prefWidth="146.0" scaleX="0.75" scaleY="0.75" style="-fx-background-color: NULL;" text="Nature: 0">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </Pane>
+                                    <Pane layoutX="-5.0" layoutY="92.0" style="-fx-background-color: NULL;">
+                                       <children>
+                                          <ChoiceBox fx:id="religionChoice" scaleX="0.75" scaleY="0.75" value="0">
+                                             <items>
+                                                <FXCollections fx:factory="observableArrayList">
+                                                   <String fx:value="0" />
+                                                   <String fx:value="1" />
+                                                   <String fx:value="2" />
+                                                </FXCollections>
+                                             </items>
+                                          </ChoiceBox>
+                                          <TextField fx:id="religion" editable="false" focusTraversable="false" layoutX="17.0" layoutY="-3.0" prefHeight="25.0" prefWidth="146.0" scaleX="0.75" scaleY="0.75" style="-fx-background-color: NULL;" text="Religion: 0">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </Pane>
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="wisdom" layoutX="-1.0" layoutY="456.0" style="-fx-border-color: BLACK;" GridPane.rowIndex="4">
+                                 <children>
+                                    <Polygon fill="WHITE" layoutX="-532.0" layoutY="-518.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: VIOLET;">
+                                       <points>
+                                          <Double fx:value="558" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="542" />
+                                       </points>
+                                    </Polygon>
+                                    <TextField fx:id="wisdomField" alignment="CENTER" layoutX="-9.0" layoutY="15.0" minHeight="35.0" minWidth="53.0" prefHeight="35.0" prefWidth="53.0" promptText="10" style="-fx-background-color: NULL;">
+                                       <font>
+                                          <Font name="Times New Roman Bold" size="10.0" />
+                                       </font>
+                                    </TextField>
+                                    <Text layoutX="1.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wisdom" textAlignment="CENTER">
+                                       <font>
+                                          <Font name="Times New Roman" size="14.0" />
+                                       </font>
+                                    </Text>
+                                    <Polygon fill="WHITE" layoutX="-507.0" layoutY="-458.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: VIOLET;">
+                                       <points>
+                                          <Double fx:value="558" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="542" />
+                                       </points>
+                                    </Polygon>
+                                    <TextField fx:id="wisdomModifier" alignment="CENTER" editable="false" focusTraversable="false" layoutX="16.0" layoutY="75.0" maxHeight="35.0" maxWidth="53.0" prefHeight="35.0" prefWidth="53.0" promptText="0" style="-fx-background-color: NULL;" />
+                                    <Polygon fill="WHITE" layoutX="-507.0" layoutY="-493.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: VIOLET;">
+                                       <points>
+                                          <Double fx:value="558" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="542" />
+                                       </points>
+                                    </Polygon>
+                                    <TextField fx:id="wisdomSymbol" alignment="CENTER" editable="false" focusTraversable="false" layoutX="16.0" layoutY="35.0" maxHeight="35.0" maxWidth="53.0" prefHeight="35.0" prefWidth="53.0" style="-fx-background-color: NULL;">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </TextField>
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="wisdomProficiencies" prefHeight="114.0" prefWidth="113.0" style="-fx-border-color: BLACK;" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                 <children>
+                                    <Pane layoutX="-5.0" layoutY="-3.0" style="-fx-background-color: NULL;">
+                                       <children>
+                                          <ChoiceBox fx:id="wisdomChoice" scaleX="0.75" scaleY="0.75" value="0">
+                                             <items>
+                                                <FXCollections fx:factory="observableArrayList">
+                                                   <String fx:value="0" />
+                                                   <String fx:value="1" />
+                                                   <String fx:value="2" />
+                                                </FXCollections>
+                                             </items>
+                                          </ChoiceBox>
+                                          <TextField fx:id="wisdomSave" editable="false" focusTraversable="false" layoutX="17.0" layoutY="-3.0" prefHeight="25.0" prefWidth="146.0" scaleX="0.75" scaleY="0.75" style="-fx-background-color: NULL;" text="Saving Throw: 0">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </Pane>
+                                    <Pane layoutX="-5.0" layoutY="16.0" style="-fx-background-color: NULL;">
+                                       <children>
+                                          <ChoiceBox fx:id="animalChoice" scaleX="0.75" scaleY="0.75" value="0">
+                                             <items>
+                                                <FXCollections fx:factory="observableArrayList">
+                                                   <String fx:value="0" />
+                                                   <String fx:value="1" />
+                                                   <String fx:value="2" />
+                                                </FXCollections>
+                                             </items>
+                                          </ChoiceBox>
+                                          <TextField fx:id="animalHandling" editable="false" focusTraversable="false" layoutX="17.0" layoutY="-3.0" prefHeight="25.0" prefWidth="146.0" scaleX="0.75" scaleY="0.75" style="-fx-background-color: NULL;" text="Animal Handling: 0">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </Pane>
+                                    <Pane layoutX="-5.0" layoutY="35.0" prefHeight="30.0" prefWidth="218.0" style="-fx-background-color: NULL;">
+                                       <children>
+                                          <ChoiceBox fx:id="insightChoice" scaleX="0.75" scaleY="0.75" value="0">
+                                             <items>
+                                                <FXCollections fx:factory="observableArrayList">
+                                                   <String fx:value="0" />
+                                                   <String fx:value="1" />
+                                                   <String fx:value="2" />
+                                                </FXCollections>
+                                             </items>
+                                          </ChoiceBox>
+                                          <TextField fx:id="insight" editable="false" focusTraversable="false" layoutX="11.0" layoutY="-3.0" prefHeight="30.0" prefWidth="187.0" scaleX="0.75" scaleY="0.75" style="-fx-background-color: NULL;" text="Insight: 0">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </Pane>
+                                    <Pane layoutX="-5.0" layoutY="54.0" style="-fx-background-color: NULL;">
+                                       <children>
+                                          <ChoiceBox fx:id="medicineChoice" scaleX="0.75" scaleY="0.75" value="0">
+                                             <items>
+                                                <FXCollections fx:factory="observableArrayList">
+                                                   <String fx:value="0" />
+                                                   <String fx:value="1" />
+                                                   <String fx:value="2" />
+                                                </FXCollections>
+                                             </items>
+                                          </ChoiceBox>
+                                          <TextField fx:id="medicine" editable="false" focusTraversable="false" layoutX="17.0" layoutY="-3.0" prefHeight="25.0" prefWidth="146.0" scaleX="0.75" scaleY="0.75" style="-fx-background-color: NULL;" text="Medicine: 0">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </Pane>
+                                    <Pane layoutX="-5.0" layoutY="73.0" style="-fx-background-color: NULL;">
+                                       <children>
+                                          <ChoiceBox fx:id="perceptionChoice" scaleX="0.75" scaleY="0.75" value="0">
+                                             <items>
+                                                <FXCollections fx:factory="observableArrayList">
+                                                   <String fx:value="0" />
+                                                   <String fx:value="1" />
+                                                   <String fx:value="2" />
+                                                </FXCollections>
+                                             </items>
+                                          </ChoiceBox>
+                                          <TextField fx:id="perception" editable="false" focusTraversable="false" layoutX="17.0" layoutY="-3.0" prefHeight="25.0" prefWidth="146.0" scaleX="0.75" scaleY="0.75" style="-fx-background-color: NULL;" text="Perception: 0">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </Pane>
+                                    <Pane layoutX="-5.0" layoutY="92.0" style="-fx-background-color: NULL;">
+                                       <children>
+                                          <ChoiceBox fx:id="survivalChoice" scaleX="0.75" scaleY="0.75" value="0">
+                                             <items>
+                                                <FXCollections fx:factory="observableArrayList">
+                                                   <String fx:value="0" />
+                                                   <String fx:value="1" />
+                                                   <String fx:value="2" />
+                                                </FXCollections>
+                                             </items>
+                                          </ChoiceBox>
+                                          <TextField fx:id="survival" editable="false" focusTraversable="false" layoutX="17.0" layoutY="-3.0" prefHeight="25.0" prefWidth="146.0" scaleX="0.75" scaleY="0.75" style="-fx-background-color: NULL;" text="Survival: 0">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </Pane>
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="charisma" style="-fx-border-color: BLACK;" GridPane.rowIndex="5">
+                                 <children>
+                                    <Polygon fill="WHITE" layoutX="-532.0" layoutY="-518.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: PINK;">
+                                       <points>
+                                          <Double fx:value="558" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="542" />
+                                       </points>
+                                    </Polygon>
+                                    <TextField fx:id="charismaField" alignment="CENTER" layoutX="-9.0" layoutY="15.0" minHeight="35.0" minWidth="53.0" prefHeight="35.0" prefWidth="53.0" promptText="10" style="-fx-background-color: NULL;">
+                                       <font>
+                                          <Font name="Times New Roman Bold" size="10.0" />
+                                       </font>
+                                    </TextField>
+                                    <Text layoutX="1.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Charisma" textAlignment="CENTER">
+                                       <font>
+                                          <Font name="Times New Roman" size="14.0" />
+                                       </font>
+                                    </Text>
+                                    <Polygon fill="WHITE" layoutX="-507.0" layoutY="-458.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: PINK;">
+                                       <points>
+                                          <Double fx:value="558" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="542" />
+                                       </points>
+                                    </Polygon>
+                                    <TextField fx:id="charismaModifier" alignment="CENTER" editable="false" focusTraversable="false" layoutX="16.0" layoutY="75.0" maxHeight="35.0" maxWidth="53.0" prefHeight="35.0" prefWidth="53.0" promptText="0" style="-fx-background-color: NULL;" />
+                                    <Polygon fill="WHITE" layoutX="-507.0" layoutY="-493.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: PINK;">
+                                       <points>
+                                          <Double fx:value="558" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="542" />
+                                       </points>
+                                    </Polygon>
+                                    <TextField fx:id="charismaSymbol" alignment="CENTER" editable="false" focusTraversable="false" layoutX="16.0" layoutY="35.0" maxHeight="35.0" maxWidth="53.0" prefHeight="35.0" prefWidth="53.0" style="-fx-background-color: NULL;">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </TextField>
+                                 </children>
+                              </Pane>
+                        
+                                                                         <!--Char Prof-->
+                              <Pane fx:id="charismaProficiencies" prefHeight="114.0" prefWidth="113.0" style="-fx-border-color: BLACK;" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                 <children>
+                                    <Pane layoutX="-5.0" layoutY="-3.0" style="-fx-background-color: NULL;">
+                                       <children>
+                                          <ChoiceBox fx:id="charismaChoice" scaleX="0.75" scaleY="0.75" value="0">
+                                             <items>
+                                                <FXCollections fx:factory="observableArrayList">
+                                                   <String fx:value="0" />
+                                                   <String fx:value="1" />
+                                                   <String fx:value="2" />
+                                                </FXCollections>
+                                             </items>
+                                          </ChoiceBox>
+                                          <TextField fx:id="charismaSave" editable="false" focusTraversable="false" layoutX="17.0" layoutY="-3.0" prefHeight="30.0" prefWidth="156.0" scaleX="0.75" scaleY="0.75" style="-fx-background-color: NULL;" text="Saving Throw: 0">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </Pane>
+                                    <Pane layoutX="-5.0" layoutY="16.0" style="-fx-background-color: NULL;">
+                                       <children>
+                                          <ChoiceBox fx:id="deceptionChoice" scaleX="0.75" scaleY="0.75" value="0">
+                                             <items>
+                                                <FXCollections fx:factory="observableArrayList">
+                                                   <String fx:value="0" />
+                                                   <String fx:value="1" />
+                                                   <String fx:value="2" />
+                                                </FXCollections>
+                                             </items>
+                                          </ChoiceBox>
+                                          <TextField fx:id="deception" editable="false" focusTraversable="false" layoutX="17.0" layoutY="-3.0" prefHeight="25.0" prefWidth="146.0" scaleX="0.75" scaleY="0.75" style="-fx-background-color: NULL;" text="Deception: 0">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </Pane>
+                                    <Pane layoutX="-5.0" layoutY="35.0" style="-fx-background-color: NULL;">
+                                       <children>
+                                          <ChoiceBox fx:id="intimidationChoice" scaleX="0.75" scaleY="0.75" value="0">
+                                             <items>
+                                                <FXCollections fx:factory="observableArrayList">
+                                                   <String fx:value="0" />
+                                                   <String fx:value="1" />
+                                                   <String fx:value="2" />
+                                                </FXCollections>
+                                             </items>
+                                          </ChoiceBox>
+                                          <TextField fx:id="intimidation" editable="false" focusTraversable="false" layoutX="17.0" layoutY="-3.0" prefHeight="25.0" prefWidth="146.0" scaleX="0.75" scaleY="0.75" style="-fx-background-color: NULL;" text="Intimidation: 0">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </Pane>
+                                    <Pane layoutX="-5.0" layoutY="54.0" style="-fx-background-color: NULL;">
+                                       <children>
+                                          <ChoiceBox fx:id="performanceChoice" scaleX="0.75" scaleY="0.75" value="0">
+                                             <items>
+                                                <FXCollections fx:factory="observableArrayList">
+                                                   <String fx:value="0" />
+                                                   <String fx:value="1" />
+                                                   <String fx:value="2" />
+                                                </FXCollections>
+                                             </items>
+                                          </ChoiceBox>
+                                          <TextField fx:id="performance" editable="false" focusTraversable="false" layoutX="17.0" layoutY="-3.0" prefHeight="25.0" prefWidth="146.0" scaleX="0.75" scaleY="0.75" style="-fx-background-color: NULL;" text="Performance: 0">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </Pane>
+                                    <Pane layoutX="-5.0" layoutY="73.0" style="-fx-background-color: NULL;">
+                                       <children>
+                                          <ChoiceBox fx:id="persuasionChoice" scaleX="0.75" scaleY="0.75" value="0">
+                                             <items>
+                                                <FXCollections fx:factory="observableArrayList">
+                                                   <String fx:value="0" />
+                                                   <String fx:value="1" />
+                                                   <String fx:value="2" />
+                                                </FXCollections>
+                                             </items>
+                                          </ChoiceBox>
+                                          <TextField fx:id="persuasion" editable="false" focusTraversable="false" layoutX="17.0" layoutY="-3.0" prefHeight="25.0" prefWidth="146.0" scaleX="0.75" scaleY="0.75" style="-fx-background-color: NULL;" text="Persuasion: 0">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </Pane>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </GridPane>
+                        <AnchorPane fx:id="acPane" prefHeight="301.0" prefWidth="468.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="2">
+                           <children>
+                              <Pane fx:id="healthPane" layoutX="26.0" prefHeight="306.0" prefWidth="396.0" translateZ="-20.0">
+                                 <children>
+                                    <Polygon fx:id="speedOctagon" fill="TRANSPARENT" layoutX="-475.0" layoutY="-478.0" scaleX="4.0" scaleY="4.0" stroke="BLACK" strokeType="INSIDE" style="-fx-stroke-width: .5;">
+                                       <points>
+                                          <Double fx:value="558" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="542" />
+                                       </points>
+                                    </Polygon>
+                                    <Polygon fx:id="acOctagon" fill="TRANSPARENT" layoutX="-351.0" layoutY="-478.0" scaleX="3.0" scaleY="3.0" stroke="BLACK" strokeType="INSIDE" style="-fx-stroke-width: 0.5;">
+                                       <points>
+                                          <Double fx:value="558" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="542" />
+                                       </points>
+                                    </Polygon>
+                                    <Polygon fx:id="initiativeOctagon" fill="TRANSPARENT" layoutX="-227.0" layoutY="-478.0" scaleX="4.0" scaleY="4.0" stroke="BLACK" strokeType="INSIDE" style="-fx-stroke-width: 0.5;">
+                                       <points>
+                                          <Double fx:value="558" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="542" />
+                                       </points>
+                                    </Polygon>
+                                    <Polygon fx:id="hitDiceOctagon" fill="TRANSPARENT" layoutX="-475.0" layoutY="-336.0" scaleX="4.0" scaleY="4.0" stroke="BLACK" strokeType="INSIDE" style="-fx-stroke-width: 0.5;">
+                                       <points>
+                                          <Double fx:value="558" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="542" />
+                                       </points>
+                                    </Polygon>
+                                    <Polygon fx:id="currentHPOctagon" fill="TRANSPARENT" layoutX="-351.0" layoutY="-337.0" scaleX="3.0" scaleY="3.0" stroke="BLACK" strokeType="INSIDE" style="-fx-stroke-width: 0.5;">
+                                       <points>
+                                          <Double fx:value="558" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="542" />
+                                       </points>
+                                    </Polygon>
+                                    <Polygon fx:id="deathSavesOctagon" fill="TRANSPARENT" layoutX="-227.0" layoutY="-336.0" scaleX="4.0" scaleY="4.0" stroke="BLACK" strokeType="INSIDE" style="-fx-stroke-width: 0.5;">
+                                       <points>
+                                          <Double fx:value="558" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="532" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="542" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="558" />
+                                          <Double fx:value="568" />
+                                          <Double fx:value="542" />
+                                       </points>
+                                    </Polygon>
+                                    <Spinner fx:id="currentHPSpinner" amountToStepBy="1" editable="true" layoutX="22.0" layoutY="25.0" max="1000000000" min="-1000000000" minHeight="20.0" prefHeight="32.0" prefWidth="106.0" style="-fx-font-size: 18;" />
+                                    <Spinner fx:id="tempHPSpinner" amountToStepBy="1" editable="true" layoutX="-6.0" layoutY="66.0" max="1000000000" min="-1000000000" minHeight="17.0" prefHeight="40.0" prefWidth="162.0" scaleX="0.5" scaleY="0.5" style="-fx-font-size: 18;" />
+                                    <Spinner fx:id="maxHpSpinner" amountToStepBy="1" editable="true" layoutX="-5.0" layoutY="99.0" max="1000000000" min="-1000000000" minHeight="17.0" prefHeight="40.0" prefWidth="162.0" scaleX="0.5" scaleY="0.5" style="-fx-font-size: 18;" />
+                                    <TextField fx:id="acField" alignment="CENTER" layoutX="147.0" layoutY="48.0" minHeight="14.0" prefHeight="48.0" prefWidth="104.0" style="-fx-background-color: NULL;">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font></TextField>
+                                    <TextField fx:id="initiativeField" alignment="CENTER" editable="false" layoutX="253.0" layoutY="41.0" prefHeight="61.0" prefWidth="140.0" style="-fx-background-color: NULL;">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font></TextField>
+                                    <MenuButton fx:id="modifiers" graphicTextGap="0.0" layoutX="290.0" layoutY="111.0" minHeight="13.0" minWidth="44.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="67.0" text="Modifiers">
+                                       <font>
+                                          <Font size="9.0" />
+                                       </font>
+                                       <items>
+                                          <CheckMenuItem fx:id="strengthInitiative" mnemonicParsing="false" text="Strength" />
+                                          <CheckMenuItem fx:id="dexterityInitiative" mnemonicParsing="false" selected="true" text="Dexterity" />
+                                          <CheckMenuItem fx:id="constitutionInitiative" mnemonicParsing="false" text="Constitution" />
+                                          <CheckMenuItem fx:id="intelligenceInitiative" mnemonicParsing="false" text="Intelligence" />
+                                          <CheckMenuItem fx:id="wisdomInitiative" mnemonicParsing="false" text="Wisdom" />
+                                          <CheckMenuItem fx:id="charismaInitiative" mnemonicParsing="false" text="Charisma" />
+                                          <CheckMenuItem fx:id="customInitiative" mnemonicParsing="false" text="Custom" />
+                                       </items>
+                                    </MenuButton>
+                                    <Spinner fx:id="hitDieSpinner" amountToStepBy="1" editable="true" layoutX="42.0" layoutY="200.0" max="1000000000" min="-1000000000" minHeight="15.0" prefHeight="26.0" prefWidth="68.0" />
+                                    <ChoiceBox fx:id="hitDieType" layoutX="43.0" layoutY="238.0" prefHeight="25.0" prefWidth="64.0" value="D4">
+                                       <items>
+                                          <FXCollections fx:factory="observableArrayList">
+                                             <String fx:value="D4" />
+                                             <String fx:value="D6" />
+                                             <String fx:value="D8" />
+                                             <String fx:value="D10" />
+                                             <String fx:value="D12" />
+                                             <String fx:value="D20" />
+                                          </FXCollections>
+                                       </items>
+                                    </ChoiceBox>
+                                    <TextField fx:id="speedField" alignment="CENTER" layoutX="147.0" layoutY="189.0" prefHeight="48.0" prefWidth="104.0" style="-fx-background-color: NULL;">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font></TextField>
+                                    <TextField fx:id="speedLabel" alignment="CENTER" editable="false" focusTraversable="false" layoutX="169.0" layoutY="156.0" minHeight="15.0" prefHeight="28.0" prefWidth="64.0" style="-fx-background-color: NULL;" text="Speed">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font></TextField>
+                                    <TextField fx:id="initiativeLabel" editable="false" focusTraversable="false" layoutX="286.0" layoutY="2.0" minHeight="15.0" prefHeight="28.0" prefWidth="76.0" style="-fx-background-color: NULL;" text="Initiative">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font></TextField>
+                                    <TextField fx:id="deathLabel" editable="false" focusTraversable="false" layoutX="295.0" layoutY="145.0" minHeight="15.0" prefHeight="28.0" prefWidth="60.0" style="-fx-background-color: NULL;" text="Death">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font></TextField>
+                                    <TextField fx:id="savesLabel" editable="false" focusTraversable="false" layoutX="294.0" layoutY="252.0" minHeight="15.0" prefHeight="28.0" prefWidth="60.0" style="-fx-background-color: NULL;" text="Saves">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font></TextField>
+                                    <TextField fx:id="hitDieLabel" alignment="CENTER" editable="false" focusTraversable="false" layoutX="42.0" layoutY="144.0" minHeight="15.0" prefHeight="28.0" prefWidth="66.0" style="-fx-background-color: NULL;" text="Hit Die">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font></TextField>
+                                    <TextField fx:id="healthLabel" alignment="CENTER" editable="false" focusTraversable="false" layoutX="44.0" layoutY="2.0" minHeight="15.0" prefHeight="28.0" prefWidth="63.0" style="-fx-background-color: NULL;" text="Health">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font></TextField>
+                                    <TextField fx:id="acLabel" editable="false" focusTraversable="false" layoutX="179.0" layoutY="19.0" minHeight="15.0" prefHeight="28.0" prefWidth="40.0" style="-fx-background-color: NULL;" text="AC">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font></TextField>
+                                    <TextField fx:id="maxHPLabel" alignment="CENTER" editable="false" focusTraversable="false" layoutX="51.0" layoutY="90.0" minHeight="15.0" prefHeight="28.0" prefWidth="47.0" style="-fx-background-color: NULL;" text="Max HP">
+                                       <font>
+                                          <Font size="10.0" />
+                                       </font>
+                                    </TextField>
+                                    <TextField fx:id="temporaryHPLabel" alignment="CENTER" editable="false" focusTraversable="false" layoutX="48.0" layoutY="55.0" minHeight="15.0" prefHeight="28.0" prefWidth="54.0" style="-fx-background-color: NULL;" text="Temp HP">
+                                       <font>
+                                          <Font size="10.0" />
+                                       </font>
+                                    </TextField>
+                                    <TextField fx:id="deathLabelOne" alignment="CENTER" editable="false" focusTraversable="false" layoutX="309.0" layoutY="212.0" minHeight="15.0" prefHeight="18.0" prefWidth="32.0" style="-fx-background-color: NULL;" text="Fails" />
+                                    <TextField fx:id="deathLabelTwo" alignment="CENTER" editable="false" focusTraversable="false" layoutX="297.0" layoutY="172.0" minHeight="15.0" prefHeight="18.0" prefWidth="56.0" style="-fx-background-color: NULL;" text="Successes" />
+                                    <RadioButton fx:id="deathSaveOne" layoutX="295.0" layoutY="193.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="13.0" />
+                                    <RadioButton fx:id="deathSaveTwo" layoutX="317.0" layoutY="193.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="13.0" />
+                                    <RadioButton fx:id="deathSaveThree" layoutX="339.0" layoutY="193.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="13.0" />
+                                    <RadioButton fx:id="deathFailOne" layoutX="295.0" layoutY="233.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="13.0" />
+                                    <RadioButton fx:id="deathFailTwo" layoutX="317.0" layoutY="233.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="13.0" />
+                                    <RadioButton fx:id="deathFailThree" layoutX="339.0" layoutY="233.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="13.0" />
+                                    <TextField fx:id="hitDieLabelOne" alignment="CENTER" editable="false" focusTraversable="false" layoutX="39.0" layoutY="169.0" minHeight="15.0" prefHeight="28.0" prefWidth="73.0" style="-fx-background-color: NULL;" text="Current">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </TextField>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="proficiencyPane" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <children>
+                              <Label focusTraversable="false" text="Proficiency Bonus">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="proficiencyBonus" alignment="CENTER" editable="false" focusTraversable="false" layoutX="191.0" layoutY="6.0" prefHeight="25.0" prefWidth="64.0" text="2" />
+                              <ChoiceBox fx:id="proficiencyBonusSymbol" layoutX="256.0" layoutY="6.0" prefHeight="25.0" prefWidth="44.0" value="+">
+                                 <items>
+                                    <FXCollections fx:factory="observableArrayList">
+                                       <String fx:value="-" />
+                                       <String fx:value="+" />
+                                    </FXCollections>
+                                 </items>
+                              </ChoiceBox>
+                              <TextField fx:id="proficiencyBonusExtra" alignment="CENTER" layoutX="301.0" layoutY="6.0" prefHeight="25.0" prefWidth="64.0" text="0" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="traits" prefWidth="466.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                           <children>
+                              <TextArea fx:id="traitsField" layoutX="1.0" layoutY="27.0" prefHeight="50.0" prefWidth="446.0" wrapText="true" />
+                              <Label focusTraversable="false" prefHeight="17.0" prefWidth="154.0" text="Personality Traits">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <TextArea fx:id="idealsField" layoutX="1.0" layoutY="100.0" prefHeight="50.0" prefWidth="446.0" wrapText="true" />
+                              <Label focusTraversable="false" layoutY="72.0" prefHeight="17.0" prefWidth="154.0" text="Ideals">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <TextArea fx:id="bondsField" layoutX="1.0" layoutY="174.0" prefHeight="50.0" prefWidth="446.0" wrapText="true" />
+                              <Label focusTraversable="false" layoutY="146.0" prefHeight="17.0" prefWidth="154.0" text="Bonds">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label focusTraversable="false" layoutY="220.0" prefHeight="17.0" prefWidth="154.0" text="Flaws">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <TextArea fx:id="flawsField" layoutX="1.0" layoutY="249.0" prefHeight="50.0" prefWidth="446.0" wrapText="true" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="nameArea" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                           <children>
+                              <TextField fx:id="characterName" alignment="CENTER" prefHeight="77.0" prefWidth="581.0" promptText="Character Name">
+                                 <font>
+                                    <Font size="36.0" />
+                                 </font>
+                              </TextField>
+                              <TextField fx:id="classField" alignment="CENTER" layoutY="77.0" prefHeight="32.0" prefWidth="175.0" promptText="Class">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </TextField>
+                              <Spinner fx:id="levelSpinner" amountToStepBy="1" editable="true" layoutX="291.0" layoutY="77.0" max="20" min="0" prefHeight="32.0" prefWidth="62.0" />
+                              <TextField fx:id="levelLabel" alignment="CENTER" editable="false" focusTraversable="false" layoutX="175.0" layoutY="77.0" prefHeight="32.0" prefWidth="116.0" text="Level: ">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </TextField>
+                              <TextField fx:id="playerNameField" alignment="CENTER" layoutX="353.0" layoutY="77.0" prefHeight="32.0" prefWidth="228.0" promptText="Player Name">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </TextField>
+                              <TextField fx:id="raceField" alignment="CENTER" layoutY="109.0" prefHeight="32.0" prefWidth="175.0" promptText="Race">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </TextField>
+                              <ComboBox fx:id="alignmentField" layoutX="174.0" layoutY="109.0" prefHeight="32.0" prefWidth="179.0" value="Neutral">
+                                   <items>
+                                       <FXCollections fx:factory="observableArrayList">
+                                           <String fx:value="Neutral" />
+                                           <String fx:value="LawFul Neutral" />
+                                           <String fx:value="Chaotic Good" />
+                                           <String fx:value="Neutral Good" />
+                                           <String fx:value="Lawful Good" />
+                                           <String fx:value="Chaotic Neutral" />
+                                           <String fx:value="Lawful Evil" />
+                                           <String fx:value="Neutral Evil" />
+                                           <String fx:value="Chaotic Evil" />
+                                       </FXCollections>
+                                   </items>
+                              </ComboBox>
+                              <TextField fx:id="experienceField" alignment="CENTER" layoutX="353.0" layoutY="109.0" prefHeight="32.0" prefWidth="228.0" promptText="Experience" text="0/300">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </TextField>
+                              <RadioButton fx:id="inspirationOne" layoutX="8.0" layoutY="165.0" mnemonicParsing="false" />
+                              <RadioButton fx:id="inspirationTwo" layoutX="34.0" layoutY="165.0" mnemonicParsing="false" />
+                              <RadioButton fx:id="inspirationThree" layoutX="60.0" layoutY="165.0" mnemonicParsing="false" />
+                              <RadioButton fx:id="inspirationFour" layoutX="84.0" layoutY="165.0" mnemonicParsing="false" />
+                              <RadioButton fx:id="inspirationFive" layoutX="108.0" layoutY="165.0" mnemonicParsing="false" />
+                              <TextField fx:id="passivePerceptionField" editable="false" focusTraversable="false" layoutX="353.0" layoutY="141.0" prefHeight="32.0" prefWidth="228.0" />
+                              <Label fx:id="passivePerceptionLabel" alignment="CENTER" focusTraversable="false" layoutX="175.0" layoutY="141.0" prefHeight="31.0" prefWidth="178.0" text="Passive Perception" />
+                              <TextField fx:id="inspirationLabel" alignment="CENTER" editable="false" focusTraversable="false" layoutX="1.0" layoutY="141.0" prefHeight="31.0" prefWidth="130.0" style="-fx-background-color: NULL;" text="Inspiration" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="inventoryPane" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.rowSpan="3">
+                           <children>
+                              <TabPane prefHeight="476.0" prefWidth="589.0" tabClosingPolicy="UNAVAILABLE">
+                                <tabs>
+                                  <Tab closable="false" text="Combat">
+                                    <content>
+                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                             <children>
+                                                <GridPane hgap="5.0" prefHeight="120.0" prefWidth="589.0">
+                                                  <columnConstraints>
+                                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                  </columnConstraints>
+                                                  <rowConstraints>
+                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                  </rowConstraints>
+                                                   <children>
+                                                      <Label alignment="CENTER" focusTraversable="false" prefHeight="42.0" prefWidth="197.0" text="Name">
+                                                         <font>
+                                                            <Font size="20.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label alignment="CENTER" focusTraversable="false" prefHeight="52.0" prefWidth="196.0" text="Attack Bonus" GridPane.columnIndex="1">
+                                                         <font>
+                                                            <Font size="20.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label alignment="CENTER" focusTraversable="false" prefHeight="37.0" prefWidth="196.0" text="Damage" GridPane.columnIndex="2">
+                                                         <font>
+                                                            <Font size="20.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextField fx:id="weaponNameOne" GridPane.rowIndex="1" />
+                                                      <TextField fx:id="attackBonusOne" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                      <TextField fx:id="damageOne" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                                      <TextField fx:id="weaponNameTwo" GridPane.rowIndex="2" />
+                                                      <TextField fx:id="attackBonusTwo" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                      <TextField fx:id="damageTwo" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                                      <TextField fx:id="weaponNameThree" GridPane.rowIndex="3" />
+                                                      <TextField fx:id="attackBonusThree" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                      <TextField fx:id="damageThree" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                                   </children>
+                                                </GridPane>
+                                                <Spinner fx:id="customInitiativeField" amountToStepBy="1" editable="true" layoutX="215.0" layoutY="122.0" max="100" min="-100" prefHeight="25.0" prefWidth="54.0" />
+                                                <Label focusTraversable="false" layoutY="143.0" prefHeight="34.0" prefWidth="189.0" text="Weapons">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label focusTraversable="false" layoutX="300.0" layoutY="143.0" prefHeight="34.0" prefWidth="189.0" text="Armor">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextArea fx:id="weapons" layoutY="172.0" prefHeight="169.0" prefWidth="289.0" wrapText="true" />
+                                                <TextArea fx:id="armor" layoutX="300.0" layoutY="172.0" prefHeight="169.0" prefWidth="289.0" wrapText="true" />
+                                                <VBox layoutY="341.0" spacing="5.0">
+                                                   <children>
+                                                      <HBox spacing="4.0">
+                                                         <children>
+                                                            <VBox prefWidth="70.0">
+                                                               <children>
+                                                                  <TextField fx:id="c1F" alignment="CENTER" prefHeight="17.0" prefWidth="70.0" text="Counter:" />
+                                                                  <Spinner fx:id="c1" editable="true" max="1000000000" min="-1000000000" prefHeight="25.0" prefWidth="70.0" />
+                                                               </children>
+                                                            </VBox>
+                                                            <VBox layoutX="10.0" layoutY="10.0" prefWidth="70.0">
+                                                               <children>
+                                                                  <TextField fx:id="c2F" alignment="CENTER" prefHeight="17.0" prefWidth="70.0" text="Counter:" />
+                                                                  <Spinner fx:id="c2" editable="true" max="1000000000" min="-1000000000" prefHeight="25.0" prefWidth="70.0" />
+                                                               </children>
+                                                            </VBox>
+                                                            <VBox layoutX="10.0" layoutY="10.0" prefWidth="70.0">
+                                                               <children>
+                                                                  <TextField fx:id="c3F" alignment="CENTER" prefHeight="17.0" prefWidth="70.0" text="Counter:" />
+                                                                  <Spinner fx:id="c3" editable="true" max="1000000000" min="-1000000000" prefHeight="25.0" prefWidth="70.0" />
+                                                               </children>
+                                                            </VBox>
+                                                            <VBox layoutX="150.0" layoutY="10.0" prefWidth="70.0">
+                                                               <children>
+                                                                  <TextField fx:id="c4F" alignment="CENTER" prefHeight="17.0" prefWidth="70.0" text="Counter:" />
+                                                                  <Spinner fx:id="c4" editable="true" max="1000000000" min="-1000000000" prefHeight="25.0" prefWidth="70.0" />
+                                                               </children>
+                                                            </VBox>
+                                                            <VBox layoutX="150.0" layoutY="10.0" prefWidth="70.0">
+                                                               <children>
+                                                                  <TextField fx:id="c5F" alignment="CENTER" prefHeight="17.0" prefWidth="70.0" text="Counter:" />
+                                                                  <Spinner fx:id="c5" editable="true" max="1000000000" min="-1000000000" prefHeight="25.0" prefWidth="70.0" />
+                                                               </children>
+                                                            </VBox>
+                                                            <VBox layoutX="290.0" layoutY="10.0" prefWidth="70.0">
+                                                               <children>
+                                                                  <TextField fx:id="c6F" alignment="CENTER" prefHeight="17.0" prefWidth="70.0" text="Counter:" />
+                                                                  <Spinner fx:id="c6" editable="true" max="1000000000" min="-1000000000" prefHeight="25.0" prefWidth="70.0" />
+                                                               </children>
+                                                            </VBox>
+                                                            <VBox layoutX="10.0" layoutY="10.0" prefWidth="70.0">
+                                                               <children>
+                                                                  <TextField fx:id="c7F" alignment="CENTER" prefHeight="17.0" prefWidth="70.0" text="Counter:" />
+                                                                  <Spinner fx:id="c7" editable="true" max="1000000000" min="-1000000000" prefHeight="25.0" prefWidth="70.0" />
+                                                               </children>
+                                                            </VBox>
+                                                            <VBox layoutX="85.0" layoutY="10.0" prefWidth="70.0">
+                                                               <children>
+                                                                  <TextField fx:id="c8F" alignment="CENTER" prefHeight="17.0" prefWidth="70.0" text="Counter:" />
+                                                                  <Spinner fx:id="c8" editable="true" max="1000000000" min="-1000000000" prefHeight="25.0" prefWidth="70.0" />
+                                                               </children>
+                                                            </VBox>
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox layoutX="10.0" layoutY="10.0" spacing="4.0">
+                                                         <children>
+                                                            <VBox prefWidth="70.0">
+                                                               <children>
+                                                                  <TextField alignment="CENTER" prefHeight="17.0" prefWidth="70.0" text="Counter:" fx:id="x8F" />
+                                                                  <Spinner editable="true" max="1000000000" min="-1000000000" prefHeight="25.0" prefWidth="70.0" fx:id="x8" />
+                                                               </children>
+                                                            </VBox>
+                                                            <VBox layoutX="10.0" layoutY="10.0" prefWidth="70.0">
+                                                               <children>
+                                                                  <TextField alignment="CENTER" prefHeight="17.0" prefWidth="70.0" text="Counter:" fx:id="x7F" />
+                                                                  <Spinner editable="true" max="1000000000" min="-1000000000" prefHeight="25.0" prefWidth="70.0" fx:id="x7" />
+                                                               </children>
+                                                            </VBox>
+                                                            <VBox layoutX="10.0" layoutY="10.0" prefWidth="70.0">
+                                                               <children>
+                                                                  <TextField alignment="CENTER" prefHeight="17.0" prefWidth="70.0" text="Counter:" fx:id="x6F" />
+                                                                  <Spinner editable="true" max="1000000000" min="-1000000000" prefHeight="25.0" prefWidth="70.0" fx:id="x6" />
+                                                               </children>
+                                                            </VBox>
+                                                            <VBox layoutX="150.0" layoutY="10.0" prefWidth="70.0">
+                                                               <children>
+                                                                  <TextField alignment="CENTER" prefHeight="17.0" prefWidth="70.0" text="Counter:" fx:id="x5F" />
+                                                                  <Spinner editable="true" max="1000000000" min="-1000000000" prefHeight="25.0" prefWidth="70.0" fx:id="x5" />
+                                                               </children>
+                                                            </VBox>
+                                                            <VBox layoutX="150.0" layoutY="10.0" prefWidth="70.0">
+                                                               <children>
+                                                                  <TextField alignment="CENTER" prefHeight="17.0" prefWidth="70.0" text="Counter:" fx:id="x4F" />
+                                                                  <Spinner editable="true" max="1000000000" min="-1000000000" prefHeight="25.0" prefWidth="70.0" fx:id="x4" />
+                                                               </children>
+                                                            </VBox>
+                                                            <VBox layoutX="290.0" layoutY="10.0" prefWidth="70.0">
+                                                               <children>
+                                                                  <TextField alignment="CENTER" prefHeight="17.0" prefWidth="70.0" text="Counter:" fx:id="x3F" />
+                                                                  <Spinner editable="true" max="1000000000" min="-1000000000" prefHeight="25.0" prefWidth="70.0" fx:id="x3" />
+                                                               </children>
+                                                            </VBox>
+                                                            <VBox layoutX="10.0" layoutY="10.0" prefWidth="70.0">
+                                                               <children>
+                                                                  <TextField alignment="CENTER" prefHeight="17.0" prefWidth="70.0" text="Counter:" fx:id="x2F" />
+                                                                  <Spinner editable="true" max="1000000000" min="-1000000000" prefHeight="25.0" prefWidth="70.0" fx:id="x2" />
+                                                               </children>
+                                                            </VBox>
+                                                            <VBox layoutX="85.0" layoutY="10.0" prefWidth="70.0">
+                                                               <children>
+                                                                  <TextField alignment="CENTER" prefHeight="17.0" prefWidth="70.0" text="Counter:" fx:id="x1F" />
+                                                                  <Spinner editable="true" max="1000000000" min="-1000000000" prefHeight="25.0" prefWidth="70.0" fx:id="x1" />
+                                                               </children>
+                                                            </VBox>
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </VBox>
+                                                <Label focusTraversable="false" layoutY="118.0" prefHeight="34.0" prefWidth="216.0" text="Custom Initiative Bonus:">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                    </content>
+                                  </Tab>
+                                   <!--Inventory Tab-->
+                                    <Tab text="Inventory">
+                                      <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                             <children>
+                                                <VBox fx:id="money" layoutX="61.0" prefHeight="125.0" prefWidth="133.0">
+                                                   <children>
+                                                      <Spinner fx:id="copper" amountToStepBy="1.0" editable="true" max="1000000000" min="-1000000000" prefHeight="25.0" prefWidth="146.0" />
+                                                      <Spinner fx:id="silver" editable="true" layoutX="10.0" layoutY="10.0" max="1000000000" min="-1000000000" />
+                                                      <Spinner fx:id="electrum" editable="true" layoutX="10.0" layoutY="35.0" max="1000000000" min="-1000000000" prefHeight="25.0" prefWidth="174.0" />
+                                                      <Spinner fx:id="gold" editable="true" layoutX="10.0" layoutY="60.0" max="1000000000" min="-1000000000" />
+                                                      <Spinner fx:id="platinum" editable="true" layoutX="10.0" layoutY="85.0" max="1000000000" min="-1000000000" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox prefHeight="125.0" prefWidth="59.0">
+                                                   <children>
+                                                      <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" focusTraversable="false" prefHeight="24.0" prefWidth="75.0" text="Copper">
+                                                         <font>
+                                                            <Font size="15.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" focusTraversable="false" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="75.0" text="Silver">
+                                                         <font>
+                                                            <Font size="15.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" focusTraversable="false" layoutX="10.0" layoutY="34.0" prefHeight="25.0" prefWidth="75.0" text="Electrum">
+                                                         <font>
+                                                            <Font size="15.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" focusTraversable="false" layoutX="10.0" layoutY="59.0" prefHeight="25.0" prefWidth="75.0" text="Gold">
+                                                         <font>
+                                                            <Font size="15.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" focusTraversable="false" layoutX="10.0" layoutY="84.0" prefHeight="25.0" prefWidth="75.0" text="Platinum">
+                                                         <font>
+                                                            <Font size="15.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </VBox>
+                                                <Label focusTraversable="false" layoutY="130.0" prefHeight="28.0" prefWidth="137.0" text="Miscellaneous">
+                                                   <font>
+                                                      <Font size="17.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextArea fx:id="miscellaneousOne" layoutY="154.0" prefHeight="293.0" prefWidth="589.0" wrapText="true" />
+                                             </children>
+                                          </AnchorPane>
+                                      </content>
+                                    </Tab>
+                                    <Tab closable="false" text="Inventory 2">
+                                      <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                             <children>
+                                                <TextArea fx:id="inventoryOne" prefHeight="448.0" prefWidth="297.0" wrapText="true" />
+                                                <TextArea fx:id="inventoryTwo" layoutX="302.0" prefHeight="448.0" prefWidth="293.0" wrapText="true" />
+                                             </children>
+                                          </AnchorPane>
+                                      </content>
+                                    </Tab>
+                                    <Tab text="Inventory 3">
+                                       <content>
+                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                             <children>
+                                                <TextArea fx:id="inventoryThree" prefHeight="448.0" prefWidth="297.0" wrapText="true" />
+                                                <TextArea fx:id="inventoryFour" layoutX="302.0" prefHeight="448.0" prefWidth="293.0" wrapText="true" />
+                                             </children>
+                                          </AnchorPane>
+                                       </content>
+                                    </Tab>
+                                  <Tab closable="false" text="Character Info">
+                                    <content>
+                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                             <children>
+                                                <VBox layoutX="40.0" prefHeight="138.0" prefWidth="104.0">
+                                                   <children>
+                                                      <TextField fx:id="ageField" prefHeight="11.0" prefWidth="44.0">
+                                                         <font>
+                                                            <Font size="10.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <TextField fx:id="eyes" layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="44.0">
+                                                         <font>
+                                                            <Font size="10.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <TextField fx:id="height" layoutX="10.0" layoutY="33.0" prefHeight="17.0" prefWidth="44.0">
+                                                         <font>
+                                                            <Font size="10.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <TextField fx:id="skin" layoutX="10.0" layoutY="56.0" prefHeight="17.0" prefWidth="44.0">
+                                                         <font>
+                                                            <Font size="10.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <TextField fx:id="hair" layoutX="10.0" layoutY="79.0" prefHeight="17.0" prefWidth="44.0">
+                                                         <font>
+                                                            <Font size="10.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <TextField fx:id="weightField" layoutX="10.0" layoutY="102.0" prefHeight="17.0" prefWidth="44.0">
+                                                         <font>
+                                                            <Font size="10.0" />
+                                                         </font>
+                                                      </TextField>
+                                                   </children>
+                                                </VBox>
+                                                <TextArea fx:id="language" layoutY="158.0" prefHeight="285.0" prefWidth="146.0" wrapText="true" />
+                                                <Label focusTraversable="false" layoutX="-1.0" layoutY="134.0" prefHeight="24.0" prefWidth="147.0" text="Languages and Proficiences" />
+                                                <TextArea fx:id="feats" layoutX="154.0" layoutY="28.0" prefHeight="415.0" prefWidth="433.0" wrapText="true" />
+                                                <Label focusTraversable="false" layoutX="153.0" layoutY="2.0" prefHeight="24.0" prefWidth="167.0" text="Features/Traits/Background" />
+                                                <VBox>
+                                                   <children>
+                                                      <Label alignment="CENTER_RIGHT" focusTraversable="false" prefHeight="23.0" prefWidth="39.0" text="Age" />
+                                                      <Label alignment="CENTER_RIGHT" focusTraversable="false" prefHeight="23.0" prefWidth="39.0" text="Eyes" />
+                                                      <Label alignment="CENTER_RIGHT" focusTraversable="false" prefHeight="23.0" prefWidth="39.0" text="Height" />
+                                                      <Label alignment="CENTER_RIGHT" focusTraversable="false" prefHeight="23.0" prefWidth="39.0" text="Skin" />
+                                                      <Label alignment="CENTER_RIGHT" focusTraversable="false" prefHeight="23.0" prefWidth="39.0" text="Hair" />
+                                                      <Label alignment="CENTER_RIGHT" focusTraversable="false" prefHeight="23.0" prefWidth="39.0" text="Weight" />
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </AnchorPane>
+                                    </content>
+                                  </Tab>
+                                    <Tab text="Character Info 2">
+                                      <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                             <children>
+                                                <Label focusTraversable="false" layoutY="-2.0" prefHeight="34.0" prefWidth="94.0" text="Backstory">
+                                                   <font>
+                                                      <Font size="17.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextArea fx:id="backStory" layoutY="32.0" prefHeight="414.0" prefWidth="588.0" wrapText="true" />
+                                             </children>
+                                          </AnchorPane>
+                                      </content>
+                                    </Tab>
+                                </tabs>
+                              </TabPane>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </GridPane>
+               </content>
+            </Tab>
+            <Tab closable="false" text="Spell Book">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <MenuBar layoutX="-1.0" prefHeight="25.0" prefWidth="1262.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-1.0">
+                          <menus>
+                            <Menu mnemonicParsing="false" text="File">
+                              <items>
+                                <MenuItem fx:id="saveSpells" mnemonicParsing="false" onAction="#saveSpells" text="Save">
+                                       <accelerator>
+                                          <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                                       </accelerator>
+                                    </MenuItem>
+                                    <MenuItem fx:id="loadSpells" mnemonicParsing="false" onAction="#loadSpells" text="Load" />
+                              </items>
+                            </Menu>
+                            <Menu mnemonicParsing="false" text="Edit">
+                                 <items>
+                                    <MenuItem fx:id="spellSlots" mnemonicParsing="false" text="Unspecified Action" />
+                                 </items>
+                            </Menu>
+                          </menus>
+                        </MenuBar>
+                        <SplitPane dividerPositions="0.5" layoutY="24.0" prefHeight="686.0" prefWidth="1261.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="24.0">
+                          <items>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <Label alignment="CENTER" prefHeight="23.0" prefWidth="627.0" text="Prepared Spells" />
+                                    <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="1.0" layoutY="26.0">
+                                       <content>
+                                          <VBox fx:id="spellbookBoxP" alignment="TOP_CENTER" prefHeight="660.0" prefWidth="625.0" spacing="5.0">
+                                             <children>
+                                                <Label alignment="CENTER" prefHeight="27.0" prefWidth="795.0" style="-fx-background-color: LIGHTGREY;" text="Cantrips">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <VBox fx:id="CantripsP" prefHeight="10.0" prefWidth="100.0" spacing="5.0" />
+                                                <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="27.0" prefWidth="795.0" style="-fx-background-color: LIGHTGREY;" text="1st Level Spells">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <VBox fx:id="firstLvlP" layoutX="10.0" layoutY="47.0" prefHeight="10.0" prefWidth="100.0" spacing="5.0" />
+                                                <Label alignment="CENTER" layoutX="10.0" layoutY="67.0" prefHeight="27.0" prefWidth="795.0" style="-fx-background-color: LIGHTGREY;" text="2nd Level Spells">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <VBox fx:id="secondLvlP" layoutX="10.0" layoutY="104.0" prefHeight="10.0" prefWidth="100.0" spacing="5.0" />
+                                                <Label alignment="CENTER" layoutX="10.0" layoutY="124.0" prefHeight="27.0" prefWidth="795.0" style="-fx-background-color: LIGHTGREY;" text="3rd Level Spells">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <VBox fx:id="thirdLvlP" layoutX="10.0" layoutY="161.0" prefHeight="10.0" prefWidth="100.0" spacing="5.0" />
+                                                <Label alignment="CENTER" layoutX="10.0" layoutY="181.0" prefHeight="27.0" prefWidth="795.0" style="-fx-background-color: LIGHTGREY;" text="4th Level Spells">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <VBox fx:id="fourthLvlP" layoutX="10.0" layoutY="218.0" prefHeight="10.0" prefWidth="100.0" spacing="5.0" />
+                                                <Label alignment="CENTER" layoutX="10.0" layoutY="238.0" prefHeight="27.0" prefWidth="795.0" style="-fx-background-color: LIGHTGREY;" text="5th Level Spells">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <VBox fx:id="fifthLvlP" layoutX="10.0" layoutY="275.0" prefHeight="10.0" prefWidth="100.0" spacing="5.0" />
+                                                <Label alignment="CENTER" layoutX="10.0" layoutY="295.0" prefHeight="27.0" prefWidth="795.0" style="-fx-background-color: LIGHTGREY;" text="6th Level Spells">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <VBox fx:id="sixthLvlP" layoutX="10.0" layoutY="332.0" prefHeight="10.0" prefWidth="100.0" spacing="5.0" />
+                                                <Label alignment="CENTER" layoutX="10.0" layoutY="352.0" prefHeight="27.0" prefWidth="795.0" style="-fx-background-color: LIGHTGREY;" text="7th Level Spells">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <VBox fx:id="seventhLvlP" layoutX="10.0" layoutY="389.0" prefHeight="10.0" prefWidth="100.0" spacing="5.0" />
+                                                <Label alignment="CENTER" layoutX="10.0" layoutY="409.0" prefHeight="27.0" prefWidth="795.0" style="-fx-background-color: LIGHTGREY;" text="8th Level Spells">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <VBox fx:id="eighthLvlP" layoutX="10.0" layoutY="446.0" prefHeight="10.0" prefWidth="100.0" spacing="5.0" />
+                                                <Label alignment="CENTER" layoutX="10.0" layoutY="466.0" prefHeight="27.0" prefWidth="795.0" style="-fx-background-color: LIGHTGREY;" text="9th Level Spells">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <VBox fx:id="ninthLvlP" layoutX="10.0" layoutY="503.0" prefHeight="10.0" prefWidth="100.0" spacing="5.0" />
+                                                <Label alignment="CENTER" layoutX="10.0" layoutY="523.0" prefHeight="27.0" prefWidth="795.0" style="-fx-background-color: LIGHTGREY;" text="Above 9th Level Spells">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <VBox fx:id="aboveNinthLvlP" layoutX="10.0" layoutY="560.0" prefHeight="10.0" prefWidth="100.0" spacing="5.0" />
+                                             </children>
+                                          </VBox>
+                                       </content>
+                                    </ScrollPane>
+                                 </children>
+                              </AnchorPane>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <Label alignment="CENTER" prefHeight="23.0" prefWidth="627.0" text="Spell Book" />
+                                    <Button fx:id="MakeSpellBttn" mnemonicParsing="false" onAction="#makeSpell" text="Make Spell" />
+                                    <ScrollPane fitToHeight="true" fitToWidth="true" layoutY="25.0">
+                                       <content>
+                                          <VBox fx:id="spellbookBox" alignment="TOP_CENTER" prefHeight="660.0" prefWidth="625.0" spacing="5.0">
+                                             <children>
+                                                <Label alignment="CENTER" prefHeight="27.0" prefWidth="795.0" style="-fx-background-color: LIGHTGREY;" text="Cantrips">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <VBox fx:id="Cantrips" prefHeight="10.0" prefWidth="100.0" spacing="5.0" />
+                                                <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="27.0" prefWidth="795.0" style="-fx-background-color: LIGHTGREY;" text="1st Level Spells">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <VBox fx:id="firstLvl" layoutX="10.0" layoutY="47.0" prefHeight="10.0" prefWidth="100.0" spacing="5.0" />
+                                                <Label alignment="CENTER" layoutX="10.0" layoutY="67.0" prefHeight="27.0" prefWidth="795.0" style="-fx-background-color: LIGHTGREY;" text="2nd Level Spells">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <VBox fx:id="secondLvl" layoutX="10.0" layoutY="104.0" prefHeight="10.0" prefWidth="100.0" spacing="5.0" />
+                                                <Label alignment="CENTER" layoutX="10.0" layoutY="124.0" prefHeight="27.0" prefWidth="795.0" style="-fx-background-color: LIGHTGREY;" text="3rd Level Spells">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <VBox fx:id="thirdLvl" layoutX="10.0" layoutY="161.0" prefHeight="10.0" prefWidth="100.0" spacing="5.0" />
+                                                <Label alignment="CENTER" layoutX="10.0" layoutY="181.0" prefHeight="27.0" prefWidth="795.0" style="-fx-background-color: LIGHTGREY;" text="4th Level Spells">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <VBox fx:id="fourthLvl" layoutX="10.0" layoutY="218.0" prefHeight="10.0" prefWidth="100.0" spacing="5.0" />
+                                                <Label alignment="CENTER" layoutX="10.0" layoutY="238.0" prefHeight="27.0" prefWidth="795.0" style="-fx-background-color: LIGHTGREY;" text="5th Level Spells">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <VBox fx:id="fifthLvl" layoutX="10.0" layoutY="275.0" prefHeight="10.0" prefWidth="100.0" spacing="5.0" />
+                                                <Label alignment="CENTER" layoutX="10.0" layoutY="295.0" prefHeight="27.0" prefWidth="795.0" style="-fx-background-color: LIGHTGREY;" text="6th Level Spells">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <VBox fx:id="sixthLvl" layoutX="10.0" layoutY="332.0" prefHeight="10.0" prefWidth="100.0" spacing="5.0" />
+                                                <Label alignment="CENTER" layoutX="10.0" layoutY="352.0" prefHeight="27.0" prefWidth="795.0" style="-fx-background-color: LIGHTGREY;" text="7th Level Spells">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <VBox fx:id="seventhLvl" layoutX="10.0" layoutY="389.0" prefHeight="10.0" prefWidth="100.0" spacing="5.0" />
+                                                <Label alignment="CENTER" layoutX="10.0" layoutY="409.0" prefHeight="27.0" prefWidth="795.0" style="-fx-background-color: LIGHTGREY;" text="8th Level Spells">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <VBox fx:id="eighthLvl" layoutX="10.0" layoutY="446.0" prefHeight="10.0" prefWidth="100.0" spacing="5.0" />
+                                                <Label alignment="CENTER" layoutX="10.0" layoutY="466.0" prefHeight="27.0" prefWidth="795.0" style="-fx-background-color: LIGHTGREY;" text="9th Level Spells">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <VBox fx:id="ninthLvl" layoutX="10.0" layoutY="503.0" prefHeight="10.0" prefWidth="100.0" spacing="5.0" />
+                                                <Label alignment="CENTER" layoutX="10.0" layoutY="523.0" prefHeight="27.0" prefWidth="795.0" style="-fx-background-color: LIGHTGREY;" text="Above 9th Level Spells">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <VBox fx:id="aboveNinthLvl" layoutX="10.0" layoutY="560.0" prefHeight="10.0" prefWidth="100.0" spacing="5.0" />
+                                             </children>
+                                          </VBox>
+                                       </content>
+                                    </ScrollPane>
+                                 </children>
+                              </AnchorPane>
+                          </items>
+                        </SplitPane>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Untitled Tab">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <MenuButton layoutX="255.0" layoutY="152.0" mnemonicParsing="false" text="MenuButton">
+                           <items>
+                              <CheckMenuItem mnemonicParsing="false" text="Unspecified Action" />
+                              <CheckMenuItem mnemonicParsing="false" text="Unspecified Action" />
+                           </items>
+                        </MenuButton>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+   </content>
+</ScrollPane>
