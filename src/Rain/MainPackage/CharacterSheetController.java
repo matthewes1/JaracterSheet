@@ -26,6 +26,11 @@ import java.util.Iterator;
 import java.util.Properties;
 
 public class CharacterSheetController {
+    //TODO Spell ui overhaul
+    //TODO Comment more code/cleanup code
+    //TODO possible higher resolution version
+
+
     private static DnDCharacter currentChar = new DnDCharacter();
     private static boolean saved = true;
     private File propFile = new File("saves/config.properties");
