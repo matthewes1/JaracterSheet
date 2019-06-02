@@ -4,41 +4,31 @@ import Rain.HelperClasses.*;
 import Rain.PlayableThings.DnDCharacter;
 import Rain.Spells.Spell;
 import Rain.Spells.SpellCard;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Iterator;
-import java.util.Properties;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.*;
+import java.util.Iterator;
+import java.util.Properties;
+
 public class CharacterSheetController {
-    public static DnDCharacter currentChar = new DnDCharacter();
+    private static DnDCharacter currentChar = new DnDCharacter();
     private static boolean saved = true;
-    public File propFile = new File("saves/config.properties");
+    private File propFile = new File("saves/config.properties");
     public static Properties props = new Properties();
 
     //<editor-fold desc="FXML declarations">
@@ -560,7 +550,12 @@ public class CharacterSheetController {
         saved = true;
     }
 
-    public void property() {
+    private void property() {
+        File file = new File("saves/");
+        if (!file.exists()) {
+            file.mkdir();
+        }
+
         if (!this.propFile.exists()) {
             props.setProperty("MainBackgroundColor", "ALICEBLUE");
             props.setProperty("OctColor", "LIGHTSKYBLUE");
@@ -581,7 +576,7 @@ public class CharacterSheetController {
 
         try {
             out = new FileOutputStream(this.propFile);
-            props.store(out, (String)null);
+            props.store(out, null);
         } catch (IOException var11) {
             var11.printStackTrace();
         } finally {
@@ -598,7 +593,7 @@ public class CharacterSheetController {
     }
 
     public void colors() {
-        this.characterPane.setBackground(new Background(new BackgroundFill[]{new BackgroundFill(Color.valueOf(props.getProperty("MainBackgroundColor")), (CornerRadii)null, (Insets)null)}));
+        this.characterPane.setBackground(new Background(new BackgroundFill[]{new BackgroundFill(Color.valueOf(props.getProperty("MainBackgroundColor")), null, null)}));
         this.speedOctagon.setFill(Color.valueOf(props.getProperty("OctColor")));
         this.acOctagon.setFill(Color.valueOf(props.getProperty("OctColor")));
         this.initiativeOctagon.setFill(Color.valueOf(props.getProperty("OctColor")));
@@ -607,14 +602,14 @@ public class CharacterSheetController {
         this.deathSavesOctagon.setFill(Color.valueOf(props.getProperty("OctColor")));
     }
 
-    public void setSpinnersAlignment() {
+    private void setSpinnersAlignment() {
         this.currentHPSpinner.getEditor().setAlignment(Pos.CENTER_RIGHT);
         this.maxHpSpinner.getEditor().setAlignment(Pos.CENTER_RIGHT);
         this.tempHPSpinner.getEditor().setAlignment(Pos.CENTER_RIGHT);
         this.hitDieSpinner.getEditor().setAlignment(Pos.CENTER_RIGHT);
     }
 
-    public void inputValidation() {
+    private void inputValidation() {
         Validation.numericField(this.strengthField);
         Validation.numericField(this.dexterityField);
         Validation.numericField(this.constitutionField);
@@ -656,7 +651,7 @@ public class CharacterSheetController {
         Validation.numericSpinner(this.c1);
     }
 
-    public void save() {
+    private void save() {
         currentChar.setCharismaField(this.charismaField.getText());
         currentChar.setStrengthField(this.strengthField.getText());
         currentChar.setDexterityField(this.dexterityField.getText());
@@ -839,49 +834,33 @@ public class CharacterSheetController {
     }
 
     //Used to generate prof bonus etc.
-    public void autoFill() {
+    private void autoFill() {
         //Registers initiative selection
-        this.strengthInitiative.selectedProperty().addListener(new ChangeListener<Boolean>() {
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+        this.strengthInitiative.selectedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
                 CharacterSheetController.this.updateInit();
-            }
         });
-        this.dexterityInitiative.selectedProperty().addListener(new ChangeListener<Boolean>() {
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+        this.dexterityInitiative.selectedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
                 CharacterSheetController.this.updateInit();
-            }
         });
-        this.constitutionInitiative.selectedProperty().addListener(new ChangeListener<Boolean>() {
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+        this.constitutionInitiative.selectedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
                 CharacterSheetController.this.updateInit();
-            }
         });
-        this.intelligenceInitiative.selectedProperty().addListener(new ChangeListener<Boolean>() {
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+        this.intelligenceInitiative.selectedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
                 CharacterSheetController.this.updateInit();
-            }
         });
-        this.wisdomInitiative.selectedProperty().addListener(new ChangeListener<Boolean>() {
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+        this.wisdomInitiative.selectedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
                 CharacterSheetController.this.updateInit();
-            }
         });
-        this.charismaInitiative.selectedProperty().addListener(new ChangeListener<Boolean>() {
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+        this.charismaInitiative.selectedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
                 CharacterSheetController.this.updateInit();
-            }
         });
-        this.customInitiative.selectedProperty().addListener(new ChangeListener<Boolean>() {
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+        this.customInitiative.selectedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
                 CharacterSheetController.this.updateInit();
                 CharacterSheetController.setUnSaved();
-            }
         });
-        this.customInitiativeField.getEditor().textProperty().addListener(new ChangeListener<String>() {
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+        this.customInitiativeField.getEditor().textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
                 CharacterSheetController.this.updateInit();
                 CharacterSheetController.setUnSaved();
-            }
         });
 
         //Register ability modifiers and ability scores
@@ -1024,7 +1003,7 @@ public class CharacterSheetController {
         AutoFill.registerProficiencySymbol(this.proficiencyBonusSymbol, this.intimidationChoice);
         AutoFill.registerProficiencySymbol(this.proficiencyBonusSymbol, this.performanceChoice);
         AutoFill.registerProficiencySymbol(this.proficiencyBonusSymbol, this.persuasionChoice);
-        AutoFill.passivePerception(this.wisdomField, this.passivePerceptionField);
+        AutoFill.passivePerception(this.passivePerceptionField, this.perception);
         AutoFill.linkStats(this.charismaModifier, this.charismaChoice);
         AutoFill.linkStats(this.charismaModifier, this.deceptionChoice);
         AutoFill.linkStats(this.charismaModifier, this.intimidationChoice);
@@ -1039,7 +1018,7 @@ public class CharacterSheetController {
      */
     public void load(ActionEvent actionEvent) {
         try {
-            currentChar = XmlHandler.convertToObject();
+            currentChar = XmlHandler.convertToObject(chooser());
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -1222,98 +1201,98 @@ public class CharacterSheetController {
     }
 
     public void registerSavedState() {
-        Saver.changesTF(this.speedField);
-        Saver.changesTF(this.experienceField);
-        Saver.changesTF(this.ageField);
-        Saver.changesTF(this.weightField);
-        Saver.changesTF(this.acField);
-        Saver.changesTA(this.traitsField);
-        Saver.changesTA(this.idealsField);
-        Saver.changesTA(this.bondsField);
-        Saver.changesTA(this.flawsField);
-        Saver.changesSp(this.currentHPSpinner);
-        Saver.changesSp(this.maxHpSpinner);
-        Saver.changesSp(this.tempHPSpinner);
-        Saver.changesSp(this.hitDieSpinner);
-        Saver.changesSp(this.levelSpinner);
-        Saver.changesSp(this.copper);
-        Saver.changesSp(this.silver);
-        Saver.changesSp(this.electrum);
-        Saver.changesSp(this.gold);
-        Saver.changesSp(this.platinum);
-        Saver.changesSp(this.x2);
-        Saver.changesSp(this.x1);
-        Saver.changesSp(this.x3);
-        Saver.changesSp(this.x4);
-        Saver.changesSp(this.x5);
-        Saver.changesSp(this.x6);
-        Saver.changesSp(this.x7);
-        Saver.changesSp(this.x8);
-        Saver.changesSp(this.c8);
-        Saver.changesSp(this.c7);
-        Saver.changesSp(this.c6);
-        Saver.changesSp(this.c5);
-        Saver.changesSp(this.c4);
-        Saver.changesSp(this.c3);
-        Saver.changesSp(this.c2);
-        Saver.changesSp(this.c1);
-        Saver.changesTF(this.characterName);
-        Saver.changesTF(this.classField);
-        Saver.changesTF(this.raceField);
-        Saver.changesTF(this.playerNameField);
-        Saver.changesTF(this.passivePerceptionField);
-        Saver.changesRb(this.deathFailOne);
-        Saver.changesRb(this.deathFailTwo);
-        Saver.changesRb(this.deathFailThree);
-        Saver.changesRb(this.deathSaveOne);
-        Saver.changesRb(this.deathSaveTwo);
-        Saver.changesRb(this.deathSaveThree);
-        Saver.changesTF(this.eyes);
-        Saver.changesTF(this.height);
-        Saver.changesTF(this.skin);
-        Saver.changesTF(this.hair);
-        Saver.changesTA(this.language);
-        Saver.changesTA(this.feats);
-        Saver.changesCb(this.alignmentField);
-        Saver.changesCb2(this.hitDieType);
-        Saver.changesRb(this.inspirationOne);
-        Saver.changesRb(this.inspirationTwo);
-        Saver.changesRb(this.inspirationFour);
-        Saver.changesRb(this.inspirationThree);
-        Saver.changesRb(this.inspirationFive);
-        Saver.changesTA(this.miscellaneousOne);
-        Saver.changesTF(this.weaponNameOne);
-        Saver.changesTF(this.weaponNameThree);
-        Saver.changesTF(this.weaponNameTwo);
-        Saver.changesTF(this.attackBonusOne);
-        Saver.changesTF(this.attackBonusThree);
-        Saver.changesTF(this.attackBonusTwo);
-        Saver.changesTF(this.damageOne);
-        Saver.changesTF(this.damageThree);
-        Saver.changesTF(this.damageTwo);
-        Saver.changesTA(this.weapons);
-        Saver.changesTA(this.armor);
-        Saver.changesTF(this.c1F);
-        Saver.changesTF(this.c2F);
-        Saver.changesTF(this.c3F);
-        Saver.changesTF(this.c4F);
-        Saver.changesTF(this.c5F);
-        Saver.changesTF(this.c6F);
-        Saver.changesTF(this.c7F);
-        Saver.changesTF(this.c8F);
-        Saver.changesTF(this.x1F);
-        Saver.changesTF(this.x2F);
-        Saver.changesTF(this.x3F);
-        Saver.changesTF(this.x4F);
-        Saver.changesTF(this.x5F);
-        Saver.changesTF(this.x6F);
-        Saver.changesTF(this.x7F);
-        Saver.changesTF(this.x8F);
-        Saver.changesTA(this.inventoryOne);
-        Saver.changesTA(this.inventoryTwo);
-        Saver.changesTA(this.inventoryThree);
-        Saver.changesTA(this.inventoryFour);
-        Saver.changesTA(this.backStory);
+        SavedToggler.changesTF(this.speedField);
+        SavedToggler.changesTF(this.experienceField);
+        SavedToggler.changesTF(this.ageField);
+        SavedToggler.changesTF(this.weightField);
+        SavedToggler.changesTF(this.acField);
+        SavedToggler.changesTA(this.traitsField);
+        SavedToggler.changesTA(this.idealsField);
+        SavedToggler.changesTA(this.bondsField);
+        SavedToggler.changesTA(this.flawsField);
+        SavedToggler.changesSp(this.currentHPSpinner);
+        SavedToggler.changesSp(this.maxHpSpinner);
+        SavedToggler.changesSp(this.tempHPSpinner);
+        SavedToggler.changesSp(this.hitDieSpinner);
+        SavedToggler.changesSp(this.levelSpinner);
+        SavedToggler.changesSp(this.copper);
+        SavedToggler.changesSp(this.silver);
+        SavedToggler.changesSp(this.electrum);
+        SavedToggler.changesSp(this.gold);
+        SavedToggler.changesSp(this.platinum);
+        SavedToggler.changesSp(this.x2);
+        SavedToggler.changesSp(this.x1);
+        SavedToggler.changesSp(this.x3);
+        SavedToggler.changesSp(this.x4);
+        SavedToggler.changesSp(this.x5);
+        SavedToggler.changesSp(this.x6);
+        SavedToggler.changesSp(this.x7);
+        SavedToggler.changesSp(this.x8);
+        SavedToggler.changesSp(this.c8);
+        SavedToggler.changesSp(this.c7);
+        SavedToggler.changesSp(this.c6);
+        SavedToggler.changesSp(this.c5);
+        SavedToggler.changesSp(this.c4);
+        SavedToggler.changesSp(this.c3);
+        SavedToggler.changesSp(this.c2);
+        SavedToggler.changesSp(this.c1);
+        SavedToggler.changesTF(this.characterName);
+        SavedToggler.changesTF(this.classField);
+        SavedToggler.changesTF(this.raceField);
+        SavedToggler.changesTF(this.playerNameField);
+        SavedToggler.changesTF(this.passivePerceptionField);
+        SavedToggler.changesRb(this.deathFailOne);
+        SavedToggler.changesRb(this.deathFailTwo);
+        SavedToggler.changesRb(this.deathFailThree);
+        SavedToggler.changesRb(this.deathSaveOne);
+        SavedToggler.changesRb(this.deathSaveTwo);
+        SavedToggler.changesRb(this.deathSaveThree);
+        SavedToggler.changesTF(this.eyes);
+        SavedToggler.changesTF(this.height);
+        SavedToggler.changesTF(this.skin);
+        SavedToggler.changesTF(this.hair);
+        SavedToggler.changesTA(this.language);
+        SavedToggler.changesTA(this.feats);
+        SavedToggler.changesCb(this.alignmentField);
+        SavedToggler.changesCb2(this.hitDieType);
+        SavedToggler.changesRb(this.inspirationOne);
+        SavedToggler.changesRb(this.inspirationTwo);
+        SavedToggler.changesRb(this.inspirationFour);
+        SavedToggler.changesRb(this.inspirationThree);
+        SavedToggler.changesRb(this.inspirationFive);
+        SavedToggler.changesTA(this.miscellaneousOne);
+        SavedToggler.changesTF(this.weaponNameOne);
+        SavedToggler.changesTF(this.weaponNameThree);
+        SavedToggler.changesTF(this.weaponNameTwo);
+        SavedToggler.changesTF(this.attackBonusOne);
+        SavedToggler.changesTF(this.attackBonusThree);
+        SavedToggler.changesTF(this.attackBonusTwo);
+        SavedToggler.changesTF(this.damageOne);
+        SavedToggler.changesTF(this.damageThree);
+        SavedToggler.changesTF(this.damageTwo);
+        SavedToggler.changesTA(this.weapons);
+        SavedToggler.changesTA(this.armor);
+        SavedToggler.changesTF(this.c1F);
+        SavedToggler.changesTF(this.c2F);
+        SavedToggler.changesTF(this.c3F);
+        SavedToggler.changesTF(this.c4F);
+        SavedToggler.changesTF(this.c5F);
+        SavedToggler.changesTF(this.c6F);
+        SavedToggler.changesTF(this.c7F);
+        SavedToggler.changesTF(this.c8F);
+        SavedToggler.changesTF(this.x1F);
+        SavedToggler.changesTF(this.x2F);
+        SavedToggler.changesTF(this.x3F);
+        SavedToggler.changesTF(this.x4F);
+        SavedToggler.changesTF(this.x5F);
+        SavedToggler.changesTF(this.x6F);
+        SavedToggler.changesTF(this.x7F);
+        SavedToggler.changesTF(this.x8F);
+        SavedToggler.changesTA(this.inventoryOne);
+        SavedToggler.changesTA(this.inventoryTwo);
+        SavedToggler.changesTA(this.inventoryThree);
+        SavedToggler.changesTA(this.inventoryFour);
+        SavedToggler.changesTA(this.backStory);
     }
 
     public static DnDCharacter getChar() {
@@ -1327,7 +1306,7 @@ public class CharacterSheetController {
     public void makeSpell(ActionEvent actionEvent) throws Exception {
         Stage SpellPopup = new Stage();
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/Rain/Spells/SpellPopup.fxml"));
-        Parent load = (Parent)loader.load();
+        Parent load = loader.load();
         SpellPopup.initModality(Modality.APPLICATION_MODAL);
         SpellPopup.initOwner(Main.getStage());
         SpellPopup.centerOnScreen();
@@ -1337,87 +1316,87 @@ public class CharacterSheetController {
 
     public void addSpell(Spell t) throws Exception {
         FXMLLoader spellFXML = new FXMLLoader(this.getClass().getResource("/Rain/Spells/SpellCard.fxml"));
-        Parent par = (Parent)spellFXML.load();
+        Parent par = spellFXML.load();
         int index = t.getLvl();
         SpellCard spellCont;
         if (t.isPrepared()) {
             if (index == 0) {
                 this.CantripsP.getChildren().add(par);
-                spellCont = (SpellCard)((Node)this.CantripsP.getChildren().get(this.CantripsP.getChildren().indexOf(par))).getUserData();
+                spellCont = (SpellCard) (this.CantripsP.getChildren().get(this.CantripsP.getChildren().indexOf(par))).getUserData();
                 spellCont.prepare();
             } else if (index == 1) {
                 this.firstLvlP.getChildren().add(par);
-                spellCont = (SpellCard)((Node)this.firstLvlP.getChildren().get(this.firstLvlP.getChildren().indexOf(par))).getUserData();
+                spellCont = (SpellCard) (this.firstLvlP.getChildren().get(this.firstLvlP.getChildren().indexOf(par))).getUserData();
                 spellCont.prepare();
             } else if (index == 2) {
                 this.secondLvlP.getChildren().add(par);
-                spellCont = (SpellCard)((Node)this.secondLvlP.getChildren().get(this.secondLvlP.getChildren().indexOf(par))).getUserData();
+                spellCont = (SpellCard) (this.secondLvlP.getChildren().get(this.secondLvlP.getChildren().indexOf(par))).getUserData();
                 spellCont.prepare();
             } else if (index == 3) {
                 this.thirdLvlP.getChildren().add(par);
-                spellCont = (SpellCard)((Node)this.thirdLvlP.getChildren().get(this.thirdLvlP.getChildren().indexOf(par))).getUserData();
+                spellCont = (SpellCard) (this.thirdLvlP.getChildren().get(this.thirdLvlP.getChildren().indexOf(par))).getUserData();
                 spellCont.prepare();
             } else if (index == 4) {
                 this.fourthLvlP.getChildren().add(par);
-                spellCont = (SpellCard)((Node)this.fourthLvlP.getChildren().get(this.fourthLvlP.getChildren().indexOf(par))).getUserData();
+                spellCont = (SpellCard) (this.fourthLvlP.getChildren().get(this.fourthLvlP.getChildren().indexOf(par))).getUserData();
                 spellCont.prepare();
             } else if (index == 5) {
                 this.fifthLvlP.getChildren().add(par);
-                spellCont = (SpellCard)((Node)this.fifthLvlP.getChildren().get(this.fifthLvlP.getChildren().indexOf(par))).getUserData();
+                spellCont = (SpellCard) (this.fifthLvlP.getChildren().get(this.fifthLvlP.getChildren().indexOf(par))).getUserData();
                 spellCont.prepare();
             } else if (index == 6) {
                 this.sixthLvlP.getChildren().add(par);
-                spellCont = (SpellCard)((Node)this.sixthLvlP.getChildren().get(this.sixthLvlP.getChildren().indexOf(par))).getUserData();
+                spellCont = (SpellCard) (this.sixthLvlP.getChildren().get(this.sixthLvlP.getChildren().indexOf(par))).getUserData();
                 spellCont.prepare();
             } else if (index == 7) {
                 this.seventhLvlP.getChildren().add(par);
-                spellCont = (SpellCard)((Node)this.seventhLvlP.getChildren().get(this.seventhLvlP.getChildren().indexOf(par))).getUserData();
+                spellCont = (SpellCard) (this.seventhLvlP.getChildren().get(this.seventhLvlP.getChildren().indexOf(par))).getUserData();
                 spellCont.prepare();
             } else if (index == 8) {
                 this.eighthLvlP.getChildren().add(par);
-                spellCont = (SpellCard)((Node)this.eighthLvlP.getChildren().get(this.eighthLvlP.getChildren().indexOf(par))).getUserData();
+                spellCont = (SpellCard) (this.eighthLvlP.getChildren().get(this.eighthLvlP.getChildren().indexOf(par))).getUserData();
                 spellCont.prepare();
             } else if (index == 9) {
                 this.ninthLvlP.getChildren().add(par);
-                spellCont = (SpellCard)((Node)this.ninthLvlP.getChildren().get(this.ninthLvlP.getChildren().indexOf(par))).getUserData();
+                spellCont = (SpellCard) (this.ninthLvlP.getChildren().get(this.ninthLvlP.getChildren().indexOf(par))).getUserData();
                 spellCont.prepare();
             } else {
                 this.aboveNinthLvlP.getChildren().add(par);
-                spellCont = (SpellCard)((Node)this.aboveNinthLvlP.getChildren().get(this.aboveNinthLvlP.getChildren().indexOf(par))).getUserData();
+                spellCont = (SpellCard) (this.aboveNinthLvlP.getChildren().get(this.aboveNinthLvlP.getChildren().indexOf(par))).getUserData();
             }
         } else if (index == 0) {
             this.Cantrips.getChildren().add(par);
-            spellCont = (SpellCard)((Node)this.Cantrips.getChildren().get(this.Cantrips.getChildren().indexOf(par))).getUserData();
+            spellCont = (SpellCard) (this.Cantrips.getChildren().get(this.Cantrips.getChildren().indexOf(par))).getUserData();
         } else if (index == 1) {
             this.firstLvl.getChildren().add(par);
-            spellCont = (SpellCard)((Node)this.firstLvl.getChildren().get(this.firstLvl.getChildren().indexOf(par))).getUserData();
+            spellCont = (SpellCard) (this.firstLvl.getChildren().get(this.firstLvl.getChildren().indexOf(par))).getUserData();
         } else if (index == 2) {
             this.secondLvl.getChildren().add(par);
-            spellCont = (SpellCard)((Node)this.secondLvl.getChildren().get(this.secondLvl.getChildren().indexOf(par))).getUserData();
+            spellCont = (SpellCard) (this.secondLvl.getChildren().get(this.secondLvl.getChildren().indexOf(par))).getUserData();
         } else if (index == 3) {
             this.thirdLvl.getChildren().add(par);
-            spellCont = (SpellCard)((Node)this.thirdLvl.getChildren().get(this.thirdLvl.getChildren().indexOf(par))).getUserData();
+            spellCont = (SpellCard) (this.thirdLvl.getChildren().get(this.thirdLvl.getChildren().indexOf(par))).getUserData();
         } else if (index == 4) {
             this.fourthLvl.getChildren().add(par);
-            spellCont = (SpellCard)((Node)this.fourthLvl.getChildren().get(this.fourthLvl.getChildren().indexOf(par))).getUserData();
+            spellCont = (SpellCard) (this.fourthLvl.getChildren().get(this.fourthLvl.getChildren().indexOf(par))).getUserData();
         } else if (index == 5) {
             this.fifthLvl.getChildren().add(par);
-            spellCont = (SpellCard)((Node)this.fifthLvl.getChildren().get(this.fifthLvl.getChildren().indexOf(par))).getUserData();
+            spellCont = (SpellCard) (this.fifthLvl.getChildren().get(this.fifthLvl.getChildren().indexOf(par))).getUserData();
         } else if (index == 6) {
             this.sixthLvl.getChildren().add(par);
-            spellCont = (SpellCard)((Node)this.sixthLvl.getChildren().get(this.sixthLvl.getChildren().indexOf(par))).getUserData();
+            spellCont = (SpellCard) (this.sixthLvl.getChildren().get(this.sixthLvl.getChildren().indexOf(par))).getUserData();
         } else if (index == 7) {
             this.seventhLvl.getChildren().add(par);
-            spellCont = (SpellCard)((Node)this.seventhLvl.getChildren().get(this.seventhLvl.getChildren().indexOf(par))).getUserData();
+            spellCont = (SpellCard) (this.seventhLvl.getChildren().get(this.seventhLvl.getChildren().indexOf(par))).getUserData();
         } else if (index == 8) {
             this.eighthLvl.getChildren().add(par);
-            spellCont = (SpellCard)((Node)this.eighthLvl.getChildren().get(this.eighthLvl.getChildren().indexOf(par))).getUserData();
+            spellCont = (SpellCard) (this.eighthLvl.getChildren().get(this.eighthLvl.getChildren().indexOf(par))).getUserData();
         } else if (index == 9) {
             this.ninthLvl.getChildren().add(par);
-            spellCont = (SpellCard)((Node)this.ninthLvl.getChildren().get(this.ninthLvl.getChildren().indexOf(par))).getUserData();
+            spellCont = (SpellCard) (this.ninthLvl.getChildren().get(this.ninthLvl.getChildren().indexOf(par))).getUserData();
         } else {
             this.aboveNinthLvl.getChildren().add(par);
-            spellCont = (SpellCard)((Node)this.aboveNinthLvl.getChildren().get(this.aboveNinthLvl.getChildren().indexOf(par))).getUserData();
+            spellCont = (SpellCard) (this.aboveNinthLvl.getChildren().get(this.aboveNinthLvl.getChildren().indexOf(par))).getUserData();
         }
 
         spellCont.setSpell(t);
@@ -1431,47 +1410,47 @@ public class CharacterSheetController {
         if (index == 0) {
             this.Cantrips.getChildren().remove(this.Cantrips.getChildren().indexOf(par));
             this.CantripsP.getChildren().add(par);
-            spellCont = (SpellCard)((Node)this.CantripsP.getChildren().get(this.CantripsP.getChildren().indexOf(par))).getUserData();
+            spellCont = (SpellCard) (this.CantripsP.getChildren().get(this.CantripsP.getChildren().indexOf(par))).getUserData();
         } else if (index == 1) {
             this.firstLvl.getChildren().remove(this.firstLvl.getChildren().indexOf(par));
             this.firstLvlP.getChildren().add(par);
-            spellCont = (SpellCard)((Node)this.firstLvlP.getChildren().get(this.firstLvlP.getChildren().indexOf(par))).getUserData();
+            spellCont = (SpellCard) (this.firstLvlP.getChildren().get(this.firstLvlP.getChildren().indexOf(par))).getUserData();
         } else if (index == 2) {
             this.secondLvl.getChildren().remove(this.secondLvl.getChildren().indexOf(par));
             this.secondLvlP.getChildren().add(par);
-            spellCont = (SpellCard)((Node)this.secondLvlP.getChildren().get(this.secondLvlP.getChildren().indexOf(par))).getUserData();
+            spellCont = (SpellCard) (this.secondLvlP.getChildren().get(this.secondLvlP.getChildren().indexOf(par))).getUserData();
         } else if (index == 3) {
             this.thirdLvl.getChildren().remove(this.thirdLvl.getChildren().indexOf(par));
             this.thirdLvlP.getChildren().add(par);
-            spellCont = (SpellCard)((Node)this.thirdLvlP.getChildren().get(this.thirdLvlP.getChildren().indexOf(par))).getUserData();
+            spellCont = (SpellCard) (this.thirdLvlP.getChildren().get(this.thirdLvlP.getChildren().indexOf(par))).getUserData();
         } else if (index == 4) {
             this.fourthLvl.getChildren().remove(this.fourthLvl.getChildren().indexOf(par));
             this.fourthLvlP.getChildren().add(par);
-            spellCont = (SpellCard)((Node)this.fourthLvlP.getChildren().get(this.fourthLvlP.getChildren().indexOf(par))).getUserData();
+            spellCont = (SpellCard) (this.fourthLvlP.getChildren().get(this.fourthLvlP.getChildren().indexOf(par))).getUserData();
         } else if (index == 5) {
             this.fifthLvl.getChildren().remove(this.fifthLvl.getChildren().indexOf(par));
             this.fifthLvlP.getChildren().add(par);
-            spellCont = (SpellCard)((Node)this.fifthLvlP.getChildren().get(this.fifthLvlP.getChildren().indexOf(par))).getUserData();
+            spellCont = (SpellCard) (this.fifthLvlP.getChildren().get(this.fifthLvlP.getChildren().indexOf(par))).getUserData();
         } else if (index == 6) {
             this.sixthLvl.getChildren().remove(this.sixthLvl.getChildren().indexOf(par));
             this.sixthLvlP.getChildren().add(par);
-            spellCont = (SpellCard)((Node)this.sixthLvlP.getChildren().get(this.sixthLvlP.getChildren().indexOf(par))).getUserData();
+            spellCont = (SpellCard) (this.sixthLvlP.getChildren().get(this.sixthLvlP.getChildren().indexOf(par))).getUserData();
         } else if (index == 7) {
             this.seventhLvl.getChildren().remove(this.seventhLvl.getChildren().indexOf(par));
             this.seventhLvlP.getChildren().add(par);
-            spellCont = (SpellCard)((Node)this.seventhLvlP.getChildren().get(this.seventhLvlP.getChildren().indexOf(par))).getUserData();
+            spellCont = (SpellCard) (this.seventhLvlP.getChildren().get(this.seventhLvlP.getChildren().indexOf(par))).getUserData();
         } else if (index == 8) {
             this.eighthLvl.getChildren().remove(this.eighthLvl.getChildren().indexOf(par));
             this.eighthLvlP.getChildren().add(par);
-            spellCont = (SpellCard)((Node)this.eighthLvlP.getChildren().get(this.eighthLvlP.getChildren().indexOf(par))).getUserData();
+            spellCont = (SpellCard) (this.eighthLvlP.getChildren().get(this.eighthLvlP.getChildren().indexOf(par))).getUserData();
         } else if (index == 9) {
             this.ninthLvl.getChildren().remove(this.ninthLvl.getChildren().indexOf(par));
             this.ninthLvlP.getChildren().add(par);
-            spellCont = (SpellCard)((Node)this.ninthLvlP.getChildren().get(this.ninthLvlP.getChildren().indexOf(par))).getUserData();
+            spellCont = (SpellCard) (this.ninthLvlP.getChildren().get(this.ninthLvlP.getChildren().indexOf(par))).getUserData();
         } else {
             this.aboveNinthLvl.getChildren().remove(this.aboveNinthLvl.getChildren().indexOf(par));
             this.aboveNinthLvlP.getChildren().add(par);
-            spellCont = (SpellCard)((Node)this.aboveNinthLvlP.getChildren().get(this.aboveNinthLvlP.getChildren().indexOf(par))).getUserData();
+            spellCont = (SpellCard) (this.aboveNinthLvlP.getChildren().get(this.aboveNinthLvlP.getChildren().indexOf(par))).getUserData();
         }
 
         spellCont.setSpell(spell);
@@ -1486,47 +1465,47 @@ public class CharacterSheetController {
         if (index == 0) {
             this.CantripsP.getChildren().remove(this.CantripsP.getChildren().indexOf(par));
             this.Cantrips.getChildren().add(par);
-            spellCont = (SpellCard)((Node)this.Cantrips.getChildren().get(this.Cantrips.getChildren().indexOf(par))).getUserData();
+            spellCont = (SpellCard) (this.Cantrips.getChildren().get(this.Cantrips.getChildren().indexOf(par))).getUserData();
         } else if (index == 1) {
             this.firstLvlP.getChildren().remove(this.firstLvlP.getChildren().indexOf(par));
             this.firstLvl.getChildren().add(par);
-            spellCont = (SpellCard)((Node)this.firstLvl.getChildren().get(this.firstLvl.getChildren().indexOf(par))).getUserData();
+            spellCont = (SpellCard) (this.firstLvl.getChildren().get(this.firstLvl.getChildren().indexOf(par))).getUserData();
         } else if (index == 2) {
             this.secondLvlP.getChildren().remove(this.secondLvlP.getChildren().indexOf(par));
             this.secondLvl.getChildren().add(par);
-            spellCont = (SpellCard)((Node)this.secondLvl.getChildren().get(this.secondLvl.getChildren().indexOf(par))).getUserData();
+            spellCont = (SpellCard) (this.secondLvl.getChildren().get(this.secondLvl.getChildren().indexOf(par))).getUserData();
         } else if (index == 3) {
             this.thirdLvlP.getChildren().remove(this.thirdLvlP.getChildren().indexOf(par));
             this.thirdLvl.getChildren().add(par);
-            spellCont = (SpellCard)((Node)this.thirdLvl.getChildren().get(this.thirdLvl.getChildren().indexOf(par))).getUserData();
+            spellCont = (SpellCard) (this.thirdLvl.getChildren().get(this.thirdLvl.getChildren().indexOf(par))).getUserData();
         } else if (index == 4) {
             this.fourthLvlP.getChildren().remove(this.fourthLvlP.getChildren().indexOf(par));
             this.fourthLvl.getChildren().add(par);
-            spellCont = (SpellCard)((Node)this.fourthLvl.getChildren().get(this.fourthLvl.getChildren().indexOf(par))).getUserData();
+            spellCont = (SpellCard) (this.fourthLvl.getChildren().get(this.fourthLvl.getChildren().indexOf(par))).getUserData();
         } else if (index == 5) {
             this.fifthLvlP.getChildren().remove(this.fifthLvlP.getChildren().indexOf(par));
             this.fifthLvl.getChildren().add(par);
-            spellCont = (SpellCard)((Node)this.fifthLvl.getChildren().get(this.fifthLvl.getChildren().indexOf(par))).getUserData();
+            spellCont = (SpellCard) (this.fifthLvl.getChildren().get(this.fifthLvl.getChildren().indexOf(par))).getUserData();
         } else if (index == 6) {
             this.sixthLvlP.getChildren().remove(this.sixthLvlP.getChildren().indexOf(par));
             this.sixthLvl.getChildren().add(par);
-            spellCont = (SpellCard)((Node)this.sixthLvl.getChildren().get(this.sixthLvl.getChildren().indexOf(par))).getUserData();
+            spellCont = (SpellCard) (this.sixthLvl.getChildren().get(this.sixthLvl.getChildren().indexOf(par))).getUserData();
         } else if (index == 7) {
             this.seventhLvlP.getChildren().remove(this.seventhLvlP.getChildren().indexOf(par));
             this.seventhLvl.getChildren().add(par);
-            spellCont = (SpellCard)((Node)this.seventhLvl.getChildren().get(this.seventhLvl.getChildren().indexOf(par))).getUserData();
+            spellCont = (SpellCard) (this.seventhLvl.getChildren().get(this.seventhLvl.getChildren().indexOf(par))).getUserData();
         } else if (index == 8) {
             this.eighthLvlP.getChildren().remove(this.eighthLvlP.getChildren().indexOf(par));
             this.eighthLvl.getChildren().add(par);
-            spellCont = (SpellCard)((Node)this.eighthLvl.getChildren().get(this.eighthLvl.getChildren().indexOf(par))).getUserData();
+            spellCont = (SpellCard) (this.eighthLvl.getChildren().get(this.eighthLvl.getChildren().indexOf(par))).getUserData();
         } else if (index == 9) {
             this.ninthLvlP.getChildren().remove(this.ninthLvlP.getChildren().indexOf(par));
             this.ninthLvl.getChildren().add(par);
-            spellCont = (SpellCard)((Node)this.ninthLvl.getChildren().get(this.ninthLvl.getChildren().indexOf(par))).getUserData();
+            spellCont = (SpellCard) (this.ninthLvl.getChildren().get(this.ninthLvl.getChildren().indexOf(par))).getUserData();
         } else {
             this.aboveNinthLvlP.getChildren().remove(this.aboveNinthLvlP.getChildren().indexOf(par));
             this.aboveNinthLvl.getChildren().add(par);
-            spellCont = (SpellCard)((Node)this.aboveNinthLvl.getChildren().get(this.aboveNinthLvl.getChildren().indexOf(par))).getUserData();
+            spellCont = (SpellCard) (this.aboveNinthLvl.getChildren().get(this.aboveNinthLvl.getChildren().indexOf(par))).getUserData();
         }
 
         spellCont.setSpell(spell);
@@ -1821,7 +1800,7 @@ public class CharacterSheetController {
     Used to calculate the Initiative
     Not coded in Autofill because it does not use change listeners
      */
-    public void updateInit() {
+    private void updateInit() {
         int init = 0;
         if (this.strengthInitiative.isSelected() && !this.strengthModifierField.getText().equals("")) {
             init += Integer.parseInt(this.strengthSymbol.getText() + this.strengthModifierField.getText());
@@ -1857,11 +1836,24 @@ public class CharacterSheetController {
     public void colorOptions(ActionEvent actionEvent) throws IOException {
         Stage OptionsPop = new Stage();
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/Rain/MainPackage/Options.fxml"));
-        Parent load = (Parent)loader.load();
+        Parent load = loader.load();
         OptionsPop.initModality(Modality.APPLICATION_MODAL);
-        OptionsPop.initOwner(Main.getStage());
+        OptionsPop.initOwner(mainPane.getScene().getWindow());
         OptionsPop.centerOnScreen();
         OptionsPop.setScene(new Scene(load, 600.0D, 400.0D));
         OptionsPop.show();
+    }
+
+    private File chooser() {
+        FileChooser chooser = new FileChooser();
+        chooser.setTitle("Open Character");
+        chooser.setInitialDirectory(new File("saves/"));
+        File f = chooser.showOpenDialog(mainPane.getScene().getWindow());
+        if (f != null) {
+            return f;
+        } else {
+            f = new File("");
+            return f;
+        }
     }
 }

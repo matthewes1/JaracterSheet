@@ -5,7 +5,8 @@ import Rain.PlayableThings.DnDCharacter;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
 
 public class XmlHandler {
     public static void convertToXML(DnDCharacter character) throws Exception {
@@ -14,20 +15,20 @@ public class XmlHandler {
         Marshaller marshaller = context.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
-        String fileName = "saves/";
-        //File save = new File(fileName);
+        String fileName = "saves/" + character.getCharacterName();
+        File checkDir = new File(fileName);
+        if (!checkDir.exists()) {
+            //If still having issues with saving for others, try checking return of this
+            checkDir.mkdir();
+        }
 
-        //if(!save.exists()) {
-        //    save.mkdir();
-        //}
-
-        fileName.concat(character.getCharacterName().concat(".xml"));
+        fileName += "/" + character.getCharacterName() + ".xml";
 
         marshaller.marshal(character, new FileOutputStream(fileName));
     }
 
-    public static DnDCharacter convertToObject() throws Exception {
-        File file = new File("saves/char.xml");
+    public static DnDCharacter convertToObject(File file) throws Exception {
+        //File file = new File("saves/char.xml");
         JAXBContext context = JAXBContext.newInstance(DnDCharacter.class);
 
         Unmarshaller unmarshaller = context.createUnmarshaller();

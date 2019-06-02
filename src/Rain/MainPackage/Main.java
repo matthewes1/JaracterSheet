@@ -1,8 +1,6 @@
 package Rain.MainPackage;
 
-import Rain.HelperClasses.Saver;
-import java.io.File;
-import java.util.Optional;
+import Rain.HelperClasses.XmlHandler;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -10,16 +8,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.stage.DirectoryChooser;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+import java.io.File;
+import java.util.Optional;
+
 public class Main extends Application {
     private static Stage mainStage;
-    public static FXMLLoader forOtherClasses;
+    private static FXMLLoader forOtherClasses;
 
     private EventHandler<WindowEvent> promptSave = (event) -> {
         if (!CharacterSheetController.getSavedState()) {
@@ -32,7 +32,11 @@ public class Main extends Application {
             closeSave.getButtonTypes().addAll(new ButtonType[]{save, cancel, close});
             Optional<ButtonType> options = closeSave.showAndWait();
             if (options.get() == save) {
-                //Saver.saveChar(CharacterSheetController.getChar());
+                try {
+                    XmlHandler.convertToXML(CharacterSheetController.getChar());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             } else if (options.get() == cancel) {
                 event.consume();
             } else {
@@ -47,9 +51,14 @@ public class Main extends Application {
     public Main() {
     }
 
+    //Remove mainStage
+    public static Stage getStage() {
+        return mainStage;
+    }
+
     public void start(Stage primaryStage) throws Exception {
         forOtherClasses = new FXMLLoader(this.getClass().getResource("CharacterSheet.fxml"));
-        Parent root = (Parent)forOtherClasses.load();
+        Parent root = forOtherClasses.load();
         primaryStage.setTitle("Dnd Character Creator Beta 1.5.0");
         primaryStage.setScene(new Scene(root, 1250.0D, 725.0D));
         primaryStage.setOnCloseRequest(this.promptSave);
@@ -59,25 +68,8 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    public static Stage getStage() {
-        return mainStage;
-    }
-
     public static FXMLLoader getRootClass() {
         return forOtherClasses;
-    }
-
-    public static File chooser() {
-        FileChooser chooser = new FileChooser();
-        chooser.setTitle("Open Character");
-        chooser.setInitialDirectory(new File("saves/"));
-        File f = chooser.showOpenDialog(mainStage);
-        if (f != null) {
-            return f;
-        } else {
-            f = new File("");
-            return f;
-        }
     }
 
     public static File chooserSpell() {
