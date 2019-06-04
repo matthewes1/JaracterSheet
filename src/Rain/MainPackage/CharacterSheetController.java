@@ -35,6 +35,7 @@ public class CharacterSheetController {
     //TODO possible higher resolution version
     //TODO finish AutoFill renaming method variables. ALso remove unnecessary calculations such as recalculating ability modifier for no reason
     //TODO Config changes
+    //TODO add Apache license after confirmation if controlsfx is needed
 
 
     private static DnDCharacter currentChar = new DnDCharacter();
