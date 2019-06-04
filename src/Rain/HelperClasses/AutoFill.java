@@ -19,8 +19,8 @@ public class AutoFill {
     /*
     Method used to register a listener for when the ability score is changed.
      */
-    public static void registerAbilityScore(TextField start, final TextField modifier, final TextField sym, final CheckMenuItem initUpdater) {
-        start.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+    public static void registerAbilityScore(TextField abilityScore, TextField abilityModifier, TextField modifierSymbol, CheckMenuItem initiativeUpdater) {
+        abilityScore.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
             if (!newValue.isEmpty() && !newValue.matches("-") && !newValue.matches(oldValue)) {
                 //Calculates the ability modifier from the new score
                 double t = Double.parseDouble(newValue);
@@ -29,21 +29,21 @@ public class AutoFill {
                 if (t < 0 && (t % 1 != 0)) {
                     t -= .5;
                 }
-                modifier.setText(String.valueOf(Math.abs((int) t)));
+                abilityModifier.setText(String.valueOf(Math.abs((int) t)));
 
                 //Sets the sign for the ability modifier
                 if (t > 0) {
-                    sym.setText("+");
+                    modifierSymbol.setText("+");
                 } else if (t < 0) {
-                    sym.setText("-");
+                    modifierSymbol.setText("-");
                 } else {
-                    sym.setText("");
+                    modifierSymbol.setText("");
                 }
 
                 //If the score is chosen for initiative, toggle it unselected then reselect it so it updates
-                if (initUpdater.isSelected()) {
-                    initUpdater.setSelected(!initUpdater.isSelected());
-                    initUpdater.setSelected(!initUpdater.isSelected());
+                if (initiativeUpdater.isSelected()) {
+                    initiativeUpdater.setSelected(!initiativeUpdater.isSelected());
+                    initiativeUpdater.setSelected(!initiativeUpdater.isSelected());
                 }
 
                 CharacterSheetController.setUnSaved();
@@ -54,20 +54,20 @@ public class AutoFill {
     /*
     Auto calculates proficiency bonus from player level
      */
-    public static void registerProficiency(Spinner start, final TextField end) {
-        start.getEditor().textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+    public static void registerProficiency(Spinner level, TextField proficiency) {
+        level.getEditor().textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
             if (!newValue.isEmpty() && !newValue.matches("-")) {
                 int t = Integer.parseInt(newValue);
                 if (t < 5) {
-                    end.setText("2");
+                    proficiency.setText("2");
                 } else if (t < 9) {
-                    end.setText("3");
+                    proficiency.setText("3");
                 } else if (t < 13) {
-                    end.setText("4");
+                    proficiency.setText("4");
                 } else if (t < 17) {
-                    end.setText("5");
+                    proficiency.setText("5");
                 } else {
-                    end.setText("6");
+                    proficiency.setText("6");
                 }
             }
         });
@@ -76,34 +76,34 @@ public class AutoFill {
     /*
     Calculates the bonus from a skill if you have proficiency in it
      */
-    public static void updateSkillsProficiency(TextField prof, final ChoiceBox box) {
-        prof.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
-            int t = box.getSelectionModel().getSelectedIndex();
+    public static void updateSkillsProficiency(TextField skillBonus, ChoiceBox proficiencySelection) {
+        skillBonus.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+            int t = proficiencySelection.getSelectionModel().getSelectedIndex();
             if (t == 0) {
-                box.getSelectionModel().select(1);
+                proficiencySelection.getSelectionModel().select(1);
             } else {
-                box.getSelectionModel().select(0);
+                proficiencySelection.getSelectionModel().select(0);
             }
 
             //Toggles the selection so the bonus updates
-            box.getSelectionModel().select(t);
+            proficiencySelection.getSelectionModel().select(t);
         });
     }
 
     /*
     Sees if proficiency bonus has a custom addition/subtraction and has been changed
      */
-    public static void registerProficiencySymbol(ChoiceBox sym, final ChoiceBox box) {
-        sym.getSelectionModel().selectedIndexProperty().addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
-            int t = box.getSelectionModel().getSelectedIndex();
+    public static void registerProficiencySymbol(ChoiceBox proficiencyBonus, ChoiceBox proficiencySelection) {
+        proficiencyBonus.getSelectionModel().selectedIndexProperty().addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
+            int t = proficiencySelection.getSelectionModel().getSelectedIndex();
             if (t == 0) {
-                box.getSelectionModel().select(1);
+                proficiencySelection.getSelectionModel().select(1);
             } else {
-                box.getSelectionModel().select(0);
+                proficiencySelection.getSelectionModel().select(0);
             }
 
             //Toggles selection to auto update
-            box.getSelectionModel().select(t);
+            proficiencySelection.getSelectionModel().select(t);
             CharacterSheetController.setUnSaved();
         });
     }
@@ -111,7 +111,7 @@ public class AutoFill {
     /*
     Calculates the bonus of a skill
      */
-    public static void registerSkill(final TextField outPut, final ChoiceBox box, final TextField prof, final TextField mod, final ChoiceBox sym, final TextField extra) {
+    public static void registerSkill(TextField outPut, ChoiceBox box, TextField prof, TextField mod, ChoiceBox sym, TextField extra) {
         box.getSelectionModel().selectedIndexProperty().addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
             if (!mod.getText().isEmpty() && !mod.getText().matches("-")) {
                 //Calculates the amount to get as a bonus. Uses the score and not the modifier because the score doesn't indicate if it is negative or not
@@ -137,7 +137,7 @@ public class AutoFill {
     /*
     Update the skills number if you change proficiency
      */
-    public static void linkStats(TextField mod, final ChoiceBox box) {
+    public static void linkStats(TextField mod, ChoiceBox box) {
         mod.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
             if (!oldValue.matches(newValue)) {
                 int t = box.getSelectionModel().getSelectedIndex();
@@ -171,7 +171,7 @@ public class AutoFill {
     /*
     Appends the amount of XP needed to level to the end of current xp upon level up
      */
-    public static void experienceFiller(final TextField exp, Spinner lvl) {
+    public static void experienceFiller(TextField exp, Spinner lvl) {
         lvl.getEditor().textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
             if (!oldValue.matches(newValue)) {
                 int x = Integer.parseInt(newValue);

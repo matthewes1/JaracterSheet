@@ -1,34 +1,36 @@
 package Rain.MainPackage;
 
-import Rain.HelperClasses.*;
+import Rain.HelperClasses.AutoFill;
+import Rain.HelperClasses.SavedToggler;
+import Rain.HelperClasses.Validation;
+import Rain.HelperClasses.XmlHandler;
 import Rain.PlayableThings.DnDCharacter;
-import Rain.Spells.Spell;
-import Rain.Spells.SpellCard;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.*;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
-import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.*;
-import java.util.Iterator;
 import java.util.Properties;
 
 public class CharacterSheetController {
     //TODO Spell ui overhaul
     //TODO Comment more code/cleanup code
     //TODO possible higher resolution version
+    //TODO finish AutoFill renaming method variables. ALso remove unnecessary calculations such as recalculating ability modifier for no reason
+    //TODO Config changes
 
 
     private static DnDCharacter currentChar = new DnDCharacter();
@@ -42,8 +44,6 @@ public class CharacterSheetController {
     @FXML
     private GridPane characterPane;
     @FXML
-    private MenuBar menuPane;
-    @FXML
     private Menu file;
     @FXML
     private MenuItem save;
@@ -54,23 +54,11 @@ public class CharacterSheetController {
     @FXML
     private MenuItem colorOptions;
     @FXML
-    private GridPane statisticPane;
-    @FXML
-    private Pane strengthPane;
-    @FXML
-    private Polygon strengthOctagon;
-    @FXML
     private TextField strengthField;
-    @FXML
-    private Text strengthLabel;
-    @FXML
-    private Polygon strengthModifierOctagon;
     @FXML
     private TextField strengthModifierField;
     @FXML
     private TextField strengthSymbol;
-    @FXML
-    private Pane strengthProficiencies;
     @FXML
     private ChoiceBox strengthChoice;
     @FXML
@@ -80,15 +68,11 @@ public class CharacterSheetController {
     @FXML
     private TextField athletics;
     @FXML
-    private Pane dexterityPane;
-    @FXML
     private TextField dexterityField;
     @FXML
     private TextField dexterityModifier;
     @FXML
     private TextField dexteritySymbol;
-    @FXML
-    private Pane dexterityProficiencies;
     @FXML
     private ChoiceBox dexterityChoice;
     @FXML
@@ -106,29 +90,21 @@ public class CharacterSheetController {
     @FXML
     private TextField stealth;
     @FXML
-    private Pane constitution;
-    @FXML
     private TextField constitutionField;
     @FXML
     private TextField constitutionModifier;
     @FXML
     private TextField constitutionSymbol;
     @FXML
-    private Pane constitutionProficiencies;
-    @FXML
     private ChoiceBox constitutionChoice;
     @FXML
     private TextField constitutionSave;
-    @FXML
-    private Pane intelligence;
     @FXML
     private TextField intelligenceField;
     @FXML
     private TextField intelligenceModifier;
     @FXML
     private TextField intelligenceSymbol;
-    @FXML
-    private Pane intelligenceProficiencies;
     @FXML
     private ChoiceBox intelligenceChoice;
     @FXML
@@ -154,15 +130,11 @@ public class CharacterSheetController {
     @FXML
     private TextField religion;
     @FXML
-    private Pane wisdom;
-    @FXML
     private TextField wisdomField;
     @FXML
     private TextField wisdomModifier;
     @FXML
     private TextField wisdomSymbol;
-    @FXML
-    private Pane wisdomProficiencies;
     @FXML
     private ChoiceBox wisdomChoice;
     @FXML
@@ -188,15 +160,11 @@ public class CharacterSheetController {
     @FXML
     private TextField survival;
     @FXML
-    private Pane charisma;
-    @FXML
     private TextField charismaField;
     @FXML
     private TextField charismaModifier;
     @FXML
     private TextField charismaSymbol;
-    @FXML
-    private Pane charismaProficiencies;
     @FXML
     private ChoiceBox charismaChoice;
     @FXML
@@ -217,10 +185,6 @@ public class CharacterSheetController {
     private ChoiceBox persuasionChoice;
     @FXML
     private TextField persuasion;
-    @FXML
-    private AnchorPane acPane;
-    @FXML
-    private Pane healthPane;
     @FXML
     private Polygon speedOctagon;
     @FXML
@@ -244,8 +208,6 @@ public class CharacterSheetController {
     @FXML
     private TextField initiativeField;
     @FXML
-    private MenuButton modifiers;
-    @FXML
     private CheckMenuItem strengthInitiative;
     @FXML
     private CheckMenuItem dexterityInitiative;
@@ -266,28 +228,6 @@ public class CharacterSheetController {
     @FXML
     private TextField speedField;
     @FXML
-    private TextField speedLabel;
-    @FXML
-    private TextField initiativeLabel;
-    @FXML
-    private TextField deathLabel;
-    @FXML
-    private TextField savesLabel;
-    @FXML
-    private TextField hitDieLabel;
-    @FXML
-    private TextField healthLabel;
-    @FXML
-    private TextField acLabel;
-    @FXML
-    private TextField maxHPLabel;
-    @FXML
-    private TextField temporaryHPLabel;
-    @FXML
-    private TextField deathLabelOne;
-    @FXML
-    private TextField deathLabelTwo;
-    @FXML
     private RadioButton deathSaveOne;
     @FXML
     private RadioButton deathSaveTwo;
@@ -300,17 +240,11 @@ public class CharacterSheetController {
     @FXML
     private RadioButton deathFailThree;
     @FXML
-    private TextField hitDieLabelOne;
-    @FXML
-    private AnchorPane proficiencyPane;
-    @FXML
     private TextField proficiencyBonus;
     @FXML
     private ChoiceBox proficiencyBonusSymbol;
     @FXML
     private TextField proficiencyBonusExtra;
-    @FXML
-    private AnchorPane traits;
     @FXML
     private TextArea traitsField;
     @FXML
@@ -320,15 +254,11 @@ public class CharacterSheetController {
     @FXML
     private TextArea flawsField;
     @FXML
-    private AnchorPane nameArea;
-    @FXML
     private TextField characterName;
     @FXML
     private TextField classField;
     @FXML
     private Spinner levelSpinner;
-    @FXML
-    private TextField levelLabel;
     @FXML
     private TextField playerNameField;
     @FXML
@@ -349,12 +279,6 @@ public class CharacterSheetController {
     private RadioButton inspirationFive;
     @FXML
     private TextField passivePerceptionField;
-    @FXML
-    private Label passivePerceptionLabel;
-    @FXML
-    private TextField inspirationLabel;
-    @FXML
-    private AnchorPane inventoryPane;
     @FXML
     private TextField weaponNameOne;
     @FXML
@@ -380,71 +304,69 @@ public class CharacterSheetController {
     @FXML
     private TextArea armor;
     @FXML
-    private TextField c1F;
+    private TextField counterOne;
     @FXML
-    private Spinner c1;
+    private Spinner<?> spinnerOne;
     @FXML
-    private TextField c2F;
+    private TextField counterTwo;
     @FXML
-    private Spinner c2;
+    private Spinner<?> spinnerTwo;
     @FXML
-    private TextField c3F;
+    private TextField counterThree;
     @FXML
-    private Spinner c3;
+    private Spinner<?> spinnerThree;
     @FXML
-    private TextField c4F;
+    private TextField counterFour;
     @FXML
-    private Spinner c4;
+    private Spinner<?> spinnerFour;
     @FXML
-    private TextField c5F;
+    private TextField counterFive;
     @FXML
-    private Spinner c5;
+    private Spinner<?> spinnerFive;
     @FXML
-    private TextField c6F;
+    private TextField counterSix;
     @FXML
-    private Spinner c6;
+    private Spinner<?> spinnerSix;
     @FXML
-    private TextField c7F;
+    private TextField counterSeven;
     @FXML
-    private Spinner c7;
+    private Spinner<?> spinnerSeven;
     @FXML
-    private TextField c8F;
+    private TextField counterEight;
     @FXML
-    private Spinner c8;
+    private Spinner<?> spinnerEight;
     @FXML
-    private TextField x8F;
+    private TextField counterNine;
     @FXML
-    private Spinner x8;
+    private Spinner<?> spinnerNine;
     @FXML
-    private TextField x7F;
+    private TextField counterTen;
     @FXML
-    private Spinner x7;
+    private Spinner<?> spinnerTen;
     @FXML
-    private TextField x6F;
+    private TextField counterEleven;
     @FXML
-    private Spinner x6;
+    private Spinner<?> spinnerEleven;
     @FXML
-    private TextField x5F;
+    private TextField counterTwelve;
     @FXML
-    private Spinner x5;
+    private Spinner<?> spinnerTwelve;
     @FXML
-    private TextField x4F;
+    private TextField counterThirteen;
     @FXML
-    private Spinner x4;
+    private Spinner<?> spinnerThirteen;
     @FXML
-    private TextField x3F;
+    private TextField counterFourteen;
     @FXML
-    private Spinner x3;
+    private Spinner<?> spinnerFourteen;
     @FXML
-    private TextField x2F;
+    private TextField counterFifteen;
     @FXML
-    private Spinner x2;
+    private Spinner<?> spinnerFifteen;
     @FXML
-    private TextField x1F;
+    private TextField counterSixteen;
     @FXML
-    private Spinner x1;
-    @FXML
-    private VBox money;
+    private Spinner<?> spinnerSixteen;
     @FXML
     private Spinner copper;
     @FXML
@@ -483,62 +405,6 @@ public class CharacterSheetController {
     private TextArea feats;
     @FXML
     private TextArea backStory;
-    @FXML
-    private MenuItem saveSpells;
-    @FXML
-    private MenuItem loadSpells;
-    @FXML
-    private MenuItem spellSlots;
-    @FXML
-    private VBox spellbookBoxP;
-    @FXML
-    private VBox CantripsP;
-    @FXML
-    private VBox firstLvlP;
-    @FXML
-    private VBox secondLvlP;
-    @FXML
-    private VBox thirdLvlP;
-    @FXML
-    private VBox fourthLvlP;
-    @FXML
-    private VBox fifthLvlP;
-    @FXML
-    private VBox sixthLvlP;
-    @FXML
-    private VBox seventhLvlP;
-    @FXML
-    private VBox eighthLvlP;
-    @FXML
-    private VBox ninthLvlP;
-    @FXML
-    private VBox aboveNinthLvlP;
-    @FXML
-    private Button MakeSpellBttn;
-    @FXML
-    private VBox spellbookBox;
-    @FXML
-    private VBox Cantrips;
-    @FXML
-    private VBox firstLvl;
-    @FXML
-    private VBox secondLvl;
-    @FXML
-    private VBox thirdLvl;
-    @FXML
-    private VBox fourthLvl;
-    @FXML
-    private VBox fifthLvl;
-    @FXML
-    private VBox sixthLvl;
-    @FXML
-    private VBox seventhLvl;
-    @FXML
-    private VBox eighthLvl;
-    @FXML
-    private VBox ninthLvl;
-    @FXML
-    private VBox aboveNinthLvl;
     //</editor-fold>
 
     public CharacterSheetController() {
@@ -638,22 +504,22 @@ public class CharacterSheetController {
         Validation.numericSpinner(this.electrum);
         Validation.numericSpinner(this.gold);
         Validation.numericSpinner(this.platinum);
-        Validation.numericSpinner(this.x1);
-        Validation.numericSpinner(this.x2);
-        Validation.numericSpinner(this.x3);
-        Validation.numericSpinner(this.x4);
-        Validation.numericSpinner(this.x5);
-        Validation.numericSpinner(this.x6);
-        Validation.numericSpinner(this.x7);
-        Validation.numericSpinner(this.x8);
-        Validation.numericSpinner(this.c8);
-        Validation.numericSpinner(this.c7);
-        Validation.numericSpinner(this.c6);
-        Validation.numericSpinner(this.c5);
-        Validation.numericSpinner(this.c4);
-        Validation.numericSpinner(this.c3);
-        Validation.numericSpinner(this.c2);
-        Validation.numericSpinner(this.c1);
+        Validation.numericSpinner(this.spinnerOne);
+        Validation.numericSpinner(this.spinnerTwo);
+        Validation.numericSpinner(this.spinnerThree);
+        Validation.numericSpinner(this.spinnerFour);
+        Validation.numericSpinner(this.spinnerFive);
+        Validation.numericSpinner(this.spinnerSix);
+        Validation.numericSpinner(this.spinnerSeven);
+        Validation.numericSpinner(this.spinnerEight);
+        Validation.numericSpinner(this.spinnerNine);
+        Validation.numericSpinner(this.spinnerTen);
+        Validation.numericSpinner(this.spinnerEleven);
+        Validation.numericSpinner(this.spinnerTwelve);
+        Validation.numericSpinner(this.spinnerThirteen);
+        Validation.numericSpinner(this.spinnerFourteen);
+        Validation.numericSpinner(this.spinnerFifteen);
+        Validation.numericSpinner(this.spinnerSixteen);
     }
 
     private void save() {
@@ -704,38 +570,38 @@ public class CharacterSheetController {
         currentChar.setInitiativeField(this.initiativeField.getText());
         currentChar.setPassivePerceptionField(this.passivePerceptionField.getText());
         currentChar.setNature(this.nature.getText());
-        currentChar.setC1F(this.c1F.getText());
-        currentChar.setC2F(this.c2F.getText());
-        currentChar.setC3F(this.c3F.getText());
-        currentChar.setC4F(this.c4F.getText());
-        currentChar.setC5F(this.c5F.getText());
-        currentChar.setC6F(this.c6F.getText());
-        currentChar.setC7F(this.c7F.getText());
-        currentChar.setC8F(this.c8F.getText());
-        currentChar.setC1(this.c1.getEditor().getText());
-        currentChar.setC2(this.c2.getEditor().getText());
-        currentChar.setC3(this.c3.getEditor().getText());
-        currentChar.setC4(this.c4.getEditor().getText());
-        currentChar.setC5(this.c5.getEditor().getText());
-        currentChar.setC6(this.c6.getEditor().getText());
-        currentChar.setC7(this.c7.getEditor().getText());
-        currentChar.setC8(this.c8.getEditor().getText());
-        currentChar.setX1F(this.x1F.getText());
-        currentChar.setX2F(this.x2F.getText());
-        currentChar.setX3F(this.x3F.getText());
-        currentChar.setX4F(this.x4F.getText());
-        currentChar.setX5F(this.x5F.getText());
-        currentChar.setX6F(this.x6F.getText());
-        currentChar.setX7F(this.x7F.getText());
-        currentChar.setX8F(this.x8F.getText());
-        currentChar.setX1(this.x1.getEditor().getText());
-        currentChar.setX2(this.x2.getEditor().getText());
-        currentChar.setX3(this.x3.getEditor().getText());
-        currentChar.setX4(this.x4.getEditor().getText());
-        currentChar.setX5(this.x5.getEditor().getText());
-        currentChar.setX6(this.x6.getEditor().getText());
-        currentChar.setX7(this.x7.getEditor().getText());
-        currentChar.setX8(this.x8.getEditor().getText());
+        currentChar.setCounterOne(this.counterOne.getText());
+        currentChar.setCounterTwo(this.counterTwo.getText());
+        currentChar.setCounterThree(this.counterThree.getText());
+        currentChar.setCounterFour(this.counterFour.getText());
+        currentChar.setCounterFive(this.counterFive.getText());
+        currentChar.setCounterSix(this.counterSix.getText());
+        currentChar.setCounterSeven(this.counterSeven.getText());
+        currentChar.setCounterEight(this.counterEight.getText());
+        currentChar.setSpinnerOne(this.spinnerOne.getEditor().getText());
+        currentChar.setSpinnerTwo(this.spinnerTwo.getEditor().getText());
+        currentChar.setSpinnerThree(this.spinnerThree.getEditor().getText());
+        currentChar.setSpinnerFour(this.spinnerFour.getEditor().getText());
+        currentChar.setSpinnerFive(this.spinnerFive.getEditor().getText());
+        currentChar.setSpinnerSix(this.spinnerSix.getEditor().getText());
+        currentChar.setSpinnerSeven(this.spinnerSeven.getEditor().getText());
+        currentChar.setSpinnerEight(this.spinnerEight.getEditor().getText());
+        currentChar.setCounterSixteen(this.counterSixteen.getText());
+        currentChar.setCounterFifteen(this.counterFifteen.getText());
+        currentChar.setCounterFourteen(this.counterFourteen.getText());
+        currentChar.setCounterThirteen(this.counterThirteen.getText());
+        currentChar.setCounterTwelve(this.counterTwelve.getText());
+        currentChar.setCounterEleven(this.counterEleven.getText());
+        currentChar.setCounterTen(this.counterTen.getText());
+        currentChar.setCounterNine(this.counterNine.getText());
+        currentChar.setSpinnerSixteen(this.spinnerSixteen.getEditor().getText());
+        currentChar.setSpinnerFifteen(this.spinnerFifteen.getEditor().getText());
+        currentChar.setSpinnerFourteen(this.spinnerFourteen.getEditor().getText());
+        currentChar.setSpinnerThirteen(this.spinnerThirteen.getEditor().getText());
+        currentChar.setSpinnerTwelve(this.spinnerTwelve.getEditor().getText());
+        currentChar.setSpinnerEleven(this.spinnerEleven.getEditor().getText());
+        currentChar.setSpinnerTen(this.spinnerTen.getEditor().getText());
+        currentChar.setSpinnerNine(this.spinnerNine.getEditor().getText());
         currentChar.setSpeedField(this.speedField.getText());
         currentChar.setProficiencyBonus(this.proficiencyBonus.getText());
         currentChar.setMaxHpString(this.maxHpSpinner.getEditor().getText());
@@ -777,7 +643,7 @@ public class CharacterSheetController {
         currentChar.setInventoryTwo(this.inventoryTwo.getText());
         currentChar.setInventoryThree(this.inventoryThree.getText());
         currentChar.setInventoryFour(this.inventoryFour.getText());
-        currentChar.setBackstory(this.backStory.getText());
+        currentChar.setBackStory(this.backStory.getText());
         currentChar.setTraitsField(this.traitsField.getText());
         currentChar.setIdealsField(this.idealsField.getText());
         currentChar.setBondsField(this.bondsField.getText());
@@ -1066,38 +932,38 @@ public class CharacterSheetController {
         this.initiativeField.setText(currentChar.getInitiativeField());
         this.passivePerceptionField.setText(currentChar.getPassivePerceptionField());
         this.nature.setText(currentChar.getNature());
-        this.c1F.setText(currentChar.getC1F());
-        this.c2F.setText(currentChar.getC2F());
-        this.c3F.setText(currentChar.getC3F());
-        this.c4F.setText(currentChar.getC4F());
-        this.c5F.setText(currentChar.getC5F());
-        this.c6F.setText(currentChar.getC6F());
-        this.c7F.setText(currentChar.getC7F());
-        this.c8F.setText(currentChar.getC8F());
-        this.c1.getEditor().setText(currentChar.getC1());
-        this.c2.getEditor().setText(currentChar.getC2());
-        this.c3.getEditor().setText(currentChar.getC3());
-        this.c4.getEditor().setText(currentChar.getC4());
-        this.c5.getEditor().setText(currentChar.getC5());
-        this.c6.getEditor().setText(currentChar.getC6());
-        this.c7.getEditor().setText(currentChar.getC7());
-        this.c8.getEditor().setText(currentChar.getC8());
-        this.x1F.setText(currentChar.getX1F());
-        this.x2F.setText(currentChar.getX2F());
-        this.x3F.setText(currentChar.getX3F());
-        this.x4F.setText(currentChar.getX4F());
-        this.x5F.setText(currentChar.getX5F());
-        this.x6F.setText(currentChar.getX6F());
-        this.x7F.setText(currentChar.getX7F());
-        this.x8F.setText(currentChar.getX8F());
-        this.x1.getEditor().setText(currentChar.getX1());
-        this.x2.getEditor().setText(currentChar.getX2());
-        this.x3.getEditor().setText(currentChar.getX3());
-        this.x4.getEditor().setText(currentChar.getX4());
-        this.x5.getEditor().setText(currentChar.getX5());
-        this.x6.getEditor().setText(currentChar.getX6());
-        this.x7.getEditor().setText(currentChar.getX7());
-        this.x8.getEditor().setText(currentChar.getX8());
+        this.counterOne.setText(currentChar.getCounterOne());
+        this.counterTwo.setText(currentChar.getCounterTwo());
+        this.counterThree.setText(currentChar.getCounterThree());
+        this.counterFour.setText(currentChar.getCounterFour());
+        this.counterFive.setText(currentChar.getCounterFive());
+        this.counterSix.setText(currentChar.getCounterSix());
+        this.counterSeven.setText(currentChar.getCounterSeven());
+        this.counterEight.setText(currentChar.getCounterEight());
+        this.spinnerOne.getEditor().setText(currentChar.getSpinnerOne());
+        this.spinnerTwo.getEditor().setText(currentChar.getSpinnerTwo());
+        this.spinnerThree.getEditor().setText(currentChar.getSpinnerThree());
+        this.spinnerFour.getEditor().setText(currentChar.getSpinnerFour());
+        this.spinnerFive.getEditor().setText(currentChar.getSpinnerFive());
+        this.spinnerSix.getEditor().setText(currentChar.getSpinnerSix());
+        this.spinnerSeven.getEditor().setText(currentChar.getSpinnerSeven());
+        this.spinnerEight.getEditor().setText(currentChar.getSpinnerEight());
+        this.counterSixteen.setText(currentChar.getCounterSixteen());
+        this.counterFifteen.setText(currentChar.getCounterFifteen());
+        this.counterFourteen.setText(currentChar.getCounterFourteen());
+        this.counterThirteen.setText(currentChar.getCounterThirteen());
+        this.counterTwelve.setText(currentChar.getCounterTwelve());
+        this.counterEleven.setText(currentChar.getCounterEleven());
+        this.counterTen.setText(currentChar.getCounterTen());
+        this.counterNine.setText(currentChar.getCounterNine());
+        this.spinnerSixteen.getEditor().setText(currentChar.getSpinnerSixteen());
+        this.spinnerFifteen.getEditor().setText(currentChar.getSpinnerFifteen());
+        this.spinnerFourteen.getEditor().setText(currentChar.getSpinnerFourteen());
+        this.spinnerThirteen.getEditor().setText(currentChar.getSpinnerThirteen());
+        this.spinnerTwelve.getEditor().setText(currentChar.getSpinnerTwelve());
+        this.spinnerEleven.getEditor().setText(currentChar.getSpinnerEleven());
+        this.spinnerTen.getEditor().setText(currentChar.getSpinnerTen());
+        this.spinnerNine.getEditor().setText(currentChar.getSpinnerNine());
         this.speedField.setText(currentChar.getSpeedField());
         this.proficiencyBonus.setText(currentChar.getProficiencyBonus());
         this.currentHPSpinner.getEditor().setText(currentChar.getCurrentHPString());
@@ -1149,7 +1015,7 @@ public class CharacterSheetController {
         this.inventoryTwo.setText(currentChar.getInventoryTwo());
         this.inventoryThree.setText(currentChar.getInventoryThree());
         this.inventoryFour.setText(currentChar.getInventoryFour());
-        this.backStory.setText(currentChar.getBackstory());
+        this.backStory.setText(currentChar.getBackStory());
         this.strengthChoice.getSelectionModel().select(currentChar.getStrengthChoice());
         this.dexterityChoice.getSelectionModel().select(currentChar.getDexterityChoice());
         this.constitutionChoice.getSelectionModel().select(currentChar.getConstitutionChoice());
@@ -1225,22 +1091,22 @@ public class CharacterSheetController {
         SavedToggler.changesSp(this.electrum);
         SavedToggler.changesSp(this.gold);
         SavedToggler.changesSp(this.platinum);
-        SavedToggler.changesSp(this.x2);
-        SavedToggler.changesSp(this.x1);
-        SavedToggler.changesSp(this.x3);
-        SavedToggler.changesSp(this.x4);
-        SavedToggler.changesSp(this.x5);
-        SavedToggler.changesSp(this.x6);
-        SavedToggler.changesSp(this.x7);
-        SavedToggler.changesSp(this.x8);
-        SavedToggler.changesSp(this.c8);
-        SavedToggler.changesSp(this.c7);
-        SavedToggler.changesSp(this.c6);
-        SavedToggler.changesSp(this.c5);
-        SavedToggler.changesSp(this.c4);
-        SavedToggler.changesSp(this.c3);
-        SavedToggler.changesSp(this.c2);
-        SavedToggler.changesSp(this.c1);
+        SavedToggler.changesSp(this.spinnerOne);
+        SavedToggler.changesSp(this.spinnerTwo);
+        SavedToggler.changesSp(this.spinnerThree);
+        SavedToggler.changesSp(this.spinnerFour);
+        SavedToggler.changesSp(this.spinnerFive);
+        SavedToggler.changesSp(this.spinnerSix);
+        SavedToggler.changesSp(this.spinnerSeven);
+        SavedToggler.changesSp(this.spinnerEight);
+        SavedToggler.changesSp(this.spinnerNine);
+        SavedToggler.changesSp(this.spinnerTen);
+        SavedToggler.changesSp(this.spinnerEleven);
+        SavedToggler.changesSp(this.spinnerTwelve);
+        SavedToggler.changesSp(this.spinnerThirteen);
+        SavedToggler.changesSp(this.spinnerFourteen);
+        SavedToggler.changesSp(this.spinnerFifteen);
+        SavedToggler.changesSp(this.spinnerSixteen);
         SavedToggler.changesTF(this.characterName);
         SavedToggler.changesTF(this.classField);
         SavedToggler.changesTF(this.raceField);
@@ -1277,22 +1143,22 @@ public class CharacterSheetController {
         SavedToggler.changesTF(this.damageTwo);
         SavedToggler.changesTA(this.weapons);
         SavedToggler.changesTA(this.armor);
-        SavedToggler.changesTF(this.c1F);
-        SavedToggler.changesTF(this.c2F);
-        SavedToggler.changesTF(this.c3F);
-        SavedToggler.changesTF(this.c4F);
-        SavedToggler.changesTF(this.c5F);
-        SavedToggler.changesTF(this.c6F);
-        SavedToggler.changesTF(this.c7F);
-        SavedToggler.changesTF(this.c8F);
-        SavedToggler.changesTF(this.x1F);
-        SavedToggler.changesTF(this.x2F);
-        SavedToggler.changesTF(this.x3F);
-        SavedToggler.changesTF(this.x4F);
-        SavedToggler.changesTF(this.x5F);
-        SavedToggler.changesTF(this.x6F);
-        SavedToggler.changesTF(this.x7F);
-        SavedToggler.changesTF(this.x8F);
+        SavedToggler.changesTF(this.counterOne);
+        SavedToggler.changesTF(this.counterTwo);
+        SavedToggler.changesTF(this.counterThree);
+        SavedToggler.changesTF(this.counterFour);
+        SavedToggler.changesTF(this.counterFive);
+        SavedToggler.changesTF(this.counterSix);
+        SavedToggler.changesTF(this.counterSeven);
+        SavedToggler.changesTF(this.counterEight);
+        SavedToggler.changesTF(this.counterNine);
+        SavedToggler.changesTF(this.counterTen);
+        SavedToggler.changesTF(this.counterEleven);
+        SavedToggler.changesTF(this.counterTwelve);
+        SavedToggler.changesTF(this.counterThirteen);
+        SavedToggler.changesTF(this.counterFourteen);
+        SavedToggler.changesTF(this.counterFifteen);
+        SavedToggler.changesTF(this.counterSixteen);
         SavedToggler.changesTA(this.inventoryOne);
         SavedToggler.changesTA(this.inventoryTwo);
         SavedToggler.changesTA(this.inventoryThree);
@@ -1317,488 +1183,6 @@ public class CharacterSheetController {
         SpellPopup.centerOnScreen();
         SpellPopup.setScene(new Scene(load, 602.0D, 425.0D));
         SpellPopup.show();
-    }
-
-    public void addSpell(Spell t) throws Exception {
-        FXMLLoader spellFXML = new FXMLLoader(this.getClass().getResource("/Rain/Spells/SpellCard.fxml"));
-        Parent par = spellFXML.load();
-        int index = t.getLvl();
-        SpellCard spellCont;
-        if (t.isPrepared()) {
-            if (index == 0) {
-                this.CantripsP.getChildren().add(par);
-                spellCont = (SpellCard) (this.CantripsP.getChildren().get(this.CantripsP.getChildren().indexOf(par))).getUserData();
-                spellCont.prepare();
-            } else if (index == 1) {
-                this.firstLvlP.getChildren().add(par);
-                spellCont = (SpellCard) (this.firstLvlP.getChildren().get(this.firstLvlP.getChildren().indexOf(par))).getUserData();
-                spellCont.prepare();
-            } else if (index == 2) {
-                this.secondLvlP.getChildren().add(par);
-                spellCont = (SpellCard) (this.secondLvlP.getChildren().get(this.secondLvlP.getChildren().indexOf(par))).getUserData();
-                spellCont.prepare();
-            } else if (index == 3) {
-                this.thirdLvlP.getChildren().add(par);
-                spellCont = (SpellCard) (this.thirdLvlP.getChildren().get(this.thirdLvlP.getChildren().indexOf(par))).getUserData();
-                spellCont.prepare();
-            } else if (index == 4) {
-                this.fourthLvlP.getChildren().add(par);
-                spellCont = (SpellCard) (this.fourthLvlP.getChildren().get(this.fourthLvlP.getChildren().indexOf(par))).getUserData();
-                spellCont.prepare();
-            } else if (index == 5) {
-                this.fifthLvlP.getChildren().add(par);
-                spellCont = (SpellCard) (this.fifthLvlP.getChildren().get(this.fifthLvlP.getChildren().indexOf(par))).getUserData();
-                spellCont.prepare();
-            } else if (index == 6) {
-                this.sixthLvlP.getChildren().add(par);
-                spellCont = (SpellCard) (this.sixthLvlP.getChildren().get(this.sixthLvlP.getChildren().indexOf(par))).getUserData();
-                spellCont.prepare();
-            } else if (index == 7) {
-                this.seventhLvlP.getChildren().add(par);
-                spellCont = (SpellCard) (this.seventhLvlP.getChildren().get(this.seventhLvlP.getChildren().indexOf(par))).getUserData();
-                spellCont.prepare();
-            } else if (index == 8) {
-                this.eighthLvlP.getChildren().add(par);
-                spellCont = (SpellCard) (this.eighthLvlP.getChildren().get(this.eighthLvlP.getChildren().indexOf(par))).getUserData();
-                spellCont.prepare();
-            } else if (index == 9) {
-                this.ninthLvlP.getChildren().add(par);
-                spellCont = (SpellCard) (this.ninthLvlP.getChildren().get(this.ninthLvlP.getChildren().indexOf(par))).getUserData();
-                spellCont.prepare();
-            } else {
-                this.aboveNinthLvlP.getChildren().add(par);
-                spellCont = (SpellCard) (this.aboveNinthLvlP.getChildren().get(this.aboveNinthLvlP.getChildren().indexOf(par))).getUserData();
-            }
-        } else if (index == 0) {
-            this.Cantrips.getChildren().add(par);
-            spellCont = (SpellCard) (this.Cantrips.getChildren().get(this.Cantrips.getChildren().indexOf(par))).getUserData();
-        } else if (index == 1) {
-            this.firstLvl.getChildren().add(par);
-            spellCont = (SpellCard) (this.firstLvl.getChildren().get(this.firstLvl.getChildren().indexOf(par))).getUserData();
-        } else if (index == 2) {
-            this.secondLvl.getChildren().add(par);
-            spellCont = (SpellCard) (this.secondLvl.getChildren().get(this.secondLvl.getChildren().indexOf(par))).getUserData();
-        } else if (index == 3) {
-            this.thirdLvl.getChildren().add(par);
-            spellCont = (SpellCard) (this.thirdLvl.getChildren().get(this.thirdLvl.getChildren().indexOf(par))).getUserData();
-        } else if (index == 4) {
-            this.fourthLvl.getChildren().add(par);
-            spellCont = (SpellCard) (this.fourthLvl.getChildren().get(this.fourthLvl.getChildren().indexOf(par))).getUserData();
-        } else if (index == 5) {
-            this.fifthLvl.getChildren().add(par);
-            spellCont = (SpellCard) (this.fifthLvl.getChildren().get(this.fifthLvl.getChildren().indexOf(par))).getUserData();
-        } else if (index == 6) {
-            this.sixthLvl.getChildren().add(par);
-            spellCont = (SpellCard) (this.sixthLvl.getChildren().get(this.sixthLvl.getChildren().indexOf(par))).getUserData();
-        } else if (index == 7) {
-            this.seventhLvl.getChildren().add(par);
-            spellCont = (SpellCard) (this.seventhLvl.getChildren().get(this.seventhLvl.getChildren().indexOf(par))).getUserData();
-        } else if (index == 8) {
-            this.eighthLvl.getChildren().add(par);
-            spellCont = (SpellCard) (this.eighthLvl.getChildren().get(this.eighthLvl.getChildren().indexOf(par))).getUserData();
-        } else if (index == 9) {
-            this.ninthLvl.getChildren().add(par);
-            spellCont = (SpellCard) (this.ninthLvl.getChildren().get(this.ninthLvl.getChildren().indexOf(par))).getUserData();
-        } else {
-            this.aboveNinthLvl.getChildren().add(par);
-            spellCont = (SpellCard) (this.aboveNinthLvl.getChildren().get(this.aboveNinthLvl.getChildren().indexOf(par))).getUserData();
-        }
-
-        spellCont.setSpell(t);
-        spellCont.load();
-        this.sortSpells();
-    }
-
-    public void prepare(Spell spell, Parent par) {
-        int index = spell.getLvl();
-        SpellCard spellCont;
-        if (index == 0) {
-            this.Cantrips.getChildren().remove(this.Cantrips.getChildren().indexOf(par));
-            this.CantripsP.getChildren().add(par);
-            spellCont = (SpellCard) (this.CantripsP.getChildren().get(this.CantripsP.getChildren().indexOf(par))).getUserData();
-        } else if (index == 1) {
-            this.firstLvl.getChildren().remove(this.firstLvl.getChildren().indexOf(par));
-            this.firstLvlP.getChildren().add(par);
-            spellCont = (SpellCard) (this.firstLvlP.getChildren().get(this.firstLvlP.getChildren().indexOf(par))).getUserData();
-        } else if (index == 2) {
-            this.secondLvl.getChildren().remove(this.secondLvl.getChildren().indexOf(par));
-            this.secondLvlP.getChildren().add(par);
-            spellCont = (SpellCard) (this.secondLvlP.getChildren().get(this.secondLvlP.getChildren().indexOf(par))).getUserData();
-        } else if (index == 3) {
-            this.thirdLvl.getChildren().remove(this.thirdLvl.getChildren().indexOf(par));
-            this.thirdLvlP.getChildren().add(par);
-            spellCont = (SpellCard) (this.thirdLvlP.getChildren().get(this.thirdLvlP.getChildren().indexOf(par))).getUserData();
-        } else if (index == 4) {
-            this.fourthLvl.getChildren().remove(this.fourthLvl.getChildren().indexOf(par));
-            this.fourthLvlP.getChildren().add(par);
-            spellCont = (SpellCard) (this.fourthLvlP.getChildren().get(this.fourthLvlP.getChildren().indexOf(par))).getUserData();
-        } else if (index == 5) {
-            this.fifthLvl.getChildren().remove(this.fifthLvl.getChildren().indexOf(par));
-            this.fifthLvlP.getChildren().add(par);
-            spellCont = (SpellCard) (this.fifthLvlP.getChildren().get(this.fifthLvlP.getChildren().indexOf(par))).getUserData();
-        } else if (index == 6) {
-            this.sixthLvl.getChildren().remove(this.sixthLvl.getChildren().indexOf(par));
-            this.sixthLvlP.getChildren().add(par);
-            spellCont = (SpellCard) (this.sixthLvlP.getChildren().get(this.sixthLvlP.getChildren().indexOf(par))).getUserData();
-        } else if (index == 7) {
-            this.seventhLvl.getChildren().remove(this.seventhLvl.getChildren().indexOf(par));
-            this.seventhLvlP.getChildren().add(par);
-            spellCont = (SpellCard) (this.seventhLvlP.getChildren().get(this.seventhLvlP.getChildren().indexOf(par))).getUserData();
-        } else if (index == 8) {
-            this.eighthLvl.getChildren().remove(this.eighthLvl.getChildren().indexOf(par));
-            this.eighthLvlP.getChildren().add(par);
-            spellCont = (SpellCard) (this.eighthLvlP.getChildren().get(this.eighthLvlP.getChildren().indexOf(par))).getUserData();
-        } else if (index == 9) {
-            this.ninthLvl.getChildren().remove(this.ninthLvl.getChildren().indexOf(par));
-            this.ninthLvlP.getChildren().add(par);
-            spellCont = (SpellCard) (this.ninthLvlP.getChildren().get(this.ninthLvlP.getChildren().indexOf(par))).getUserData();
-        } else {
-            this.aboveNinthLvl.getChildren().remove(this.aboveNinthLvl.getChildren().indexOf(par));
-            this.aboveNinthLvlP.getChildren().add(par);
-            spellCont = (SpellCard) (this.aboveNinthLvlP.getChildren().get(this.aboveNinthLvlP.getChildren().indexOf(par))).getUserData();
-        }
-
-        spellCont.setSpell(spell);
-        spellCont.load();
-        spellCont.prep();
-        this.sortSpells();
-    }
-
-    public void unPrepare(Spell spell, Parent par) {
-        int index = spell.getLvl();
-        SpellCard spellCont;
-        if (index == 0) {
-            this.CantripsP.getChildren().remove(this.CantripsP.getChildren().indexOf(par));
-            this.Cantrips.getChildren().add(par);
-            spellCont = (SpellCard) (this.Cantrips.getChildren().get(this.Cantrips.getChildren().indexOf(par))).getUserData();
-        } else if (index == 1) {
-            this.firstLvlP.getChildren().remove(this.firstLvlP.getChildren().indexOf(par));
-            this.firstLvl.getChildren().add(par);
-            spellCont = (SpellCard) (this.firstLvl.getChildren().get(this.firstLvl.getChildren().indexOf(par))).getUserData();
-        } else if (index == 2) {
-            this.secondLvlP.getChildren().remove(this.secondLvlP.getChildren().indexOf(par));
-            this.secondLvl.getChildren().add(par);
-            spellCont = (SpellCard) (this.secondLvl.getChildren().get(this.secondLvl.getChildren().indexOf(par))).getUserData();
-        } else if (index == 3) {
-            this.thirdLvlP.getChildren().remove(this.thirdLvlP.getChildren().indexOf(par));
-            this.thirdLvl.getChildren().add(par);
-            spellCont = (SpellCard) (this.thirdLvl.getChildren().get(this.thirdLvl.getChildren().indexOf(par))).getUserData();
-        } else if (index == 4) {
-            this.fourthLvlP.getChildren().remove(this.fourthLvlP.getChildren().indexOf(par));
-            this.fourthLvl.getChildren().add(par);
-            spellCont = (SpellCard) (this.fourthLvl.getChildren().get(this.fourthLvl.getChildren().indexOf(par))).getUserData();
-        } else if (index == 5) {
-            this.fifthLvlP.getChildren().remove(this.fifthLvlP.getChildren().indexOf(par));
-            this.fifthLvl.getChildren().add(par);
-            spellCont = (SpellCard) (this.fifthLvl.getChildren().get(this.fifthLvl.getChildren().indexOf(par))).getUserData();
-        } else if (index == 6) {
-            this.sixthLvlP.getChildren().remove(this.sixthLvlP.getChildren().indexOf(par));
-            this.sixthLvl.getChildren().add(par);
-            spellCont = (SpellCard) (this.sixthLvl.getChildren().get(this.sixthLvl.getChildren().indexOf(par))).getUserData();
-        } else if (index == 7) {
-            this.seventhLvlP.getChildren().remove(this.seventhLvlP.getChildren().indexOf(par));
-            this.seventhLvl.getChildren().add(par);
-            spellCont = (SpellCard) (this.seventhLvl.getChildren().get(this.seventhLvl.getChildren().indexOf(par))).getUserData();
-        } else if (index == 8) {
-            this.eighthLvlP.getChildren().remove(this.eighthLvlP.getChildren().indexOf(par));
-            this.eighthLvl.getChildren().add(par);
-            spellCont = (SpellCard) (this.eighthLvl.getChildren().get(this.eighthLvl.getChildren().indexOf(par))).getUserData();
-        } else if (index == 9) {
-            this.ninthLvlP.getChildren().remove(this.ninthLvlP.getChildren().indexOf(par));
-            this.ninthLvl.getChildren().add(par);
-            spellCont = (SpellCard) (this.ninthLvl.getChildren().get(this.ninthLvl.getChildren().indexOf(par))).getUserData();
-        } else {
-            this.aboveNinthLvlP.getChildren().remove(this.aboveNinthLvlP.getChildren().indexOf(par));
-            this.aboveNinthLvl.getChildren().add(par);
-            spellCont = (SpellCard) (this.aboveNinthLvl.getChildren().get(this.aboveNinthLvl.getChildren().indexOf(par))).getUserData();
-        }
-
-        spellCont.setSpell(spell);
-        spellCont.load();
-        spellCont.uPrep();
-        this.sortSpells();
-    }
-
-    public void deleteSpell(Spell spell, Parent par, boolean prepared) {
-        int index;
-        if (prepared) {
-            index = spell.getLvl();
-            if (index == 0) {
-                this.CantripsP.getChildren().remove(this.CantripsP.getChildren().indexOf(par));
-            } else if (index == 1) {
-                this.firstLvlP.getChildren().remove(this.firstLvlP.getChildren().indexOf(par));
-            } else if (index == 2) {
-                this.secondLvlP.getChildren().remove(this.secondLvlP.getChildren().indexOf(par));
-            } else if (index == 3) {
-                this.thirdLvlP.getChildren().remove(this.thirdLvlP.getChildren().indexOf(par));
-            } else if (index == 4) {
-                this.fourthLvlP.getChildren().remove(this.fourthLvlP.getChildren().indexOf(par));
-            } else if (index == 5) {
-                this.fifthLvlP.getChildren().remove(this.fifthLvlP.getChildren().indexOf(par));
-            } else if (index == 6) {
-                this.sixthLvlP.getChildren().remove(this.sixthLvlP.getChildren().indexOf(par));
-            } else if (index == 7) {
-                this.seventhLvlP.getChildren().remove(this.seventhLvlP.getChildren().indexOf(par));
-            } else if (index == 8) {
-                this.eighthLvlP.getChildren().remove(this.eighthLvlP.getChildren().indexOf(par));
-            } else if (index == 9) {
-                this.ninthLvlP.getChildren().remove(this.ninthLvlP.getChildren().indexOf(par));
-            } else {
-                this.aboveNinthLvlP.getChildren().remove(this.aboveNinthLvlP.getChildren().indexOf(par));
-            }
-        } else {
-            index = spell.getLvl();
-            if (index == 0) {
-                this.Cantrips.getChildren().remove(this.Cantrips.getChildren().indexOf(par));
-            } else if (index == 1) {
-                this.firstLvl.getChildren().remove(this.firstLvl.getChildren().indexOf(par));
-            } else if (index == 2) {
-                this.secondLvl.getChildren().remove(this.secondLvl.getChildren().indexOf(par));
-            } else if (index == 3) {
-                this.thirdLvl.getChildren().remove(this.thirdLvl.getChildren().indexOf(par));
-            } else if (index == 4) {
-                this.fourthLvl.getChildren().remove(this.fourthLvl.getChildren().indexOf(par));
-            } else if (index == 5) {
-                this.fifthLvl.getChildren().remove(this.fifthLvl.getChildren().indexOf(par));
-            } else if (index == 6) {
-                this.sixthLvl.getChildren().remove(this.sixthLvl.getChildren().indexOf(par));
-            } else if (index == 7) {
-                this.seventhLvl.getChildren().remove(this.seventhLvl.getChildren().indexOf(par));
-            } else if (index == 8) {
-                this.eighthLvl.getChildren().remove(this.eighthLvl.getChildren().indexOf(par));
-            } else if (index == 9) {
-                this.ninthLvl.getChildren().remove(this.ninthLvl.getChildren().indexOf(par));
-            } else {
-                this.aboveNinthLvl.getChildren().remove(this.aboveNinthLvl.getChildren().indexOf(par));
-            }
-        }
-
-        this.sortSpells();
-    }
-
-    public void saveSpells(ActionEvent actionEvent) {
-        Iterator var2 = this.Cantrips.getChildren().iterator();
-
-        Node t;
-        SpellCard spellCard;
-        while(var2.hasNext()) {
-            t = (Node)var2.next();
-            spellCard = (SpellCard)t.getUserData();
-            spellCard.saveSpell();
-        }
-
-        var2 = this.firstLvl.getChildren().iterator();
-
-        while(var2.hasNext()) {
-            t = (Node)var2.next();
-            spellCard = (SpellCard)t.getUserData();
-            spellCard.saveSpell();
-        }
-
-        var2 = this.secondLvl.getChildren().iterator();
-
-        while(var2.hasNext()) {
-            t = (Node)var2.next();
-            spellCard = (SpellCard)t.getUserData();
-            spellCard.saveSpell();
-        }
-
-        var2 = this.thirdLvl.getChildren().iterator();
-
-        while(var2.hasNext()) {
-            t = (Node)var2.next();
-            spellCard = (SpellCard)t.getUserData();
-            spellCard.saveSpell();
-        }
-
-        var2 = this.fourthLvl.getChildren().iterator();
-
-        while(var2.hasNext()) {
-            t = (Node)var2.next();
-            spellCard = (SpellCard)t.getUserData();
-            spellCard.saveSpell();
-        }
-
-        var2 = this.fifthLvl.getChildren().iterator();
-
-        while(var2.hasNext()) {
-            t = (Node)var2.next();
-            spellCard = (SpellCard)t.getUserData();
-            spellCard.saveSpell();
-        }
-
-        var2 = this.sixthLvl.getChildren().iterator();
-
-        while(var2.hasNext()) {
-            t = (Node)var2.next();
-            spellCard = (SpellCard)t.getUserData();
-            spellCard.saveSpell();
-        }
-
-        var2 = this.seventhLvl.getChildren().iterator();
-
-        while(var2.hasNext()) {
-            t = (Node)var2.next();
-            spellCard = (SpellCard)t.getUserData();
-            spellCard.saveSpell();
-        }
-
-        var2 = this.eighthLvl.getChildren().iterator();
-
-        while(var2.hasNext()) {
-            t = (Node)var2.next();
-            spellCard = (SpellCard)t.getUserData();
-            spellCard.saveSpell();
-        }
-
-        var2 = this.ninthLvl.getChildren().iterator();
-
-        while(var2.hasNext()) {
-            t = (Node)var2.next();
-            spellCard = (SpellCard)t.getUserData();
-            spellCard.saveSpell();
-        }
-
-        var2 = this.aboveNinthLvl.getChildren().iterator();
-
-        while(var2.hasNext()) {
-            t = (Node)var2.next();
-            spellCard = (SpellCard)t.getUserData();
-            spellCard.saveSpell();
-        }
-
-        var2 = this.CantripsP.getChildren().iterator();
-
-        while(var2.hasNext()) {
-            t = (Node)var2.next();
-            spellCard = (SpellCard)t.getUserData();
-            spellCard.saveSpell();
-        }
-
-        var2 = this.firstLvlP.getChildren().iterator();
-
-        while(var2.hasNext()) {
-            t = (Node)var2.next();
-            spellCard = (SpellCard)t.getUserData();
-            spellCard.saveSpell();
-        }
-
-        var2 = this.secondLvlP.getChildren().iterator();
-
-        while(var2.hasNext()) {
-            t = (Node)var2.next();
-            spellCard = (SpellCard)t.getUserData();
-            spellCard.saveSpell();
-        }
-
-        var2 = this.thirdLvlP.getChildren().iterator();
-
-        while(var2.hasNext()) {
-            t = (Node)var2.next();
-            spellCard = (SpellCard)t.getUserData();
-            spellCard.saveSpell();
-        }
-
-        var2 = this.fourthLvlP.getChildren().iterator();
-
-        while(var2.hasNext()) {
-            t = (Node)var2.next();
-            spellCard = (SpellCard)t.getUserData();
-            spellCard.saveSpell();
-        }
-
-        var2 = this.fifthLvlP.getChildren().iterator();
-
-        while(var2.hasNext()) {
-            t = (Node)var2.next();
-            spellCard = (SpellCard)t.getUserData();
-            spellCard.saveSpell();
-        }
-
-        var2 = this.sixthLvlP.getChildren().iterator();
-
-        while(var2.hasNext()) {
-            t = (Node)var2.next();
-            spellCard = (SpellCard)t.getUserData();
-            spellCard.saveSpell();
-        }
-
-        var2 = this.seventhLvlP.getChildren().iterator();
-
-        while(var2.hasNext()) {
-            t = (Node)var2.next();
-            spellCard = (SpellCard)t.getUserData();
-            spellCard.saveSpell();
-        }
-
-        var2 = this.eighthLvlP.getChildren().iterator();
-
-        while(var2.hasNext()) {
-            t = (Node)var2.next();
-            spellCard = (SpellCard)t.getUserData();
-            spellCard.saveSpell();
-        }
-
-        var2 = this.ninthLvlP.getChildren().iterator();
-
-        while(var2.hasNext()) {
-            t = (Node)var2.next();
-            spellCard = (SpellCard)t.getUserData();
-            spellCard.saveSpell();
-        }
-
-        var2 = this.aboveNinthLvlP.getChildren().iterator();
-
-        while(var2.hasNext()) {
-            t = (Node)var2.next();
-            spellCard = (SpellCard)t.getUserData();
-            spellCard.saveSpell();
-        }
-
-    }
-
-    public String getCharName() {
-        return this.characterName.getText();
-    }
-
-    public void sortSpells() {
-        Sorter.sort(this.CantripsP);
-        Sorter.sort(this.firstLvlP);
-        Sorter.sort(this.secondLvlP);
-        Sorter.sort(this.thirdLvlP);
-        Sorter.sort(this.fourthLvlP);
-        Sorter.sort(this.fifthLvlP);
-        Sorter.sort(this.sixthLvlP);
-        Sorter.sort(this.seventhLvlP);
-        Sorter.sort(this.eighthLvlP);
-        Sorter.sort(this.ninthLvlP);
-        Sorter.sort(this.aboveNinthLvlP);
-        Sorter.sort(this.Cantrips);
-        Sorter.sort(this.firstLvl);
-        Sorter.sort(this.secondLvl);
-        Sorter.sort(this.thirdLvl);
-        Sorter.sort(this.fourthLvl);
-        Sorter.sort(this.fifthLvl);
-        Sorter.sort(this.sixthLvl);
-        Sorter.sort(this.seventhLvl);
-        Sorter.sort(this.eighthLvl);
-        Sorter.sort(this.ninthLvl);
-        Sorter.sort(this.aboveNinthLvl);
-    }
-
-    public void loadSpells(ActionEvent actionEvent) throws Exception {
-        File spellFolder = Main.chooserSpell();
-        File[] listFiles = spellFolder.listFiles();
-        Loader loader = new Loader();
-        File[] var5 = listFiles;
-        int var6 = listFiles.length;
-
-        for(int var7 = 0; var7 < var6; ++var7) {
-            File f = var5[var7];
-            loader.loadSpell(f);
-        }
-
-        this.sortSpells();
     }
 
     /*

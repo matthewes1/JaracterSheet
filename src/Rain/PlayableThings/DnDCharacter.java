@@ -55,22 +55,22 @@ public class DnDCharacter implements Serializable {
     private String raceField;
     private String playerNameField;
     private String passivePerceptionField;
-    private String c1F;
-    private String c2F;
-    private String c3F;
-    private String c4F;
-    private String c5F;
-    private String c6F;
-    private String c7F;
-    private String c8F;
-    private String x1F;
-    private String x2F;
-    private String x3F;
-    private String x4F;
-    private String x5F;
-    private String x6F;
-    private String x7F;
-    private String x8F;
+    private String counterOne;
+    private String counterTwo;
+    private String counterThree;
+    private String counterFour;
+    private String counterFive;
+    private String counterSix;
+    private String counterSeven;
+    private String counterEight;
+    private String counterNine;
+    private String counterTen;
+    private String counterEleven;
+    private String counterTwelve;
+    private String counterThirteen;
+    private String counterFourteen;
+    private String counterFifteen;
+    private String counterSixteen;
     private String weaponNameOne;
     private String weaponNameThree;
     private String weaponNameTwo;
@@ -84,7 +84,7 @@ public class DnDCharacter implements Serializable {
     private String height;
     private String skin;
     private String hair;
-    private String backstory;
+    private String backStory;
     private String inventoryThree;
     private String inventoryFour;
     private String traitsField;
@@ -106,22 +106,22 @@ public class DnDCharacter implements Serializable {
     private String electrum;
     private String gold;
     private String platinum;
-    private String x2;
-    private String x1;
-    private String x3;
-    private String x4;
-    private String x5;
-    private String x6;
-    private String x7;
-    private String x8;
-    private String c8;
-    private String c7;
-    private String c6;
-    private String c5;
-    private String c4;
-    private String c3;
-    private String c2;
-    private String c1;
+    private String spinnerOne;
+    private String spinnerTwo;
+    private String spinnerThree;
+    private String spinnerFour;
+    private String spinnerFive;
+    private String spinnerSix;
+    private String spinnerSeven;
+    private String spinnerEight;
+    private String spinnerNine;
+    private String spinnerTen;
+    private String spinnerEleven;
+    private String spinnerTwelve;
+    private String spinnerThirteen;
+    private String spinnerFourteen;
+    private String spinnerFifteen;
+    private String spinnerSixteen;
     private String inventoryOne;
     private String inventoryTwo;
     private String customInitiativeField;
@@ -617,147 +617,147 @@ public class DnDCharacter implements Serializable {
     }
 
     @XmlElement
-    public String getC1F() {
-        return c1F;
+    public String getCounterOne() {
+        return counterOne;
     }
 
-    public void setC1F(String c1F) {
-        this.c1F = c1F;
-    }
-
-    @XmlElement
-    public String getC2F() {
-        return c2F;
-    }
-
-    public void setC2F(String c2F) {
-        this.c2F = c2F;
+    public void setCounterOne(String counterOne) {
+        this.counterOne = counterOne;
     }
 
     @XmlElement
-    public String getC3F() {
-        return c3F;
+    public String getCounterTwo() {
+        return counterTwo;
     }
 
-    public void setC3F(String c3F) {
-        this.c3F = c3F;
-    }
-
-    @XmlElement
-    public String getC4F() {
-        return c4F;
-    }
-
-    public void setC4F(String c4F) {
-        this.c4F = c4F;
+    public void setCounterTwo(String counterTwo) {
+        this.counterTwo = counterTwo;
     }
 
     @XmlElement
-    public String getC5F() {
-        return c5F;
+    public String getCounterThree() {
+        return counterThree;
     }
 
-    public void setC5F(String c5F) {
-        this.c5F = c5F;
-    }
-
-    @XmlElement
-    public String getC6F() {
-        return c6F;
-    }
-
-    public void setC6F(String c6F) {
-        this.c6F = c6F;
+    public void setCounterThree(String counterThree) {
+        this.counterThree = counterThree;
     }
 
     @XmlElement
-    public String getC7F() {
-        return c7F;
+    public String getCounterFour() {
+        return counterFour;
     }
 
-    public void setC7F(String c7F) {
-        this.c7F = c7F;
-    }
-
-    @XmlElement
-    public String getC8F() {
-        return c8F;
-    }
-
-    public void setC8F(String c8F) {
-        this.c8F = c8F;
+    public void setCounterFour(String counterFour) {
+        this.counterFour = counterFour;
     }
 
     @XmlElement
-    public String getX1F() {
-        return x1F;
+    public String getCounterFive() {
+        return counterFive;
     }
 
-    public void setX1F(String x1F) {
-        this.x1F = x1F;
-    }
-
-    @XmlElement
-    public String getX2F() {
-        return x2F;
-    }
-
-    public void setX2F(String x2F) {
-        this.x2F = x2F;
+    public void setCounterFive(String counterFive) {
+        this.counterFive = counterFive;
     }
 
     @XmlElement
-    public String getX3F() {
-        return x3F;
+    public String getCounterSix() {
+        return counterSix;
     }
 
-    public void setX3F(String x3F) {
-        this.x3F = x3F;
-    }
-
-    @XmlElement
-    public String getX4F() {
-        return x4F;
-    }
-
-    public void setX4F(String x4F) {
-        this.x4F = x4F;
+    public void setCounterSix(String counterSix) {
+        this.counterSix = counterSix;
     }
 
     @XmlElement
-    public String getX5F() {
-        return x5F;
+    public String getCounterSeven() {
+        return counterSeven;
     }
 
-    public void setX5F(String x5F) {
-        this.x5F = x5F;
-    }
-
-    @XmlElement
-    public String getX6F() {
-        return x6F;
-    }
-
-    public void setX6F(String x6F) {
-        this.x6F = x6F;
+    public void setCounterSeven(String counterSeven) {
+        this.counterSeven = counterSeven;
     }
 
     @XmlElement
-    public String getX7F() {
-        return x7F;
+    public String getCounterEight() {
+        return counterEight;
     }
 
-    public void setX7F(String x7F) {
-        this.x7F = x7F;
+    public void setCounterEight(String counterEight) {
+        this.counterEight = counterEight;
     }
 
     @XmlElement
-    public String getX8F() {
-        return x8F;
+    public String getCounterSixteen() {
+        return counterSixteen;
     }
 
-    public void setX8F(String x8F) {
-        this.x8F = x8F;
+    public void setCounterSixteen(String counterSixteen) {
+        this.counterSixteen = counterSixteen;
+    }
+
+    @XmlElement
+    public String getCounterFifteen() {
+        return counterFifteen;
+    }
+
+    public void setCounterFifteen(String counterFifteen) {
+        this.counterFifteen = counterFifteen;
+    }
+
+    @XmlElement
+    public String getCounterFourteen() {
+        return counterFourteen;
+    }
+
+    public void setCounterFourteen(String counterFourteen) {
+        this.counterFourteen = counterFourteen;
+    }
+
+    @XmlElement
+    public String getCounterThirteen() {
+        return counterThirteen;
+    }
+
+    public void setCounterThirteen(String counterThirteen) {
+        this.counterThirteen = counterThirteen;
+    }
+
+    @XmlElement
+    public String getCounterTwelve() {
+        return counterTwelve;
+    }
+
+    public void setCounterTwelve(String counterTwelve) {
+        this.counterTwelve = counterTwelve;
+    }
+
+    @XmlElement
+    public String getCounterEleven() {
+        return counterEleven;
+    }
+
+    public void setCounterEleven(String counterEleven) {
+        this.counterEleven = counterEleven;
+    }
+
+    @XmlElement
+    public String getCounterTen() {
+        return counterTen;
+    }
+
+    public void setCounterTen(String counterTen) {
+        this.counterTen = counterTen;
+    }
+
+    @XmlElement
+    public String getCounterNine() {
+        return counterNine;
+    }
+
+    public void setCounterNine(String counterNine) {
+        this.counterNine = counterNine;
     }
 
     @XmlElement
@@ -878,12 +878,12 @@ public class DnDCharacter implements Serializable {
     }
 
     @XmlElement
-    public String getBackstory() {
-        return backstory;
+    public String getBackStory() {
+        return backStory;
     }
 
-    public void setBackstory(String backstory) {
-        this.backstory = backstory;
+    public void setBackStory(String backStory) {
+        this.backStory = backStory;
     }
 
     @XmlElement
@@ -1069,147 +1069,147 @@ public class DnDCharacter implements Serializable {
     }
 
     @XmlElement
-    public String getX2() {
-        return x2;
+    public String getSpinnerFifteen() {
+        return spinnerFifteen;
     }
 
-    public void setX2(String x2) {
-        this.x2 = x2;
-    }
-
-    @XmlElement
-    public String getX1() {
-        return x1;
-    }
-
-    public void setX1(String x1) {
-        this.x1 = x1;
+    public void setSpinnerFifteen(String spinnerFifteen) {
+        this.spinnerFifteen = spinnerFifteen;
     }
 
     @XmlElement
-    public String getX3() {
-        return x3;
+    public String getSpinnerSixteen() {
+        return spinnerSixteen;
     }
 
-    public void setX3(String x3) {
-        this.x3 = x3;
-    }
-
-    @XmlElement
-    public String getX4() {
-        return x4;
-    }
-
-    public void setX4(String x4) {
-        this.x4 = x4;
+    public void setSpinnerSixteen(String spinnerSixteen) {
+        this.spinnerSixteen = spinnerSixteen;
     }
 
     @XmlElement
-    public String getX5() {
-        return x5;
+    public String getSpinnerFourteen() {
+        return spinnerFourteen;
     }
 
-    public void setX5(String x5) {
-        this.x5 = x5;
-    }
-
-    @XmlElement
-    public String getX6() {
-        return x6;
-    }
-
-    public void setX6(String x6) {
-        this.x6 = x6;
+    public void setSpinnerFourteen(String spinnerFourteen) {
+        this.spinnerFourteen = spinnerFourteen;
     }
 
     @XmlElement
-    public String getX7() {
-        return x7;
+    public String getSpinnerThirteen() {
+        return spinnerThirteen;
     }
 
-    public void setX7(String x7) {
-        this.x7 = x7;
-    }
-
-    @XmlElement
-    public String getX8() {
-        return x8;
-    }
-
-    public void setX8(String x8) {
-        this.x8 = x8;
+    public void setSpinnerThirteen(String spinnerThirteen) {
+        this.spinnerThirteen = spinnerThirteen;
     }
 
     @XmlElement
-    public String getC8() {
-        return c8;
+    public String getSpinnerTwelve() {
+        return spinnerTwelve;
     }
 
-    public void setC8(String c8) {
-        this.c8 = c8;
-    }
-
-    @XmlElement
-    public String getC7() {
-        return c7;
-    }
-
-    public void setC7(String c7) {
-        this.c7 = c7;
+    public void setSpinnerTwelve(String spinnerTwelve) {
+        this.spinnerTwelve = spinnerTwelve;
     }
 
     @XmlElement
-    public String getC6() {
-        return c6;
+    public String getSpinnerEleven() {
+        return spinnerEleven;
     }
 
-    public void setC6(String c6) {
-        this.c6 = c6;
-    }
-
-    @XmlElement
-    public String getC5() {
-        return c5;
-    }
-
-    public void setC5(String c5) {
-        this.c5 = c5;
+    public void setSpinnerEleven(String spinnerEleven) {
+        this.spinnerEleven = spinnerEleven;
     }
 
     @XmlElement
-    public String getC4() {
-        return c4;
+    public String getSpinnerTen() {
+        return spinnerTen;
     }
 
-    public void setC4(String c4) {
-        this.c4 = c4;
-    }
-
-    @XmlElement
-    public String getC3() {
-        return c3;
-    }
-
-    public void setC3(String c3) {
-        this.c3 = c3;
+    public void setSpinnerTen(String spinnerTen) {
+        this.spinnerTen = spinnerTen;
     }
 
     @XmlElement
-    public String getC2() {
-        return c2;
+    public String getSpinnerNine() {
+        return spinnerNine;
     }
 
-    public void setC2(String c2) {
-        this.c2 = c2;
+    public void setSpinnerNine(String spinnerNine) {
+        this.spinnerNine = spinnerNine;
     }
 
     @XmlElement
-    public String getC1() {
-        return c1;
+    public String getSpinnerEight() {
+        return spinnerEight;
     }
 
-    public void setC1(String c1) {
-        this.c1 = c1;
+    public void setSpinnerEight(String spinnerEight) {
+        this.spinnerEight = spinnerEight;
+    }
+
+    @XmlElement
+    public String getSpinnerSeven() {
+        return spinnerSeven;
+    }
+
+    public void setSpinnerSeven(String spinnerSeven) {
+        this.spinnerSeven = spinnerSeven;
+    }
+
+    @XmlElement
+    public String getSpinnerSix() {
+        return spinnerSix;
+    }
+
+    public void setSpinnerSix(String spinnerSix) {
+        this.spinnerSix = spinnerSix;
+    }
+
+    @XmlElement
+    public String getSpinnerFive() {
+        return spinnerFive;
+    }
+
+    public void setSpinnerFive(String spinnerFive) {
+        this.spinnerFive = spinnerFive;
+    }
+
+    @XmlElement
+    public String getSpinnerFour() {
+        return spinnerFour;
+    }
+
+    public void setSpinnerFour(String spinnerFour) {
+        this.spinnerFour = spinnerFour;
+    }
+
+    @XmlElement
+    public String getSpinnerThree() {
+        return spinnerThree;
+    }
+
+    public void setSpinnerThree(String spinnerThree) {
+        this.spinnerThree = spinnerThree;
+    }
+
+    @XmlElement
+    public String getSpinnerTwo() {
+        return spinnerTwo;
+    }
+
+    public void setSpinnerTwo(String spinnerTwo) {
+        this.spinnerTwo = spinnerTwo;
+    }
+
+    @XmlElement
+    public String getSpinnerOne() {
+        return spinnerOne;
+    }
+
+    public void setSpinnerOne(String spinnerOne) {
+        this.spinnerOne = spinnerOne;
     }
 
     @XmlElement
