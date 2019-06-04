@@ -10,11 +10,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
-import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-import java.io.File;
 import java.util.Optional;
 
 public class Main extends Application {
@@ -70,20 +68,6 @@ public class Main extends Application {
 
     public static FXMLLoader getRootClass() {
         return forOtherClasses;
-    }
-
-    public static File chooserSpell() {
-        File t = new File("saves/");
-        DirectoryChooser chooser = new DirectoryChooser();
-        chooser.setInitialDirectory(t);
-        chooser.setTitle("Open Spellbook");
-        File f = chooser.showDialog(mainStage);
-        if (f != null) {
-            return f;
-        } else {
-            f = new File("");
-            return f;
-        }
     }
 
     public static void main(String[] args) {
