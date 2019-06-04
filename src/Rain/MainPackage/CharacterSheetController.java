@@ -7,12 +7,14 @@ import Rain.HelperClasses.XmlHandler;
 import Rain.PlayableThings.DnDCharacter;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
@@ -21,6 +23,8 @@ import javafx.scene.shape.Polygon;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
+import org.controlsfx.control.tableview2.TableView2;
 
 import java.io.*;
 import java.util.Properties;
@@ -36,7 +40,7 @@ public class CharacterSheetController {
     private static DnDCharacter currentChar = new DnDCharacter();
     private static boolean saved = true;
     private File propFile = new File("saves/config.properties");
-    public static Properties props = new Properties();
+    private Properties props = new Properties();
 
     //<editor-fold desc="FXML declarations">
     @FXML
@@ -405,23 +409,33 @@ public class CharacterSheetController {
     private TextArea feats;
     @FXML
     private TextArea backStory;
+    @FXML
+    private TableView spellTable;
+    @FXML
+    private GridPane spellBookPane;
     //</editor-fold>
 
     public CharacterSheetController() {
     }
+
+    private EventHandler<WindowEvent> loadPropertiesOnClose = (event) -> {
+        this.loadProperties();
+        event.consume();
+    };
+
     @FXML
     protected void initialize() {
-        this.property();
-        this.colors();
+        this.loadProperties();
         this.setSpinnersAlignment();
         this.inputValidation();
         this.autoFill();
         this.registerSavedState();
         this.levelSpinner.increment();
+        this.setupTable();
         saved = true;
     }
 
-    private void property() {
+    private void loadProperties() {
         File file = new File("saves/");
         if (!file.exists()) {
             file.mkdir();
@@ -430,7 +444,7 @@ public class CharacterSheetController {
         if (!this.propFile.exists()) {
             props.setProperty("MainBackgroundColor", "ALICEBLUE");
             props.setProperty("OctColor", "LIGHTSKYBLUE");
-            this.saveProps();
+            saveProperties();
         }
 
         try {
@@ -439,15 +453,16 @@ public class CharacterSheetController {
         } catch (IOException var2) {
             var2.printStackTrace();
         }
-
+        this.colors();
     }
 
-    public void saveProps() {
+    public void saveProperties() {
+        File propertyFile = new File("saves/config.properties");
         FileOutputStream out = null;
 
         try {
-            out = new FileOutputStream(this.propFile);
-            props.store(out, null);
+            out = new FileOutputStream(propertyFile);
+            this.props.store(out, null);
         } catch (IOException var11) {
             var11.printStackTrace();
         } finally {
@@ -1174,17 +1189,6 @@ public class CharacterSheetController {
         return saved;
     }
 
-    public void makeSpell(ActionEvent actionEvent) throws Exception {
-        Stage SpellPopup = new Stage();
-        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/Rain/Spells/SpellPopup.fxml"));
-        Parent load = loader.load();
-        SpellPopup.initModality(Modality.APPLICATION_MODAL);
-        SpellPopup.initOwner(Main.getStage());
-        SpellPopup.centerOnScreen();
-        SpellPopup.setScene(new Scene(load, 602.0D, 425.0D));
-        SpellPopup.show();
-    }
-
     /*
     Used to calculate the Initiative
     Not coded in Autofill because it does not use change listeners
@@ -1231,6 +1235,7 @@ public class CharacterSheetController {
         OptionsPop.centerOnScreen();
         OptionsPop.setScene(new Scene(load, 600.0D, 400.0D));
         OptionsPop.show();
+        OptionsPop.setOnCloseRequest(loadPropertiesOnClose);
     }
 
     private File chooser() {
@@ -1244,5 +1249,14 @@ public class CharacterSheetController {
             f = new File("");
             return f;
         }
+    }
+
+    private void setupTable() {
+        spellTable = new TableView2();
+        TableColumn<String, String> column1 = new TableColumn<>("test");
+        column1.setCellValueFactory(new PropertyValueFactory<>("test"));
+        spellTable.getColumns().add(column1);
+        GridPane.setRowIndex(spellTable, 1);
+        spellBookPane.getChildren().add(spellTable);
     }
 }

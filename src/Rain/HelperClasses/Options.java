@@ -1,48 +1,94 @@
 package Rain.HelperClasses;
 
-import Rain.MainPackage.Main;
-import Rain.MainPackage.CharacterSheetController;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
+
+import java.io.*;
+import java.util.Properties;
 
 public class Options {
+    //Add @FXML stuff etc.
     public ColorPicker BackGroundColor;
     public ColorPicker OctColor;
-    CharacterSheetController c = (CharacterSheetController)Main.getRootClass().getController();
+    private Properties properties = new Properties();
+    private File propertyFile = new File("saves/config.properties");
 
     public Options() {
     }
 
     @FXML
     public void initialize() {
-        CharacterSheetController var10001 = this.c;
-        this.BackGroundColor.setValue(Color.valueOf(CharacterSheetController.props.getProperty("MainBackgroundColor")));
-        var10001 = this.c;
-        this.OctColor.setValue(Color.valueOf(CharacterSheetController.props.getProperty("OctColor")));
+        loadProperties();
+        this.BackGroundColor.setValue(Color.valueOf(properties.getProperty("MainBackgroundColor")));
+        this.OctColor.setValue(Color.valueOf(properties.getProperty("OctColor")));
     }
 
-    public void BackgroundColor(ActionEvent actionEvent) {
+    public void loadProperties() {
+        File file = new File("saves/");
+        if (!file.exists()) {
+            file.mkdir();
+        }
+
+        if (!propertyFile.exists()) {
+            this.properties.setProperty("MainBackgroundColor", "ALICEBLUE");
+            this.properties.setProperty("OctColor", "LIGHTSKYBLUE");
+            this.saveProps();
+        }
+
+        try {
+            InputStream in = new FileInputStream(propertyFile);
+            this.properties.load(in);
+        } catch (IOException var2) {
+            var2.printStackTrace();
+        }
     }
 
-    public void Cancel(ActionEvent actionEvent) {
+    public void saveProps() {
+        FileOutputStream out = null;
+
+        try {
+            out = new FileOutputStream(propertyFile);
+            this.properties.store(out, null);
+        } catch (IOException var11) {
+            var11.printStackTrace();
+        } finally {
+            if (out != null) {
+                try {
+                    out.close();
+                } catch (IOException var10) {
+                    var10.printStackTrace();
+                }
+            }
+
+        }
+
+    }
+
+    public void BackgroundColor() {
+    }
+
+    public void Cancel() {
         Stage t = (Stage)this.OctColor.getScene().getWindow();
         t.close();
     }
 
-    public void Save(ActionEvent actionEvent) {
-        CharacterSheetController var10000 = this.c;
-        CharacterSheetController.props.setProperty("MainBackgroundColor", ((Color)this.BackGroundColor.getValue()).toString());
-        var10000 = this.c;
-        CharacterSheetController.props.setProperty("OctColor", ((Color)this.OctColor.getValue()).toString());
-        this.c.saveProps();
-        this.c.colors();
+    public void Save() {
+        properties.setProperty("MainBackgroundColor", (this.BackGroundColor.getValue()).toString());
+        properties.setProperty("OctColor", (this.OctColor.getValue()).toString());
         Stage t = (Stage)this.OctColor.getScene().getWindow();
+        saveProps();
+        t.fireEvent(
+                new WindowEvent(
+                        t,
+                        WindowEvent.WINDOW_CLOSE_REQUEST
+                )
+        );
         t.close();
     }
 
-    public void OctColor(ActionEvent actionEvent) {
+    public void OctColor() {
     }
 }

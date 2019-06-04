@@ -64,8 +64,8 @@
                               <Pane style="-fx-border-color: BLACK;">
                                  <children>
                                      <!--Strength Octogon-->
-                                    <Polygon fill="WHITE" layoutX="-532.0" layoutY="-518.0" stroke="BLACK"
-                                             strokeType="INSIDE" style="-fx-fill: TOMATO;">
+                                     <Polygon fill="WHITE" layoutX="-532.0" layoutY="-518.0" stroke="BLACK"
+                                              strokeType="INSIDE" style="-fx-fill: TOMATO;">
                                       <points>
                                         <Double fx:value="558" />
                                         <Double fx:value="532" />
@@ -94,16 +94,16 @@
                                      </TextField>
             
                                                                                            <!--Strength Label-->
-                                    <Text layoutX="1.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                                          text="Strength" textAlignment="CENTER">
+                                     <Text layoutX="1.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                                           text="Strength" textAlignment="CENTER">
                                          <font>
                                              <Font name="Times New Roman" size="14.0" />
                                          </font>
                                      </Text>
             
                                                                                            <!--Strength Modifier Octagon and field-->
-                                    <Polygon fill="WHITE" layoutX="-507.0" layoutY="-458.0" stroke="BLACK"
-                                             strokeType="INSIDE" style="-fx-fill: TOMATO;">
+                                     <Polygon fill="WHITE" layoutX="-507.0" layoutY="-458.0" stroke="BLACK"
+                                              strokeType="INSIDE" style="-fx-fill: TOMATO;">
                                        <points>
                                           <Double fx:value="558" />
                                           <Double fx:value="532" />
@@ -153,8 +153,8 @@
                               </Pane>
                         
                                                                          <!--Str Prof-->
-                              <Pane prefHeight="114.0" prefWidth="44.0" style="-fx-border-color: BLACK;"
-                                    GridPane.columnIndex="1">
+                               <Pane prefHeight="114.0" prefWidth="44.0" style="-fx-border-color: BLACK;"
+                                     GridPane.columnIndex="1">
                                  <children>
                                     <Pane layoutX="-5.0" layoutY="-3.0" style="-fx-background-color: NULL;">
                                        <children>
@@ -284,8 +284,8 @@
                               </Pane>
                         
                                                                          <!--Dex Prof-->
-                              <Pane prefHeight="114.0" prefWidth="113.0" style="-fx-border-color: BLACK;"
-                                    GridPane.columnIndex="1" GridPane.rowIndex="1">
+                               <Pane prefHeight="114.0" prefWidth="113.0" style="-fx-border-color: BLACK;"
+                                     GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <children>
                                     <Pane layoutX="-5.0" layoutY="-3.0" style="-fx-background-color: NULL;">
                                        <children>
@@ -455,8 +455,8 @@
                               </Pane>
                         
                                                                                <!--Const Prof-->
-                              <Pane prefHeight="114.0" prefWidth="137.0" style="-fx-border-color: BLACK;"
-                                    GridPane.columnIndex="1" GridPane.rowIndex="2">
+                               <Pane prefHeight="114.0" prefWidth="137.0" style="-fx-border-color: BLACK;"
+                                     GridPane.columnIndex="1" GridPane.rowIndex="2">
                                  <children>
                                     <Pane layoutX="-5.0" layoutY="-3.0" prefHeight="30.0" prefWidth="173.0" style="-fx-background-color: NULL;">
                                        <children>
@@ -561,8 +561,8 @@
                                     </TextField>
                                  </children>
                               </Pane>
-                              <Pane prefHeight="114.0" prefWidth="113.0" style="-fx-border-color: BLACK;"
-                                    GridPane.columnIndex="1" GridPane.rowIndex="3">
+                               <Pane prefHeight="114.0" prefWidth="113.0" style="-fx-border-color: BLACK;"
+                                     GridPane.columnIndex="1" GridPane.rowIndex="3">
                                  <children>
                                     <Pane layoutX="-5.0" layoutY="-3.0" style="-fx-background-color: NULL;">
                                        <children>
@@ -692,8 +692,8 @@
                                     </Pane>
                                  </children>
                               </Pane>
-                              <Pane layoutX="-1.0" layoutY="456.0" style="-fx-border-color: BLACK;"
-                                    GridPane.rowIndex="4">
+                               <Pane layoutX="-1.0" layoutY="456.0" style="-fx-border-color: BLACK;"
+                                     GridPane.rowIndex="4">
                                  <children>
                                     <Polygon fill="WHITE" layoutX="-532.0" layoutY="-518.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: VIOLET;">
                                        <points>
@@ -773,8 +773,8 @@
                                     </TextField>
                                  </children>
                               </Pane>
-                              <Pane prefHeight="114.0" prefWidth="113.0" style="-fx-border-color: BLACK;"
-                                    GridPane.columnIndex="1" GridPane.rowIndex="4">
+                               <Pane prefHeight="114.0" prefWidth="113.0" style="-fx-border-color: BLACK;"
+                                     GridPane.columnIndex="1" GridPane.rowIndex="4">
                                  <children>
                                     <Pane layoutX="-5.0" layoutY="-3.0" style="-fx-background-color: NULL;">
                                        <children>
@@ -986,8 +986,8 @@
                               </Pane>
                         
                                                                          <!--Char Prof-->
-                              <Pane prefHeight="114.0" prefWidth="113.0" style="-fx-border-color: BLACK;"
-                                    GridPane.columnIndex="1" GridPane.rowIndex="5">
+                               <Pane prefHeight="114.0" prefWidth="113.0" style="-fx-border-color: BLACK;"
+                                     GridPane.columnIndex="1" GridPane.rowIndex="5">
                                  <children>
                                     <Pane layoutX="-5.0" layoutY="-3.0" style="-fx-background-color: NULL;">
                                        <children>
@@ -1098,8 +1098,8 @@
                               </Pane>
                            </children>
                         </GridPane>
-                        <AnchorPane prefHeight="301.0" prefWidth="468.0" GridPane.columnIndex="1" GridPane.rowIndex="1"
-                                    GridPane.rowSpan="2">
+                         <AnchorPane prefHeight="301.0" prefWidth="468.0" GridPane.columnIndex="1" GridPane.rowIndex="1"
+                                     GridPane.rowSpan="2">
                            <children>
                               <Pane layoutX="26.0" prefHeight="306.0" prefWidth="396.0" translateZ="-20.0">
                                  <children>
@@ -1234,9 +1234,9 @@
                                        <font>
                                           <Font size="15.0" />
                                        </font></TextField>
-                                    <MenuButton graphicTextGap="0.0" layoutX="290.0" layoutY="111.0" minHeight="13.0"
-                                                minWidth="44.0" mnemonicParsing="false" prefHeight="23.0"
-                                                prefWidth="67.0" text="Modifiers">
+                                     <MenuButton graphicTextGap="0.0" layoutX="290.0" layoutY="111.0" minHeight="13.0"
+                                                 minWidth="44.0" mnemonicParsing="false" prefHeight="23.0"
+                                                 prefWidth="67.0" text="Modifiers">
                                        <font>
                                           <Font size="9.0" />
                                        </font>
@@ -1267,77 +1267,77 @@
                                        <font>
                                           <Font size="15.0" />
                                        </font></TextField>
-                                    <TextField alignment="CENTER" editable="false" focusTraversable="false"
-                                               layoutX="169.0" layoutY="156.0" minHeight="15.0" prefHeight="28.0"
-                                               prefWidth="64.0" style="-fx-background-color: NULL;" text="Speed">
+                                     <TextField alignment="CENTER" editable="false" focusTraversable="false"
+                                                layoutX="169.0" layoutY="156.0" minHeight="15.0" prefHeight="28.0"
+                                                prefWidth="64.0" style="-fx-background-color: NULL;" text="Speed">
                                        <font>
                                           <Font size="15.0" />
                                        </font></TextField>
-                                    <TextField editable="false" focusTraversable="false" layoutX="286.0" layoutY="2.0"
-                                               minHeight="15.0" prefHeight="28.0" prefWidth="76.0"
-                                               style="-fx-background-color: NULL;" text="Initiative">
+                                     <TextField editable="false" focusTraversable="false" layoutX="286.0" layoutY="2.0"
+                                                minHeight="15.0" prefHeight="28.0" prefWidth="76.0"
+                                                style="-fx-background-color: NULL;" text="Initiative">
                                        <font>
                                           <Font size="15.0" />
                                        </font></TextField>
-                                    <TextField editable="false" focusTraversable="false" layoutX="295.0" layoutY="145.0"
-                                               minHeight="15.0" prefHeight="28.0" prefWidth="60.0"
-                                               style="-fx-background-color: NULL;" text="Death">
+                                     <TextField editable="false" focusTraversable="false" layoutX="295.0"
+                                                layoutY="145.0" minHeight="15.0" prefHeight="28.0" prefWidth="60.0"
+                                                style="-fx-background-color: NULL;" text="Death">
                                        <font>
                                           <Font size="15.0" />
                                        </font></TextField>
-                                    <TextField editable="false" focusTraversable="false" layoutX="294.0" layoutY="252.0"
-                                               minHeight="15.0" prefHeight="28.0" prefWidth="60.0"
-                                               style="-fx-background-color: NULL;" text="Saves">
+                                     <TextField editable="false" focusTraversable="false" layoutX="294.0"
+                                                layoutY="252.0" minHeight="15.0" prefHeight="28.0" prefWidth="60.0"
+                                                style="-fx-background-color: NULL;" text="Saves">
                                        <font>
                                           <Font size="15.0" />
                                        </font></TextField>
-                                    <TextField alignment="CENTER" editable="false" focusTraversable="false"
-                                               layoutX="42.0" layoutY="144.0" minHeight="15.0" prefHeight="28.0"
-                                               prefWidth="66.0" style="-fx-background-color: NULL;" text="Hit Die">
+                                     <TextField alignment="CENTER" editable="false" focusTraversable="false"
+                                                layoutX="42.0" layoutY="144.0" minHeight="15.0" prefHeight="28.0"
+                                                prefWidth="66.0" style="-fx-background-color: NULL;" text="Hit Die">
                                        <font>
                                           <Font size="15.0" />
                                        </font></TextField>
-                                    <TextField alignment="CENTER" editable="false" focusTraversable="false"
-                                               layoutX="44.0" layoutY="2.0" minHeight="15.0" prefHeight="28.0"
-                                               prefWidth="63.0" style="-fx-background-color: NULL;" text="Health">
+                                     <TextField alignment="CENTER" editable="false" focusTraversable="false"
+                                                layoutX="44.0" layoutY="2.0" minHeight="15.0" prefHeight="28.0"
+                                                prefWidth="63.0" style="-fx-background-color: NULL;" text="Health">
                                        <font>
                                           <Font size="15.0" />
                                        </font></TextField>
-                                    <TextField editable="false" focusTraversable="false" layoutX="179.0" layoutY="19.0"
-                                               minHeight="15.0" prefHeight="28.0" prefWidth="40.0"
-                                               style="-fx-background-color: NULL;" text="AC">
+                                     <TextField editable="false" focusTraversable="false" layoutX="179.0" layoutY="19.0"
+                                                minHeight="15.0" prefHeight="28.0" prefWidth="40.0"
+                                                style="-fx-background-color: NULL;" text="AC">
                                        <font>
                                           <Font size="15.0" />
                                        </font></TextField>
-                                    <TextField alignment="CENTER" editable="false" focusTraversable="false"
-                                               layoutX="51.0" layoutY="90.0" minHeight="15.0" prefHeight="28.0"
-                                               prefWidth="47.0" style="-fx-background-color: NULL;" text="Max HP">
+                                     <TextField alignment="CENTER" editable="false" focusTraversable="false"
+                                                layoutX="51.0" layoutY="90.0" minHeight="15.0" prefHeight="28.0"
+                                                prefWidth="47.0" style="-fx-background-color: NULL;" text="Max HP">
                                        <font>
                                           <Font size="10.0" />
                                        </font>
                                     </TextField>
-                                    <TextField alignment="CENTER" editable="false" focusTraversable="false"
-                                               layoutX="48.0" layoutY="55.0" minHeight="15.0" prefHeight="28.0"
-                                               prefWidth="54.0" style="-fx-background-color: NULL;" text="Temp HP">
+                                     <TextField alignment="CENTER" editable="false" focusTraversable="false"
+                                                layoutX="48.0" layoutY="55.0" minHeight="15.0" prefHeight="28.0"
+                                                prefWidth="54.0" style="-fx-background-color: NULL;" text="Temp HP">
                                        <font>
                                           <Font size="10.0" />
                                        </font>
                                     </TextField>
-                                    <TextField alignment="CENTER" editable="false" focusTraversable="false"
-                                               layoutX="309.0" layoutY="212.0" minHeight="15.0" prefHeight="18.0"
-                                               prefWidth="32.0" style="-fx-background-color: NULL;" text="Fails"/>
-                                    <TextField alignment="CENTER" editable="false" focusTraversable="false"
-                                               layoutX="297.0" layoutY="172.0" minHeight="15.0" prefHeight="18.0"
-                                               prefWidth="56.0" style="-fx-background-color: NULL;" text="Successes"/>
+                                     <TextField alignment="CENTER" editable="false" focusTraversable="false"
+                                                layoutX="309.0" layoutY="212.0" minHeight="15.0" prefHeight="18.0"
+                                                prefWidth="32.0" style="-fx-background-color: NULL;" text="Fails"/>
+                                     <TextField alignment="CENTER" editable="false" focusTraversable="false"
+                                                layoutX="297.0" layoutY="172.0" minHeight="15.0" prefHeight="18.0"
+                                                prefWidth="56.0" style="-fx-background-color: NULL;" text="Successes"/>
                                     <RadioButton fx:id="deathSaveOne" layoutX="295.0" layoutY="193.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="13.0" />
                                     <RadioButton fx:id="deathSaveTwo" layoutX="317.0" layoutY="193.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="13.0" />
                                     <RadioButton fx:id="deathSaveThree" layoutX="339.0" layoutY="193.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="13.0" />
                                     <RadioButton fx:id="deathFailOne" layoutX="295.0" layoutY="233.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="13.0" />
                                     <RadioButton fx:id="deathFailTwo" layoutX="317.0" layoutY="233.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="13.0" />
                                     <RadioButton fx:id="deathFailThree" layoutX="339.0" layoutY="233.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="13.0" />
-                                    <TextField alignment="CENTER" editable="false" focusTraversable="false"
-                                               layoutX="39.0" layoutY="169.0" minHeight="15.0" prefHeight="28.0"
-                                               prefWidth="73.0" style="-fx-background-color: NULL;" text="Current">
+                                     <TextField alignment="CENTER" editable="false" focusTraversable="false"
+                                                layoutX="39.0" layoutY="169.0" minHeight="15.0" prefHeight="28.0"
+                                                prefWidth="73.0" style="-fx-background-color: NULL;" text="Current">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
@@ -1406,8 +1406,8 @@
                                  </font>
                               </TextField>
                               <Spinner fx:id="levelSpinner" amountToStepBy="1" editable="true" layoutX="291.0" layoutY="77.0" max="20" min="0" prefHeight="32.0" prefWidth="62.0" />
-                              <TextField alignment="CENTER" editable="false" focusTraversable="false" layoutX="175.0"
-                                         layoutY="77.0" prefHeight="32.0" prefWidth="116.0" text="Level: ">
+                               <TextField alignment="CENTER" editable="false" focusTraversable="false" layoutX="175.0"
+                                          layoutY="77.0" prefHeight="32.0" prefWidth="116.0" text="Level: ">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
@@ -1426,7 +1426,7 @@
                                    <items>
                                        <FXCollections fx:factory="observableArrayList">
                                            <String fx:value="Neutral" />
-                                          <String fx:value="Lawful Neutral"/>
+                                           <String fx:value="Lawful Neutral"/>
                                            <String fx:value="Chaotic Good" />
                                            <String fx:value="Neutral Good" />
                                            <String fx:value="Lawful Good" />
@@ -1448,11 +1448,11 @@
                               <RadioButton fx:id="inspirationFour" layoutX="84.0" layoutY="165.0" mnemonicParsing="false" />
                               <RadioButton fx:id="inspirationFive" layoutX="108.0" layoutY="165.0" mnemonicParsing="false" />
                               <TextField fx:id="passivePerceptionField" editable="false" focusTraversable="false" layoutX="353.0" layoutY="141.0" prefHeight="32.0" prefWidth="228.0" />
-                              <Label alignment="CENTER" focusTraversable="false" layoutX="175.0" layoutY="141.0"
-                                     prefHeight="31.0" prefWidth="178.0" text="Passive Perception"/>
-                              <TextField alignment="CENTER" editable="false" focusTraversable="false" layoutX="1.0"
-                                         layoutY="141.0" prefHeight="31.0" prefWidth="130.0"
-                                         style="-fx-background-color: NULL;" text="Inspiration"/>
+                               <Label alignment="CENTER" focusTraversable="false" layoutX="175.0" layoutY="141.0"
+                                      prefHeight="31.0" prefWidth="178.0" text="Passive Perception"/>
+                               <TextField alignment="CENTER" editable="false" focusTraversable="false" layoutX="1.0"
+                                          layoutY="141.0" prefHeight="31.0" prefWidth="130.0"
+                                          style="-fx-background-color: NULL;" text="Inspiration"/>
                            </children>
                         </AnchorPane>
                         <AnchorPane GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.rowSpan="3">
@@ -1521,82 +1521,82 @@
                                                          <children>
                                                             <VBox prefWidth="70.0">
                                                                <children>
-                                                                  <TextField fx:id="counterOne" alignment="CENTER"
-                                                                             prefHeight="17.0" prefWidth="70.0"
-                                                                             text="Counter:"/>
-                                                                  <Spinner fx:id="spinnerOne" editable="true"
-                                                                           max="1000000000" min="-1000000000"
-                                                                           prefHeight="25.0" prefWidth="70.0"/>
+                                                                   <TextField fx:id="counterOne" alignment="CENTER"
+                                                                              prefHeight="17.0" prefWidth="70.0"
+                                                                              text="Counter:"/>
+                                                                   <Spinner fx:id="spinnerOne" editable="true"
+                                                                            max="1000000000" min="-1000000000"
+                                                                            prefHeight="25.0" prefWidth="70.0"/>
                                                                </children>
                                                             </VBox>
                                                             <VBox layoutX="10.0" layoutY="10.0" prefWidth="70.0">
                                                                <children>
-                                                                  <TextField fx:id="counterTwo" alignment="CENTER"
-                                                                             prefHeight="17.0" prefWidth="70.0"
-                                                                             text="Counter:"/>
-                                                                  <Spinner fx:id="spinnerTwo" editable="true"
-                                                                           max="1000000000" min="-1000000000"
-                                                                           prefHeight="25.0" prefWidth="70.0"/>
+                                                                   <TextField fx:id="counterTwo" alignment="CENTER"
+                                                                              prefHeight="17.0" prefWidth="70.0"
+                                                                              text="Counter:"/>
+                                                                   <Spinner fx:id="spinnerTwo" editable="true"
+                                                                            max="1000000000" min="-1000000000"
+                                                                            prefHeight="25.0" prefWidth="70.0"/>
                                                                </children>
                                                             </VBox>
                                                             <VBox layoutX="10.0" layoutY="10.0" prefWidth="70.0">
                                                                <children>
-                                                                  <TextField fx:id="counterThree" alignment="CENTER"
-                                                                             prefHeight="17.0" prefWidth="70.0"
-                                                                             text="Counter:"/>
-                                                                  <Spinner fx:id="spinnerThree" editable="true"
-                                                                           max="1000000000" min="-1000000000"
-                                                                           prefHeight="25.0" prefWidth="70.0"/>
+                                                                   <TextField fx:id="counterThree" alignment="CENTER"
+                                                                              prefHeight="17.0" prefWidth="70.0"
+                                                                              text="Counter:"/>
+                                                                   <Spinner fx:id="spinnerThree" editable="true"
+                                                                            max="1000000000" min="-1000000000"
+                                                                            prefHeight="25.0" prefWidth="70.0"/>
                                                                </children>
                                                             </VBox>
                                                             <VBox layoutX="150.0" layoutY="10.0" prefWidth="70.0">
                                                                <children>
-                                                                  <TextField fx:id="counterFour" alignment="CENTER"
-                                                                             prefHeight="17.0" prefWidth="70.0"
-                                                                             text="Counter:"/>
-                                                                  <Spinner fx:id="spinnerFour" editable="true"
-                                                                           max="1000000000" min="-1000000000"
-                                                                           prefHeight="25.0" prefWidth="70.0"/>
+                                                                   <TextField fx:id="counterFour" alignment="CENTER"
+                                                                              prefHeight="17.0" prefWidth="70.0"
+                                                                              text="Counter:"/>
+                                                                   <Spinner fx:id="spinnerFour" editable="true"
+                                                                            max="1000000000" min="-1000000000"
+                                                                            prefHeight="25.0" prefWidth="70.0"/>
                                                                </children>
                                                             </VBox>
                                                             <VBox layoutX="150.0" layoutY="10.0" prefWidth="70.0">
                                                                <children>
-                                                                  <TextField fx:id="counterFive" alignment="CENTER"
-                                                                             prefHeight="17.0" prefWidth="70.0"
-                                                                             text="Counter:"/>
-                                                                  <Spinner fx:id="spinnerFive" editable="true"
-                                                                           max="1000000000" min="-1000000000"
-                                                                           prefHeight="25.0" prefWidth="70.0"/>
+                                                                   <TextField fx:id="counterFive" alignment="CENTER"
+                                                                              prefHeight="17.0" prefWidth="70.0"
+                                                                              text="Counter:"/>
+                                                                   <Spinner fx:id="spinnerFive" editable="true"
+                                                                            max="1000000000" min="-1000000000"
+                                                                            prefHeight="25.0" prefWidth="70.0"/>
                                                                </children>
                                                             </VBox>
                                                             <VBox layoutX="290.0" layoutY="10.0" prefWidth="70.0">
                                                                <children>
-                                                                  <TextField fx:id="counterSix" alignment="CENTER"
-                                                                             prefHeight="17.0" prefWidth="70.0"
-                                                                             text="Counter:"/>
-                                                                  <Spinner fx:id="spinnerSix" editable="true"
-                                                                           max="1000000000" min="-1000000000"
-                                                                           prefHeight="25.0" prefWidth="70.0"/>
+                                                                   <TextField fx:id="counterSix" alignment="CENTER"
+                                                                              prefHeight="17.0" prefWidth="70.0"
+                                                                              text="Counter:"/>
+                                                                   <Spinner fx:id="spinnerSix" editable="true"
+                                                                            max="1000000000" min="-1000000000"
+                                                                            prefHeight="25.0" prefWidth="70.0"/>
                                                                </children>
                                                             </VBox>
                                                             <VBox layoutX="10.0" layoutY="10.0" prefWidth="70.0">
                                                                <children>
-                                                                  <TextField fx:id="counterSeven" alignment="CENTER"
-                                                                             prefHeight="17.0" prefWidth="70.0"
-                                                                             text="Counter:"/>
-                                                                  <Spinner fx:id="spinnerSeven" editable="true"
-                                                                           max="1000000000" min="-1000000000"
-                                                                           prefHeight="25.0" prefWidth="70.0"/>
+                                                                   <TextField fx:id="counterSeven" alignment="CENTER"
+                                                                              prefHeight="17.0" prefWidth="70.0"
+                                                                              text="Counter:"/>
+                                                                   <Spinner fx:id="spinnerSeven" editable="true"
+                                                                            max="1000000000" min="-1000000000"
+                                                                            prefHeight="25.0" prefWidth="70.0"/>
                                                                </children>
                                                             </VBox>
                                                             <VBox layoutX="85.0" layoutY="10.0" prefWidth="70.0">
                                                                <children>
-                                                                  <TextField fx:id="counterEight" alignment="CENTER"
-                                                                             prefHeight="17.0" prefWidth="70.0"
-                                                                             text="Counter:"/>
-                                                                  <Spinner fx:id="spinnerEight" editable="true"
-                                                                           max="1000000000" min="-1000000000"
-                                                                           prefHeight="25.0" prefWidth="70.0"/>
+                                                                   <TextField fx:id="counterEight" alignment="CENTER"
+                                                                              prefHeight="17.0" prefWidth="70.0"
+                                                                              text="Counter:"/>
+                                                                   <Spinner fx:id="spinnerEight" editable="true"
+                                                                            max="1000000000" min="-1000000000"
+                                                                            prefHeight="25.0" prefWidth="70.0"/>
                                                                </children>
                                                             </VBox>
                                                          </children>
@@ -1605,82 +1605,82 @@
                                                          <children>
                                                             <VBox prefWidth="70.0">
                                                                <children>
-                                                                  <TextField fx:id="counterNine" alignment="CENTER"
-                                                                             prefHeight="17.0" prefWidth="70.0"
-                                                                             text="Counter:"/>
-                                                                  <Spinner fx:id="spinnerNine" editable="true"
-                                                                           max="1000000000" min="-1000000000"
-                                                                           prefHeight="25.0" prefWidth="70.0"/>
+                                                                   <TextField fx:id="counterNine" alignment="CENTER"
+                                                                              prefHeight="17.0" prefWidth="70.0"
+                                                                              text="Counter:"/>
+                                                                   <Spinner fx:id="spinnerNine" editable="true"
+                                                                            max="1000000000" min="-1000000000"
+                                                                            prefHeight="25.0" prefWidth="70.0"/>
                                                                </children>
                                                             </VBox>
                                                             <VBox layoutX="10.0" layoutY="10.0" prefWidth="70.0">
                                                                <children>
-                                                                  <TextField fx:id="counterTen" alignment="CENTER"
-                                                                             prefHeight="17.0" prefWidth="70.0"
-                                                                             text="Counter:"/>
-                                                                  <Spinner fx:id="spinnerTen" editable="true"
-                                                                           max="1000000000" min="-1000000000"
-                                                                           prefHeight="25.0" prefWidth="70.0"/>
+                                                                   <TextField fx:id="counterTen" alignment="CENTER"
+                                                                              prefHeight="17.0" prefWidth="70.0"
+                                                                              text="Counter:"/>
+                                                                   <Spinner fx:id="spinnerTen" editable="true"
+                                                                            max="1000000000" min="-1000000000"
+                                                                            prefHeight="25.0" prefWidth="70.0"/>
                                                                </children>
                                                             </VBox>
                                                             <VBox layoutX="10.0" layoutY="10.0" prefWidth="70.0">
                                                                <children>
-                                                                  <TextField fx:id="counterEleven" alignment="CENTER"
-                                                                             prefHeight="17.0" prefWidth="70.0"
-                                                                             text="Counter:"/>
-                                                                  <Spinner fx:id="spinnerEleven" editable="true"
-                                                                           max="1000000000" min="-1000000000"
-                                                                           prefHeight="25.0" prefWidth="70.0"/>
+                                                                   <TextField fx:id="counterEleven" alignment="CENTER"
+                                                                              prefHeight="17.0" prefWidth="70.0"
+                                                                              text="Counter:"/>
+                                                                   <Spinner fx:id="spinnerEleven" editable="true"
+                                                                            max="1000000000" min="-1000000000"
+                                                                            prefHeight="25.0" prefWidth="70.0"/>
                                                                </children>
                                                             </VBox>
                                                             <VBox layoutX="150.0" layoutY="10.0" prefWidth="70.0">
                                                                <children>
-                                                                  <TextField fx:id="counterTwelve" alignment="CENTER"
-                                                                             prefHeight="17.0" prefWidth="70.0"
-                                                                             text="Counter:"/>
-                                                                  <Spinner fx:id="spinnerTwelve" editable="true"
-                                                                           max="1000000000" min="-1000000000"
-                                                                           prefHeight="25.0" prefWidth="70.0"/>
+                                                                   <TextField fx:id="counterTwelve" alignment="CENTER"
+                                                                              prefHeight="17.0" prefWidth="70.0"
+                                                                              text="Counter:"/>
+                                                                   <Spinner fx:id="spinnerTwelve" editable="true"
+                                                                            max="1000000000" min="-1000000000"
+                                                                            prefHeight="25.0" prefWidth="70.0"/>
                                                                </children>
                                                             </VBox>
                                                             <VBox layoutX="150.0" layoutY="10.0" prefWidth="70.0">
                                                                <children>
-                                                                  <TextField fx:id="counterThirteen" alignment="CENTER"
-                                                                             prefHeight="17.0" prefWidth="70.0"
-                                                                             text="Counter:"/>
-                                                                  <Spinner fx:id="spinnerThirteen" editable="true"
-                                                                           max="1000000000" min="-1000000000"
-                                                                           prefHeight="25.0" prefWidth="70.0"/>
+                                                                   <TextField fx:id="counterThirteen" alignment="CENTER"
+                                                                              prefHeight="17.0" prefWidth="70.0"
+                                                                              text="Counter:"/>
+                                                                   <Spinner fx:id="spinnerThirteen" editable="true"
+                                                                            max="1000000000" min="-1000000000"
+                                                                            prefHeight="25.0" prefWidth="70.0"/>
                                                                </children>
                                                             </VBox>
                                                             <VBox layoutX="290.0" layoutY="10.0" prefWidth="70.0">
                                                                <children>
-                                                                  <TextField fx:id="counterFourteen" alignment="CENTER"
-                                                                             prefHeight="17.0" prefWidth="70.0"
-                                                                             text="Counter:"/>
-                                                                  <Spinner fx:id="spinnerFourteen" editable="true"
-                                                                           max="1000000000" min="-1000000000"
-                                                                           prefHeight="25.0" prefWidth="70.0"/>
+                                                                   <TextField fx:id="counterFourteen" alignment="CENTER"
+                                                                              prefHeight="17.0" prefWidth="70.0"
+                                                                              text="Counter:"/>
+                                                                   <Spinner fx:id="spinnerFourteen" editable="true"
+                                                                            max="1000000000" min="-1000000000"
+                                                                            prefHeight="25.0" prefWidth="70.0"/>
                                                                </children>
                                                             </VBox>
                                                             <VBox layoutX="10.0" layoutY="10.0" prefWidth="70.0">
                                                                <children>
-                                                                  <TextField fx:id="counterFifteen" alignment="CENTER"
-                                                                             prefHeight="17.0" prefWidth="70.0"
-                                                                             text="Counter:"/>
-                                                                  <Spinner fx:id="spinnerFifteen" editable="true"
-                                                                           max="1000000000" min="-1000000000"
-                                                                           prefHeight="25.0" prefWidth="70.0"/>
+                                                                   <TextField fx:id="counterFifteen" alignment="CENTER"
+                                                                              prefHeight="17.0" prefWidth="70.0"
+                                                                              text="Counter:"/>
+                                                                   <Spinner fx:id="spinnerFifteen" editable="true"
+                                                                            max="1000000000" min="-1000000000"
+                                                                            prefHeight="25.0" prefWidth="70.0"/>
                                                                </children>
                                                             </VBox>
                                                             <VBox layoutX="85.0" layoutY="10.0" prefWidth="70.0">
                                                                <children>
-                                                                  <TextField fx:id="counterSixteen" alignment="CENTER"
-                                                                             prefHeight="17.0" prefWidth="70.0"
-                                                                             text="Counter:"/>
-                                                                  <Spinner fx:id="spinnerSixteen" editable="true"
-                                                                           max="1000000000" min="-1000000000"
-                                                                           prefHeight="25.0" prefWidth="70.0"/>
+                                                                   <TextField fx:id="counterSixteen" alignment="CENTER"
+                                                                              prefHeight="17.0" prefWidth="70.0"
+                                                                              text="Counter:"/>
+                                                                   <Spinner fx:id="spinnerSixteen" editable="true"
+                                                                            max="1000000000" min="-1000000000"
+                                                                            prefHeight="25.0" prefWidth="70.0"/>
                                                                </children>
                                                             </VBox>
                                                          </children>
@@ -1847,7 +1847,40 @@
                   </GridPane>
                </content>
             </Tab>
-            <Tab closable="false" text="Spell Book"/>
+             <Tab closable="false" text="Spell Book">
+                 <content>
+                     <GridPane fx:id="spellBookPane">
+                         <columnConstraints>
+                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                         </columnConstraints>
+                         <rowConstraints>
+                             <RowConstraints maxHeight="25.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES"/>
+                             <RowConstraints maxHeight="667.0" minHeight="10.0" prefHeight="659.0" vgrow="SOMETIMES"/>
+                         </rowConstraints>
+                         <children>
+                             <MenuBar>
+                                 <menus>
+                                     <Menu mnemonicParsing="false" text="File">
+                                         <items>
+                                             <MenuItem mnemonicParsing="false" text="Close"/>
+                                         </items>
+                                     </Menu>
+                                     <Menu mnemonicParsing="false" text="Edit">
+                                         <items>
+                                             <MenuItem mnemonicParsing="false" text="Delete"/>
+                                         </items>
+                                     </Menu>
+                                     <Menu mnemonicParsing="false" text="Help">
+                                         <items>
+                                             <MenuItem mnemonicParsing="false" text="About"/>
+                                         </items>
+                                     </Menu>
+                                 </menus>
+                             </MenuBar>
+                         </children>
+                     </GridPane>
+                 </content>
+             </Tab>
          </tabs>
       </TabPane>
    </content>

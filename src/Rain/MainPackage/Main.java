@@ -17,7 +17,6 @@ import java.util.Optional;
 
 public class Main extends Application {
     private static Stage mainStage;
-    private static FXMLLoader forOtherClasses;
 
     private EventHandler<WindowEvent> promptSave = (event) -> {
         if (!CharacterSheetController.getSavedState()) {
@@ -49,14 +48,9 @@ public class Main extends Application {
     public Main() {
     }
 
-    //Remove mainStage
-    public static Stage getStage() {
-        return mainStage;
-    }
-
     public void start(Stage primaryStage) throws Exception {
-        forOtherClasses = new FXMLLoader(this.getClass().getResource("CharacterSheet.fxml"));
-        Parent root = forOtherClasses.load();
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("CharacterSheet.fxml"));
+        Parent root = loader.load();
         primaryStage.setTitle("Dnd Character Creator Beta 1.5.0");
         primaryStage.setScene(new Scene(root, 1250.0D, 725.0D));
         primaryStage.setOnCloseRequest(this.promptSave);
@@ -64,10 +58,6 @@ public class Main extends Application {
         primaryStage.setMinHeight(725);
         mainStage = primaryStage;
         primaryStage.show();
-    }
-
-    public static FXMLLoader getRootClass() {
-        return forOtherClasses;
     }
 
     public static void main(String[] args) {
