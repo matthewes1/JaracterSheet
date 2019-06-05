@@ -7,17 +7,20 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 
+/**
+ * Class full of methods for auto calculation of numbers and listening to changing fields
+ * If some of these change, it changes the saved state
+ */
 public class AutoFill {
-
-    /*
-    Class full of methods for auto calculation of numbers
-    If any of these change, changes saved state
-     */
     public AutoFill() {
     }
 
-    /*
-    Method used to register a listener for when the ability score is changed.
+    /**
+     * Registers a listener to the abilityScore provided. When it changes, it updates the modifier and sign
+     * @param abilityScore          The score that will listened to
+     * @param abilityModifier       The modifier that is calculated from the score
+     * @param modifierSymbol        The symbol used to display the sign of the modifier
+     * @param initiativeUpdater     Initiative selection box, used to update initiative if the abilityScore is selected for initiative calculation
      */
     public static void registerAbilityScore(TextField abilityScore, TextField abilityModifier, TextField modifierSymbol, CheckMenuItem initiativeUpdater) {
         abilityScore.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
@@ -31,7 +34,6 @@ public class AutoFill {
                 }
                 abilityModifier.setText(String.valueOf(Math.abs((int) score)));
 
-                //Sets the sign for the ability modifier
                 if (score > 0) {
                     modifierSymbol.setText("+");
                 } else if (score < 0) {
@@ -40,7 +42,6 @@ public class AutoFill {
                     modifierSymbol.setText("");
                 }
 
-                //If the score is chosen for initiative, toggle it unselected then reselect it so it updates
                 if (initiativeUpdater.isSelected()) {
                     initiativeUpdater.setSelected(!initiativeUpdater.isSelected());
                     initiativeUpdater.setSelected(!initiativeUpdater.isSelected());
@@ -51,8 +52,10 @@ public class AutoFill {
         });
     }
 
-    /*
-    Auto calculates proficiency bonus from player level
+    /**
+     * Calculates proficiency bonus from player level whenever player level is changed
+     * @param level         Spinner that contains the character level
+     * @param proficiency   Field that contains the characters proficiency bonus
      */
     public static void registerProficiency(Spinner level, TextField proficiency) {
         level.getEditor().textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
@@ -73,8 +76,10 @@ public class AutoFill {
         });
     }
 
-    /*
-    Calculates the bonus from a skill if you have proficiency in it
+    /**
+     * Updates the skill bonus if the character changes proficiency in that skill
+     * @param skillBonus                Field that contains the bonus
+     * @param proficiencySelection      Contains the proficiency bonus the character has
      */
     public static void updateSkillsProficiency(TextField skillBonus, ChoiceBox proficiencySelection) {
         skillBonus.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
@@ -90,8 +95,10 @@ public class AutoFill {
         });
     }
 
-    /*
-    Sees if proficiency bonus has a custom addition/subtraction and has been changed
+    /**
+     * Updates the skill bonuses if a character gets a custom proficiency
+     * @param proficiencyBonus          The proficiency bonus symbol
+     * @param proficiencySelection      The skill to be toggled for updating
      */
     public static void registerProficiencySymbol(ChoiceBox proficiencyBonus, ChoiceBox proficiencySelection) {
         proficiencyBonus.getSelectionModel().selectedIndexProperty().addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
@@ -108,13 +115,19 @@ public class AutoFill {
         });
     }
 
-    /*
-    Calculates the bonus of a skill
+    /**
+     * Calculates the skill bonus a character has. This method uses the ability score instead of the modifier
+     * because the modifier by itself does not entail whether or not it is negative
+     * @param skillBonus                The bonus field
+     * @param proficiencyChoice         Box that holds the level of proficiency in the skill
+     * @param proficiency               Proficiency bonus
+     * @param abilityScore              The score of the ability the skill depends on
+     * @param customProficiencySign     The sign of the custom proficiency
+     * @param customProficiency         Custom proficiency bonus
      */
     public static void registerSkill(TextField skillBonus, ChoiceBox proficiencyChoice, TextField proficiency, TextField abilityScore, ChoiceBox customProficiencySign, TextField customProficiency) {
         proficiencyChoice.getSelectionModel().selectedIndexProperty().addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
             if (!abilityScore.getText().isEmpty() && !abilityScore.getText().matches("-")) {
-                //Calculates the amount to get as a bonus. Uses the score and not the modifier because the score doesn't indicate if it is negative or not
                 int score = Integer.parseInt(abilityScore.getText());
                 score -= 10;
                 score /= 2;
@@ -124,7 +137,6 @@ public class AutoFill {
                     proficiencyBonus = -proficiencyBonus;
                 }
 
-                //Add proficiency
                 score += proficiencyBonus;
                 String bonus = skillBonus.getText();
                 bonus = bonus.substring(0, bonus.indexOf(": ") + 2);
@@ -134,8 +146,10 @@ public class AutoFill {
         });
     }
 
-    /*
-    Update the skills number if you change proficiency
+    /**
+     * Updates the skill if the modifier gets updated
+     * @param abilityModifier       The modifier that the skill uses
+     * @param proficiencyChoice     The selection of proficiency in the skill
      */
     public static void linkStats(TextField abilityModifier, ChoiceBox proficiencyChoice) {
         abilityModifier.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
@@ -152,8 +166,10 @@ public class AutoFill {
         });
     }
 
-    /*
-    Calculates passive perception
+    /**
+     * Calculates passive perception
+     * @param passivePerception     Field that contains passive perception
+     * @param perception            Perception skill
      */
     public static void passivePerception(TextField passivePerception, TextField perception) {
         perception.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
@@ -168,8 +184,10 @@ public class AutoFill {
         });
     }
 
-    /*
-    Appends the amount of XP needed to level to the end of current xp upon level up
+    /**
+     * Appends the experience needed for the next level to the current experience
+     * @param experience        Experience field
+     * @param levelSpinner      Character level
      */
     public static void experienceFiller(TextField experience, Spinner levelSpinner) {
         levelSpinner.getEditor().textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {

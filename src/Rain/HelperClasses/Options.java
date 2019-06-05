@@ -9,6 +9,9 @@ import javafx.stage.WindowEvent;
 import java.io.*;
 import java.util.Properties;
 
+/**
+ * Controller for the options pane
+ */
 public class Options {
     @FXML
     private ColorPicker backgroundColor;
@@ -20,15 +23,18 @@ public class Options {
     public Options() {
     }
 
+    /**
+     * Loads property file and sets the color pickers to the current colors
+     */
     @FXML
     public void initialize() {
         loadProperties();
-        //Sets the color pickers to the current color from config
         backgroundColor.setValue(Color.valueOf(properties.getProperty("mainBackgroundColor")));
         octagonColor.setValue(Color.valueOf(properties.getProperty("octagonColor")));
     }
 
     public void loadProperties() {
+        //Check for saves folder and if the property file exists
         File saveFolder = new File("saves/");
         if (!saveFolder.exists()) {
             saveFolder.mkdir();
@@ -39,6 +45,7 @@ public class Options {
             properties.setProperty("octagonColor", "LIGHTSKYBLUE");
             saveProperties();
         }
+
 
         InputStream read = null;
         try {
@@ -57,7 +64,6 @@ public class Options {
             }
         }
     }
-
 
     public void saveProperties() {
         FileOutputStream output = null;
@@ -82,6 +88,9 @@ public class Options {
         options.close();
     }
 
+    /**
+     * Called when the user clicks save, triggers window close event so the main panel runs color assignment
+     */
     public void Save() {
         properties.setProperty("mainBackgroundColor", (this.backgroundColor.getValue()).toString());
         properties.setProperty("octagonColor", (this.octagonColor.getValue()).toString());

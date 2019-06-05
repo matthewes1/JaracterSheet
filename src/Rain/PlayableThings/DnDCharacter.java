@@ -3,6 +3,12 @@ package Rain.PlayableThings;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ * Character object for dnd 5e SRD and some added homebrew customizations such as the following:
+ * Custom skills for initiative
+ * Custom bonus to proficiency
+ * Custom bonus to initiative
+ */
 @XmlRootElement
 public class DnDCharacter {
     private String strengthField;
@@ -1018,7 +1024,6 @@ public class DnDCharacter {
     public void setHitDieString(String hitDieString) {
         this.hitDieString = hitDieString;
     }
-
 
 
     @XmlElement

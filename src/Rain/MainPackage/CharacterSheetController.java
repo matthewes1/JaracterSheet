@@ -6,7 +6,6 @@ import Rain.HelperClasses.Validation;
 import Rain.HelperClasses.XmlHandler;
 import Rain.PlayableThings.DnDCharacter;
 import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,18 +23,18 @@ import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import org.controlsfx.control.tableview2.TableView2;
 
 import java.io.*;
 import java.util.Properties;
 
+/**
+ * Controller for the main panel and all its tabs. Also houses many methods for assigning character data
+ */
 public class CharacterSheetController {
     //TODO Spell ui overhaul
-    //TODO Comment more code/cleanup code
     //TODO possible higher resolution version
     //TODO add Apache license after confirmation if controlsfx is needed and find SRD license
     //TODO save file loading filtering
-
 
     private static DnDCharacter currentCharacter = new DnDCharacter();
     private static boolean saved = true;
@@ -418,15 +417,6 @@ public class CharacterSheetController {
     public CharacterSheetController() {
     }
 
-    //Called when Color Options pane is closed
-    private EventHandler<WindowEvent> loadPropertiesOnClose = (event) -> {
-        loadProperties();
-        event.consume();
-    };
-
-    public static DnDCharacter getChar() {
-        return currentCharacter;
-    }
 
     @FXML
     protected void initialize() {
@@ -440,7 +430,18 @@ public class CharacterSheetController {
         saved = true;
     }
 
-    //Loads properties file
+    /**
+     * Called when options pane is closed so the colors update
+     */
+    private EventHandler<WindowEvent> loadPropertiesOnClose = (event) -> {
+        loadProperties();
+        event.consume();
+    };
+
+    public static void setUnSaved() {
+        saved = false;
+    }
+
     private void loadProperties() {
         File file = new File("saves/");
         if (!file.exists()) {
@@ -491,6 +492,47 @@ public class CharacterSheetController {
         }
     }
 
+    public static boolean getSavedState() {
+        return saved;
+    }
+
+    public static DnDCharacter getChar() {
+        return currentCharacter;
+    }
+
+    /**
+     * Opens pane containing options for program customization
+     *
+     * @throws IOException
+     */
+    public void colorOptions() throws IOException {
+        Stage optionsPopup = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Rain/MainPackage/Options.fxml"));
+        Parent load = loader.load();
+        optionsPopup.initModality(Modality.APPLICATION_MODAL);
+        optionsPopup.initOwner(mainPane.getScene().getWindow());
+        optionsPopup.centerOnScreen();
+        optionsPopup.setScene(new Scene(load, 600.0D, 400.0D));
+        optionsPopup.show();
+        optionsPopup.setOnCloseRequest(loadPropertiesOnClose);
+    }
+
+    /**
+     * Save selection prompt
+     *
+     * @return selected file or NULL if no file is selected
+     */
+    private File chooser() {
+        FileChooser chooser = new FileChooser();
+        chooser.setTitle("Open Character");
+        chooser.setInitialDirectory(new File("saves/"));
+        File selected = chooser.showOpenDialog(mainPane.getScene().getWindow());
+        return selected;
+    }
+
+    /**
+     * Applies colors from the property file to the appropriate elements
+     */
     public void colors() {
         characterPane.setBackground(new Background(new BackgroundFill[]{new BackgroundFill(Color.valueOf(properties.getProperty("mainBackgroundColor")), null, null)}));
         speedOctagon.setFill(Color.valueOf(properties.getProperty("octagonColor")));
@@ -501,6 +543,9 @@ public class CharacterSheetController {
         deathSavesOctagon.setFill(Color.valueOf(properties.getProperty("octagonColor")));
     }
 
+    /**
+     * Some minor adjustments to a few of the spinners text alignment
+     */
     private void setSpinnersAlignment() {
         currentHPSpinner.getEditor().setAlignment(Pos.CENTER_RIGHT);
         maxHpSpinner.getEditor().setAlignment(Pos.CENTER_RIGHT);
@@ -508,6 +553,9 @@ public class CharacterSheetController {
         hitDieSpinner.getEditor().setAlignment(Pos.CENTER_RIGHT);
     }
 
+    /**
+     * Registers the elements with their needed input validation
+     */
     private void inputValidation() {
         Validation.numericField(strengthField);
         Validation.numericField(dexterityField);
@@ -550,6 +598,331 @@ public class CharacterSheetController {
         Validation.numericSpinner(spinnerSixteen);
     }
 
+    /**
+     * Registers the auto calculations for stats.
+     */
+    private void autoFill() {
+        //Registers initiative selection
+        strengthInitiative.selectedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
+            CharacterSheetController.this.updateInit();
+        });
+        dexterityInitiative.selectedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
+            CharacterSheetController.this.updateInit();
+        });
+        constitutionInitiative.selectedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
+            CharacterSheetController.this.updateInit();
+        });
+        intelligenceInitiative.selectedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
+            CharacterSheetController.this.updateInit();
+        });
+        wisdomInitiative.selectedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
+            CharacterSheetController.this.updateInit();
+        });
+        charismaInitiative.selectedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
+            CharacterSheetController.this.updateInit();
+        });
+        customInitiative.selectedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
+            CharacterSheetController.this.updateInit();
+            CharacterSheetController.setUnSaved();
+        });
+        customInitiativeField.getEditor().textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+            CharacterSheetController.this.updateInit();
+            CharacterSheetController.setUnSaved();
+        });
+
+        //Register ability modifiers and ability scores
+        AutoFill.registerAbilityScore(strengthField, strengthModifierField, strengthSymbol, dexterityInitiative);
+        AutoFill.registerAbilityScore(dexterityField, dexterityModifier, dexteritySymbol, dexterityInitiative);
+        AutoFill.registerAbilityScore(constitutionField, constitutionModifier, constitutionSymbol, dexterityInitiative);
+        AutoFill.registerAbilityScore(intelligenceField, intelligenceModifier, intelligenceSymbol, dexterityInitiative);
+        AutoFill.registerAbilityScore(wisdomField, wisdomModifier, wisdomSymbol, dexterityInitiative);
+        AutoFill.registerAbilityScore(charismaField, charismaModifier, charismaSymbol, dexterityInitiative);
+
+        AutoFill.registerProficiency(levelSpinner, proficiencyBonus);
+
+        //Strength related stuff
+        AutoFill.registerSkill(strengthSave, strengthChoice, proficiencyBonus, strengthField, proficiencyBonusSymbol, proficiencyBonusExtra);
+        AutoFill.registerSkill(athletics, athleticsChoice, proficiencyBonus, strengthField, proficiencyBonusSymbol, proficiencyBonusExtra);
+        AutoFill.updateSkillsProficiency(proficiencyBonus, strengthChoice);
+        AutoFill.updateSkillsProficiency(proficiencyBonus, athleticsChoice);
+        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, strengthChoice);
+        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, athleticsChoice);
+        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, strengthChoice);
+        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, athleticsChoice);
+        AutoFill.linkStats(strengthModifierField, strengthChoice);
+        AutoFill.linkStats(strengthModifierField, athleticsChoice);
+
+        //Dexterity Stuff
+        AutoFill.registerSkill(dexteritySave, dexterityChoice, proficiencyBonus, dexterityField, proficiencyBonusSymbol, proficiencyBonusExtra);
+        AutoFill.registerSkill(acrobatics, acrobaticsChoice, proficiencyBonus, dexterityField, proficiencyBonusSymbol, proficiencyBonusExtra);
+        AutoFill.registerSkill(sleightOfHand, sleightOfHandChoice, proficiencyBonus, dexterityField, proficiencyBonusSymbol, proficiencyBonusExtra);
+        AutoFill.registerSkill(stealth, stealthChoice, proficiencyBonus, dexterityField, proficiencyBonusSymbol, proficiencyBonusExtra);
+        AutoFill.updateSkillsProficiency(proficiencyBonus, dexterityChoice);
+        AutoFill.updateSkillsProficiency(proficiencyBonus, acrobaticsChoice);
+        AutoFill.updateSkillsProficiency(proficiencyBonus, sleightOfHandChoice);
+        AutoFill.updateSkillsProficiency(proficiencyBonus, stealthChoice);
+        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, dexterityChoice);
+        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, acrobaticsChoice);
+        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, sleightOfHandChoice);
+        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, stealthChoice);
+        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, dexterityChoice);
+        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, acrobaticsChoice);
+        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, sleightOfHandChoice);
+        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, stealthChoice);
+        AutoFill.linkStats(dexterityModifier, dexterityChoice);
+        AutoFill.linkStats(dexterityModifier, acrobaticsChoice);
+        AutoFill.linkStats(dexterityModifier, sleightOfHandChoice);
+        AutoFill.linkStats(dexterityModifier, stealthChoice);
+
+        //Constitution Stuff
+        AutoFill.registerSkill(constitutionSave, constitutionChoice, proficiencyBonus, constitutionField, proficiencyBonusSymbol, proficiencyBonusExtra);
+        AutoFill.updateSkillsProficiency(proficiencyBonus, constitutionChoice);
+        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, constitutionChoice);
+        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, constitutionChoice);
+        AutoFill.linkStats(constitutionModifier, constitutionChoice);
+
+        //Intelligence Stuff
+        AutoFill.registerSkill(intelligenceSave, intelligenceChoice, proficiencyBonus, intelligenceField, proficiencyBonusSymbol, proficiencyBonusExtra);
+        AutoFill.registerSkill(arcana, arcanaChoice, proficiencyBonus, intelligenceField, proficiencyBonusSymbol, proficiencyBonusExtra);
+        AutoFill.registerSkill(history, historyChoice, proficiencyBonus, intelligenceField, proficiencyBonusSymbol, proficiencyBonusExtra);
+        AutoFill.registerSkill(investigation, investigationChoice, proficiencyBonus, intelligenceField, proficiencyBonusSymbol, proficiencyBonusExtra);
+        AutoFill.registerSkill(nature, natureChoice, proficiencyBonus, intelligenceField, proficiencyBonusSymbol, proficiencyBonusExtra);
+        AutoFill.registerSkill(religion, religionChoice, proficiencyBonus, intelligenceField, proficiencyBonusSymbol, proficiencyBonusExtra);
+        AutoFill.updateSkillsProficiency(proficiencyBonus, intelligenceChoice);
+        AutoFill.updateSkillsProficiency(proficiencyBonus, arcanaChoice);
+        AutoFill.updateSkillsProficiency(proficiencyBonus, historyChoice);
+        AutoFill.updateSkillsProficiency(proficiencyBonus, investigationChoice);
+        AutoFill.updateSkillsProficiency(proficiencyBonus, natureChoice);
+        AutoFill.updateSkillsProficiency(proficiencyBonus, religionChoice);
+        AutoFill.updateSkillsProficiency(proficiencyBonus, historyChoice);
+        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, intelligenceChoice);
+        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, arcanaChoice);
+        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, historyChoice);
+        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, investigationChoice);
+        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, natureChoice);
+        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, religionChoice);
+        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, historyChoice);
+        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, intelligenceChoice);
+        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, arcanaChoice);
+        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, historyChoice);
+        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, investigationChoice);
+        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, natureChoice);
+        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, religionChoice);
+        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, historyChoice);
+        AutoFill.linkStats(intelligenceModifier, intelligenceChoice);
+        AutoFill.linkStats(intelligenceModifier, arcanaChoice);
+        AutoFill.linkStats(intelligenceModifier, historyChoice);
+        AutoFill.linkStats(intelligenceModifier, investigationChoice);
+        AutoFill.linkStats(intelligenceModifier, natureChoice);
+        AutoFill.linkStats(intelligenceModifier, religionChoice);
+
+        //Wisdom Stuff
+        AutoFill.registerSkill(wisdomSave, wisdomChoice, proficiencyBonus, wisdomField, proficiencyBonusSymbol, proficiencyBonusExtra);
+        AutoFill.registerSkill(animalHandling, animalChoice, proficiencyBonus, wisdomField, proficiencyBonusSymbol, proficiencyBonusExtra);
+        AutoFill.registerSkill(medicine, medicineChoice, proficiencyBonus, wisdomField, proficiencyBonusSymbol, proficiencyBonusExtra);
+        AutoFill.registerSkill(perception, perceptionChoice, proficiencyBonus, wisdomField, proficiencyBonusSymbol, proficiencyBonusExtra);
+        AutoFill.registerSkill(survival, survivalChoice, proficiencyBonus, wisdomField, proficiencyBonusSymbol, proficiencyBonusExtra);
+        AutoFill.registerSkill(insight, insightChoice, proficiencyBonus, wisdomField, proficiencyBonusSymbol, proficiencyBonusExtra);
+        AutoFill.updateSkillsProficiency(proficiencyBonus, wisdomChoice);
+        AutoFill.updateSkillsProficiency(proficiencyBonus, animalChoice);
+        AutoFill.updateSkillsProficiency(proficiencyBonus, medicineChoice);
+        AutoFill.updateSkillsProficiency(proficiencyBonus, perceptionChoice);
+        AutoFill.updateSkillsProficiency(proficiencyBonus, survivalChoice);
+        AutoFill.updateSkillsProficiency(proficiencyBonus, insightChoice);
+        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, wisdomChoice);
+        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, animalChoice);
+        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, medicineChoice);
+        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, perceptionChoice);
+        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, survivalChoice);
+        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, insightChoice);
+        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, wisdomChoice);
+        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, animalChoice);
+        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, medicineChoice);
+        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, perceptionChoice);
+        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, survivalChoice);
+        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, insightChoice);
+        AutoFill.linkStats(wisdomModifier, wisdomChoice);
+        AutoFill.linkStats(wisdomModifier, animalChoice);
+        AutoFill.linkStats(wisdomModifier, historyChoice);
+        AutoFill.linkStats(wisdomModifier, medicineChoice);
+        AutoFill.linkStats(wisdomModifier, perceptionChoice);
+        AutoFill.linkStats(wisdomModifier, survivalChoice);
+        AutoFill.linkStats(wisdomModifier, insightChoice);
+
+        //Charisma Stuff
+        AutoFill.registerSkill(charismaSave, charismaChoice, proficiencyBonus, charismaField, proficiencyBonusSymbol, proficiencyBonusExtra);
+        AutoFill.registerSkill(deception, deceptionChoice, proficiencyBonus, charismaField, proficiencyBonusSymbol, proficiencyBonusExtra);
+        AutoFill.registerSkill(intimidation, intimidationChoice, proficiencyBonus, charismaField, proficiencyBonusSymbol, proficiencyBonusExtra);
+        AutoFill.registerSkill(performance, performanceChoice, proficiencyBonus, charismaField, proficiencyBonusSymbol, proficiencyBonusExtra);
+        AutoFill.registerSkill(persuasion, persuasionChoice, proficiencyBonus, charismaField, proficiencyBonusSymbol, proficiencyBonusExtra);
+        AutoFill.updateSkillsProficiency(proficiencyBonus, charismaChoice);
+        AutoFill.updateSkillsProficiency(proficiencyBonus, deceptionChoice);
+        AutoFill.updateSkillsProficiency(proficiencyBonus, intimidationChoice);
+        AutoFill.updateSkillsProficiency(proficiencyBonus, performanceChoice);
+        AutoFill.updateSkillsProficiency(proficiencyBonus, persuasionChoice);
+        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, charismaChoice);
+        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, deceptionChoice);
+        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, intimidationChoice);
+        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, performanceChoice);
+        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, persuasionChoice);
+        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, charismaChoice);
+        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, deceptionChoice);
+        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, intimidationChoice);
+        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, performanceChoice);
+        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, persuasionChoice);
+        AutoFill.passivePerception(passivePerceptionField, perception);
+        AutoFill.linkStats(charismaModifier, charismaChoice);
+        AutoFill.linkStats(charismaModifier, deceptionChoice);
+        AutoFill.linkStats(charismaModifier, intimidationChoice);
+        AutoFill.linkStats(charismaModifier, performanceChoice);
+        AutoFill.linkStats(charismaModifier, persuasionChoice);
+
+        AutoFill.experienceFiller(experienceField, levelSpinner);
+    }
+
+    /**
+     * Registers saved state togglers
+     * Certain fields like modifiers are note here because their change listener for autocalculation includes saved state toggling
+     */
+    public void registerSavedState() {
+        SavedToggler.changesTextField(speedField);
+        SavedToggler.changesTextField(experienceField);
+        SavedToggler.changesTextField(ageField);
+        SavedToggler.changesTextField(weightField);
+        SavedToggler.changesTextField(acField);
+        SavedToggler.changesTextArea(traitsField);
+        SavedToggler.changesTextArea(idealsField);
+        SavedToggler.changesTextArea(bondsField);
+        SavedToggler.changesTextArea(flawsField);
+        SavedToggler.changesSpinner(currentHPSpinner);
+        SavedToggler.changesSpinner(maxHpSpinner);
+        SavedToggler.changesSpinner(tempHPSpinner);
+        SavedToggler.changesSpinner(hitDieSpinner);
+        SavedToggler.changesSpinner(levelSpinner);
+        SavedToggler.changesSpinner(copper);
+        SavedToggler.changesSpinner(silver);
+        SavedToggler.changesSpinner(electrum);
+        SavedToggler.changesSpinner(gold);
+        SavedToggler.changesSpinner(platinum);
+        SavedToggler.changesSpinner(spinnerOne);
+        SavedToggler.changesSpinner(spinnerTwo);
+        SavedToggler.changesSpinner(spinnerThree);
+        SavedToggler.changesSpinner(spinnerFour);
+        SavedToggler.changesSpinner(spinnerFive);
+        SavedToggler.changesSpinner(spinnerSix);
+        SavedToggler.changesSpinner(spinnerSeven);
+        SavedToggler.changesSpinner(spinnerEight);
+        SavedToggler.changesSpinner(spinnerNine);
+        SavedToggler.changesSpinner(spinnerTen);
+        SavedToggler.changesSpinner(spinnerEleven);
+        SavedToggler.changesSpinner(spinnerTwelve);
+        SavedToggler.changesSpinner(spinnerThirteen);
+        SavedToggler.changesSpinner(spinnerFourteen);
+        SavedToggler.changesSpinner(spinnerFifteen);
+        SavedToggler.changesSpinner(spinnerSixteen);
+        SavedToggler.changesTextField(characterName);
+        SavedToggler.changesTextField(classField);
+        SavedToggler.changesTextField(raceField);
+        SavedToggler.changesTextField(playerNameField);
+        SavedToggler.changesTextField(passivePerceptionField);
+        SavedToggler.changesRadioButton(deathFailOne);
+        SavedToggler.changesRadioButton(deathFailTwo);
+        SavedToggler.changesRadioButton(deathFailThree);
+        SavedToggler.changesRadioButton(deathSaveOne);
+        SavedToggler.changesRadioButton(deathSaveTwo);
+        SavedToggler.changesRadioButton(deathSaveThree);
+        SavedToggler.changesTextField(eyes);
+        SavedToggler.changesTextField(height);
+        SavedToggler.changesTextField(skin);
+        SavedToggler.changesTextField(hair);
+        SavedToggler.changesTextArea(language);
+        SavedToggler.changesTextArea(feats);
+        SavedToggler.changesComboBox(alignmentField);
+        SavedToggler.changesChoiceBox(hitDieType);
+        SavedToggler.changesRadioButton(inspirationOne);
+        SavedToggler.changesRadioButton(inspirationTwo);
+        SavedToggler.changesRadioButton(inspirationFour);
+        SavedToggler.changesRadioButton(inspirationThree);
+        SavedToggler.changesRadioButton(inspirationFive);
+        SavedToggler.changesTextArea(miscellaneousOne);
+        SavedToggler.changesTextField(weaponNameOne);
+        SavedToggler.changesTextField(weaponNameThree);
+        SavedToggler.changesTextField(weaponNameTwo);
+        SavedToggler.changesTextField(attackBonusOne);
+        SavedToggler.changesTextField(attackBonusThree);
+        SavedToggler.changesTextField(attackBonusTwo);
+        SavedToggler.changesTextField(damageOne);
+        SavedToggler.changesTextField(damageThree);
+        SavedToggler.changesTextField(damageTwo);
+        SavedToggler.changesTextArea(weapons);
+        SavedToggler.changesTextArea(armor);
+        SavedToggler.changesTextField(counterOne);
+        SavedToggler.changesTextField(counterTwo);
+        SavedToggler.changesTextField(counterThree);
+        SavedToggler.changesTextField(counterFour);
+        SavedToggler.changesTextField(counterFive);
+        SavedToggler.changesTextField(counterSix);
+        SavedToggler.changesTextField(counterSeven);
+        SavedToggler.changesTextField(counterEight);
+        SavedToggler.changesTextField(counterNine);
+        SavedToggler.changesTextField(counterTen);
+        SavedToggler.changesTextField(counterEleven);
+        SavedToggler.changesTextField(counterTwelve);
+        SavedToggler.changesTextField(counterThirteen);
+        SavedToggler.changesTextField(counterFourteen);
+        SavedToggler.changesTextField(counterFifteen);
+        SavedToggler.changesTextField(counterSixteen);
+        SavedToggler.changesTextArea(inventoryOne);
+        SavedToggler.changesTextArea(inventoryTwo);
+        SavedToggler.changesTextArea(inventoryThree);
+        SavedToggler.changesTextArea(inventoryFour);
+        SavedToggler.changesTextArea(backStory);
+    }
+
+    /**
+     * Used to calculate the Initiative
+     * Not included in Autofill because it does not use change listeners
+     */
+    private void updateInit() {
+        int initiative = 0;
+        if (strengthInitiative.isSelected() && !strengthModifierField.getText().equals("")) {
+            initiative += Integer.parseInt(strengthSymbol.getText() + strengthModifierField.getText());
+        }
+
+        if (dexterityInitiative.isSelected() && !dexterityModifier.getText().equals("")) {
+            initiative += Integer.parseInt(dexteritySymbol.getText() + dexterityModifier.getText());
+        }
+
+        if (constitutionInitiative.isSelected() && !constitutionModifier.getText().equals("")) {
+            initiative += Integer.parseInt(constitutionSymbol.getText() + constitutionModifier.getText());
+        }
+
+        if (intelligenceInitiative.isSelected() && !intelligenceModifier.getText().equals("")) {
+            initiative += Integer.parseInt(intelligenceSymbol.getText() + intelligenceModifier.getText());
+        }
+
+        if (wisdomInitiative.isSelected() && !wisdomModifier.getText().equals("")) {
+            initiative += Integer.parseInt(wisdomSymbol.getText() + wisdomModifier.getText());
+        }
+
+        if (charismaInitiative.isSelected() && !charismaModifier.getText().equals("")) {
+            initiative += Integer.parseInt(charismaSymbol.getText() + charismaModifier.getText());
+        }
+
+        if (customInitiative.isSelected() && !customInitiativeField.getEditor().getText().equals("")) {
+            initiative += Integer.parseInt(customInitiativeField.getEditor().getText());
+        }
+
+        initiativeField.setText(String.valueOf(initiative));
+    }
+
+    public void saveButton() {
+        save();
+    }
+
+    /**
+     * Saves all of the current fields to the character and sends it to XMLhandler
+     */
     private void save() {
         currentCharacter.setCharismaField(charismaField.getText());
         currentCharacter.setStrengthField(strengthField.getText());
@@ -728,199 +1101,8 @@ public class CharacterSheetController {
         saved = true;
     }
 
-    public void saveButton() {
-        save();
-    }
-
-    //Used to generate prof bonus etc.
-    private void autoFill() {
-        //Registers initiative selection
-        strengthInitiative.selectedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
-                CharacterSheetController.this.updateInit();
-        });
-        dexterityInitiative.selectedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
-                CharacterSheetController.this.updateInit();
-        });
-        constitutionInitiative.selectedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
-                CharacterSheetController.this.updateInit();
-        });
-        intelligenceInitiative.selectedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
-                CharacterSheetController.this.updateInit();
-        });
-        wisdomInitiative.selectedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
-                CharacterSheetController.this.updateInit();
-        });
-        charismaInitiative.selectedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
-                CharacterSheetController.this.updateInit();
-        });
-        customInitiative.selectedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
-                CharacterSheetController.this.updateInit();
-                CharacterSheetController.setUnSaved();
-        });
-        customInitiativeField.getEditor().textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
-                CharacterSheetController.this.updateInit();
-                CharacterSheetController.setUnSaved();
-        });
-
-        //Register ability modifiers and ability scores
-        AutoFill.registerAbilityScore(strengthField, strengthModifierField, strengthSymbol, dexterityInitiative);
-        AutoFill.registerAbilityScore(dexterityField, dexterityModifier, dexteritySymbol, dexterityInitiative);
-        AutoFill.registerAbilityScore(constitutionField, constitutionModifier, constitutionSymbol, dexterityInitiative);
-        AutoFill.registerAbilityScore(intelligenceField, intelligenceModifier, intelligenceSymbol, dexterityInitiative);
-        AutoFill.registerAbilityScore(wisdomField, wisdomModifier, wisdomSymbol, dexterityInitiative);
-        AutoFill.registerAbilityScore(charismaField, charismaModifier, charismaSymbol, dexterityInitiative);
-
-        AutoFill.registerProficiency(levelSpinner, proficiencyBonus);
-
-        //Strength related stuff
-        AutoFill.registerSkill(strengthSave, strengthChoice, proficiencyBonus, strengthField, proficiencyBonusSymbol, proficiencyBonusExtra);
-        AutoFill.registerSkill(athletics, athleticsChoice, proficiencyBonus, strengthField, proficiencyBonusSymbol, proficiencyBonusExtra);
-        AutoFill.updateSkillsProficiency(proficiencyBonus, strengthChoice);
-        AutoFill.updateSkillsProficiency(proficiencyBonus, athleticsChoice);
-        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, strengthChoice);
-        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, athleticsChoice);
-        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, strengthChoice);
-        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, athleticsChoice);
-        AutoFill.linkStats(strengthModifierField, strengthChoice);
-        AutoFill.linkStats(strengthModifierField, athleticsChoice);
-
-        //Dexterity Stuff
-        AutoFill.registerSkill(dexteritySave, dexterityChoice, proficiencyBonus, dexterityField, proficiencyBonusSymbol, proficiencyBonusExtra);
-        AutoFill.registerSkill(acrobatics, acrobaticsChoice, proficiencyBonus, dexterityField, proficiencyBonusSymbol, proficiencyBonusExtra);
-        AutoFill.registerSkill(sleightOfHand, sleightOfHandChoice, proficiencyBonus, dexterityField, proficiencyBonusSymbol, proficiencyBonusExtra);
-        AutoFill.registerSkill(stealth, stealthChoice, proficiencyBonus, dexterityField, proficiencyBonusSymbol, proficiencyBonusExtra);
-        AutoFill.updateSkillsProficiency(proficiencyBonus, dexterityChoice);
-        AutoFill.updateSkillsProficiency(proficiencyBonus, acrobaticsChoice);
-        AutoFill.updateSkillsProficiency(proficiencyBonus, sleightOfHandChoice);
-        AutoFill.updateSkillsProficiency(proficiencyBonus, stealthChoice);
-        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, dexterityChoice);
-        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, acrobaticsChoice);
-        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, sleightOfHandChoice);
-        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, stealthChoice);
-        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, dexterityChoice);
-        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, acrobaticsChoice);
-        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, sleightOfHandChoice);
-        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, stealthChoice);
-        AutoFill.linkStats(dexterityModifier, dexterityChoice);
-        AutoFill.linkStats(dexterityModifier, acrobaticsChoice);
-        AutoFill.linkStats(dexterityModifier, sleightOfHandChoice);
-        AutoFill.linkStats(dexterityModifier, stealthChoice);
-
-        //Constitution Stuff
-        AutoFill.registerSkill(constitutionSave, constitutionChoice, proficiencyBonus, constitutionField, proficiencyBonusSymbol, proficiencyBonusExtra);
-        AutoFill.updateSkillsProficiency(proficiencyBonus, constitutionChoice);
-        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, constitutionChoice);
-        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, constitutionChoice);
-        AutoFill.linkStats(constitutionModifier, constitutionChoice);
-
-        //Intelligence Stuff
-        AutoFill.registerSkill(intelligenceSave, intelligenceChoice, proficiencyBonus, intelligenceField, proficiencyBonusSymbol, proficiencyBonusExtra);
-        AutoFill.registerSkill(arcana, arcanaChoice, proficiencyBonus, intelligenceField, proficiencyBonusSymbol, proficiencyBonusExtra);
-        AutoFill.registerSkill(history, historyChoice, proficiencyBonus, intelligenceField, proficiencyBonusSymbol, proficiencyBonusExtra);
-        AutoFill.registerSkill(investigation, investigationChoice, proficiencyBonus, intelligenceField, proficiencyBonusSymbol, proficiencyBonusExtra);
-        AutoFill.registerSkill(nature, natureChoice, proficiencyBonus, intelligenceField, proficiencyBonusSymbol, proficiencyBonusExtra);
-        AutoFill.registerSkill(religion, religionChoice, proficiencyBonus, intelligenceField, proficiencyBonusSymbol, proficiencyBonusExtra);
-        AutoFill.updateSkillsProficiency(proficiencyBonus, intelligenceChoice);
-        AutoFill.updateSkillsProficiency(proficiencyBonus, arcanaChoice);
-        AutoFill.updateSkillsProficiency(proficiencyBonus, historyChoice);
-        AutoFill.updateSkillsProficiency(proficiencyBonus, investigationChoice);
-        AutoFill.updateSkillsProficiency(proficiencyBonus, natureChoice);
-        AutoFill.updateSkillsProficiency(proficiencyBonus, religionChoice);
-        AutoFill.updateSkillsProficiency(proficiencyBonus, historyChoice);
-        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, intelligenceChoice);
-        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, arcanaChoice);
-        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, historyChoice);
-        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, investigationChoice);
-        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, natureChoice);
-        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, religionChoice);
-        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, historyChoice);
-        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, intelligenceChoice);
-        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, arcanaChoice);
-        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, historyChoice);
-        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, investigationChoice);
-        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, natureChoice);
-        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, religionChoice);
-        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, historyChoice);
-        AutoFill.linkStats(intelligenceModifier, intelligenceChoice);
-        AutoFill.linkStats(intelligenceModifier, arcanaChoice);
-        AutoFill.linkStats(intelligenceModifier, historyChoice);
-        AutoFill.linkStats(intelligenceModifier, investigationChoice);
-        AutoFill.linkStats(intelligenceModifier, natureChoice);
-        AutoFill.linkStats(intelligenceModifier, religionChoice);
-
-        //Wisdom Stuff
-        AutoFill.registerSkill(wisdomSave, wisdomChoice, proficiencyBonus, wisdomField, proficiencyBonusSymbol, proficiencyBonusExtra);
-        AutoFill.registerSkill(animalHandling, animalChoice, proficiencyBonus, wisdomField, proficiencyBonusSymbol, proficiencyBonusExtra);
-        AutoFill.registerSkill(medicine, medicineChoice, proficiencyBonus, wisdomField, proficiencyBonusSymbol, proficiencyBonusExtra);
-        AutoFill.registerSkill(perception, perceptionChoice, proficiencyBonus, wisdomField, proficiencyBonusSymbol, proficiencyBonusExtra);
-        AutoFill.registerSkill(survival, survivalChoice, proficiencyBonus, wisdomField, proficiencyBonusSymbol, proficiencyBonusExtra);
-        AutoFill.registerSkill(insight, insightChoice, proficiencyBonus, wisdomField, proficiencyBonusSymbol, proficiencyBonusExtra);
-        AutoFill.updateSkillsProficiency(proficiencyBonus, wisdomChoice);
-        AutoFill.updateSkillsProficiency(proficiencyBonus, animalChoice);
-        AutoFill.updateSkillsProficiency(proficiencyBonus, medicineChoice);
-        AutoFill.updateSkillsProficiency(proficiencyBonus, perceptionChoice);
-        AutoFill.updateSkillsProficiency(proficiencyBonus, survivalChoice);
-        AutoFill.updateSkillsProficiency(proficiencyBonus, insightChoice);
-        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, wisdomChoice);
-        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, animalChoice);
-        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, medicineChoice);
-        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, perceptionChoice);
-        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, survivalChoice);
-        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, insightChoice);
-        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, wisdomChoice);
-        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, animalChoice);
-        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, medicineChoice);
-        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, perceptionChoice);
-        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, survivalChoice);
-        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, insightChoice);
-        AutoFill.linkStats(wisdomModifier, wisdomChoice);
-        AutoFill.linkStats(wisdomModifier, animalChoice);
-        AutoFill.linkStats(wisdomModifier, historyChoice);
-        AutoFill.linkStats(wisdomModifier, medicineChoice);
-        AutoFill.linkStats(wisdomModifier, perceptionChoice);
-        AutoFill.linkStats(wisdomModifier, survivalChoice);
-        AutoFill.linkStats(wisdomModifier, insightChoice);
-
-        //Charisma Stuff
-        AutoFill.registerSkill(charismaSave, charismaChoice, proficiencyBonus, charismaField, proficiencyBonusSymbol, proficiencyBonusExtra);
-        AutoFill.registerSkill(deception, deceptionChoice, proficiencyBonus, charismaField, proficiencyBonusSymbol, proficiencyBonusExtra);
-        AutoFill.registerSkill(intimidation, intimidationChoice, proficiencyBonus, charismaField, proficiencyBonusSymbol, proficiencyBonusExtra);
-        AutoFill.registerSkill(performance, performanceChoice, proficiencyBonus, charismaField, proficiencyBonusSymbol, proficiencyBonusExtra);
-        AutoFill.registerSkill(persuasion, persuasionChoice, proficiencyBonus, charismaField, proficiencyBonusSymbol, proficiencyBonusExtra);
-        AutoFill.updateSkillsProficiency(proficiencyBonus, charismaChoice);
-        AutoFill.updateSkillsProficiency(proficiencyBonus, deceptionChoice);
-        AutoFill.updateSkillsProficiency(proficiencyBonus, intimidationChoice);
-        AutoFill.updateSkillsProficiency(proficiencyBonus, performanceChoice);
-        AutoFill.updateSkillsProficiency(proficiencyBonus, persuasionChoice);
-        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, charismaChoice);
-        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, deceptionChoice);
-        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, intimidationChoice);
-        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, performanceChoice);
-        AutoFill.updateSkillsProficiency(proficiencyBonusExtra, persuasionChoice);
-        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, charismaChoice);
-        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, deceptionChoice);
-        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, intimidationChoice);
-        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, performanceChoice);
-        AutoFill.registerProficiencySymbol(proficiencyBonusSymbol, persuasionChoice);
-        AutoFill.passivePerception(passivePerceptionField, perception);
-        AutoFill.linkStats(charismaModifier, charismaChoice);
-        AutoFill.linkStats(charismaModifier, deceptionChoice);
-        AutoFill.linkStats(charismaModifier, intimidationChoice);
-        AutoFill.linkStats(charismaModifier, performanceChoice);
-        AutoFill.linkStats(charismaModifier, persuasionChoice);
-
-        AutoFill.experienceFiller(experienceField, levelSpinner);
-    }
-
-    /*
-    Used to set current character as unsaved
-     */
-    public static void setUnSaved() {
-        saved = false;
-    }
-
-    /*
-    On load event, load character and set the current character to the loaded one
+    /**
+     * Gets character from XMLHandler and applies the data to the fields
      */
     public void load() {
         try {
@@ -1102,164 +1284,11 @@ public class CharacterSheetController {
         }
     }
 
-    public void registerSavedState() {
-        SavedToggler.changesTextField(speedField);
-        SavedToggler.changesTextField(experienceField);
-        SavedToggler.changesTextField(ageField);
-        SavedToggler.changesTextField(weightField);
-        SavedToggler.changesTextField(acField);
-        SavedToggler.changesTextArea(traitsField);
-        SavedToggler.changesTextArea(idealsField);
-        SavedToggler.changesTextArea(bondsField);
-        SavedToggler.changesTextArea(flawsField);
-        SavedToggler.changesSpinner(currentHPSpinner);
-        SavedToggler.changesSpinner(maxHpSpinner);
-        SavedToggler.changesSpinner(tempHPSpinner);
-        SavedToggler.changesSpinner(hitDieSpinner);
-        SavedToggler.changesSpinner(levelSpinner);
-        SavedToggler.changesSpinner(copper);
-        SavedToggler.changesSpinner(silver);
-        SavedToggler.changesSpinner(electrum);
-        SavedToggler.changesSpinner(gold);
-        SavedToggler.changesSpinner(platinum);
-        SavedToggler.changesSpinner(spinnerOne);
-        SavedToggler.changesSpinner(spinnerTwo);
-        SavedToggler.changesSpinner(spinnerThree);
-        SavedToggler.changesSpinner(spinnerFour);
-        SavedToggler.changesSpinner(spinnerFive);
-        SavedToggler.changesSpinner(spinnerSix);
-        SavedToggler.changesSpinner(spinnerSeven);
-        SavedToggler.changesSpinner(spinnerEight);
-        SavedToggler.changesSpinner(spinnerNine);
-        SavedToggler.changesSpinner(spinnerTen);
-        SavedToggler.changesSpinner(spinnerEleven);
-        SavedToggler.changesSpinner(spinnerTwelve);
-        SavedToggler.changesSpinner(spinnerThirteen);
-        SavedToggler.changesSpinner(spinnerFourteen);
-        SavedToggler.changesSpinner(spinnerFifteen);
-        SavedToggler.changesSpinner(spinnerSixteen);
-        SavedToggler.changesTextField(characterName);
-        SavedToggler.changesTextField(classField);
-        SavedToggler.changesTextField(raceField);
-        SavedToggler.changesTextField(playerNameField);
-        SavedToggler.changesTextField(passivePerceptionField);
-        SavedToggler.changesRadioButton(deathFailOne);
-        SavedToggler.changesRadioButton(deathFailTwo);
-        SavedToggler.changesRadioButton(deathFailThree);
-        SavedToggler.changesRadioButton(deathSaveOne);
-        SavedToggler.changesRadioButton(deathSaveTwo);
-        SavedToggler.changesRadioButton(deathSaveThree);
-        SavedToggler.changesTextField(eyes);
-        SavedToggler.changesTextField(height);
-        SavedToggler.changesTextField(skin);
-        SavedToggler.changesTextField(hair);
-        SavedToggler.changesTextArea(language);
-        SavedToggler.changesTextArea(feats);
-        SavedToggler.changesComboBox(alignmentField);
-        SavedToggler.changesChoiceBox(hitDieType);
-        SavedToggler.changesRadioButton(inspirationOne);
-        SavedToggler.changesRadioButton(inspirationTwo);
-        SavedToggler.changesRadioButton(inspirationFour);
-        SavedToggler.changesRadioButton(inspirationThree);
-        SavedToggler.changesRadioButton(inspirationFive);
-        SavedToggler.changesTextArea(miscellaneousOne);
-        SavedToggler.changesTextField(weaponNameOne);
-        SavedToggler.changesTextField(weaponNameThree);
-        SavedToggler.changesTextField(weaponNameTwo);
-        SavedToggler.changesTextField(attackBonusOne);
-        SavedToggler.changesTextField(attackBonusThree);
-        SavedToggler.changesTextField(attackBonusTwo);
-        SavedToggler.changesTextField(damageOne);
-        SavedToggler.changesTextField(damageThree);
-        SavedToggler.changesTextField(damageTwo);
-        SavedToggler.changesTextArea(weapons);
-        SavedToggler.changesTextArea(armor);
-        SavedToggler.changesTextField(counterOne);
-        SavedToggler.changesTextField(counterTwo);
-        SavedToggler.changesTextField(counterThree);
-        SavedToggler.changesTextField(counterFour);
-        SavedToggler.changesTextField(counterFive);
-        SavedToggler.changesTextField(counterSix);
-        SavedToggler.changesTextField(counterSeven);
-        SavedToggler.changesTextField(counterEight);
-        SavedToggler.changesTextField(counterNine);
-        SavedToggler.changesTextField(counterTen);
-        SavedToggler.changesTextField(counterEleven);
-        SavedToggler.changesTextField(counterTwelve);
-        SavedToggler.changesTextField(counterThirteen);
-        SavedToggler.changesTextField(counterFourteen);
-        SavedToggler.changesTextField(counterFifteen);
-        SavedToggler.changesTextField(counterSixteen);
-        SavedToggler.changesTextArea(inventoryOne);
-        SavedToggler.changesTextArea(inventoryTwo);
-        SavedToggler.changesTextArea(inventoryThree);
-        SavedToggler.changesTextArea(inventoryFour);
-        SavedToggler.changesTextArea(backStory);
-    }
-
-    public static boolean getSavedState() {
-        return saved;
-    }
-
-    /*
-    Used to calculate the Initiative
-    Not coded in Autofill because it does not use change listeners
+    /**
+     * Spellbook setup
      */
-    private void updateInit() {
-        int initiative = 0;
-        if (strengthInitiative.isSelected() && !strengthModifierField.getText().equals("")) {
-            initiative += Integer.parseInt(strengthSymbol.getText() + strengthModifierField.getText());
-        }
-
-        if (dexterityInitiative.isSelected() && !dexterityModifier.getText().equals("")) {
-            initiative += Integer.parseInt(dexteritySymbol.getText() + dexterityModifier.getText());
-        }
-
-        if (constitutionInitiative.isSelected() && !constitutionModifier.getText().equals("")) {
-            initiative += Integer.parseInt(constitutionSymbol.getText() + constitutionModifier.getText());
-        }
-
-        if (intelligenceInitiative.isSelected() && !intelligenceModifier.getText().equals("")) {
-            initiative += Integer.parseInt(intelligenceSymbol.getText() + intelligenceModifier.getText());
-        }
-
-        if (wisdomInitiative.isSelected() && !wisdomModifier.getText().equals("")) {
-            initiative += Integer.parseInt(wisdomSymbol.getText() + wisdomModifier.getText());
-        }
-
-        if (charismaInitiative.isSelected() && !charismaModifier.getText().equals("")) {
-            initiative += Integer.parseInt(charismaSymbol.getText() + charismaModifier.getText());
-        }
-
-        if (customInitiative.isSelected() && !customInitiativeField.getEditor().getText().equals("")) {
-            initiative += Integer.parseInt(customInitiativeField.getEditor().getText());
-        }
-
-        initiativeField.setText(String.valueOf(initiative));
-    }
-
-    public void colorOptions(ActionEvent actionEvent) throws IOException {
-        Stage optionsPopup = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Rain/MainPackage/Options.fxml"));
-        Parent load = loader.load();
-        optionsPopup.initModality(Modality.APPLICATION_MODAL);
-        optionsPopup.initOwner(mainPane.getScene().getWindow());
-        optionsPopup.centerOnScreen();
-        optionsPopup.setScene(new Scene(load, 600.0D, 400.0D));
-        optionsPopup.show();
-        optionsPopup.setOnCloseRequest(loadPropertiesOnClose);
-    }
-
-    private File chooser() {
-        FileChooser chooser = new FileChooser();
-        chooser.setTitle("Open Character");
-        chooser.setInitialDirectory(new File("saves/"));
-        File selected = chooser.showOpenDialog(mainPane.getScene().getWindow());
-        return selected;
-    }
-
     private void setupTable() {
-        spellTable = new TableView2();
+        spellTable = new TableView();
         TableColumn<String, String> column1 = new TableColumn<>("test");
         column1.setCellValueFactory(new PropertyValueFactory<>("test"));
         spellTable.getColumns().add(column1);
