@@ -33,8 +33,6 @@ public class CharacterSheetController {
     //TODO Spell ui overhaul
     //TODO Comment more code/cleanup code
     //TODO possible higher resolution version
-    //TODO finish AutoFill renaming method variables. ALso remove unnecessary calculations such as recalculating ability modifier for no reason
-    //TODO Config changes
     //TODO add Apache license after confirmation if controlsfx is needed and find SRD license
     //TODO save file loading filtering
 
