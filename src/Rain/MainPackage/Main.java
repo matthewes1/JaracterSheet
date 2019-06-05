@@ -16,9 +16,10 @@ import javafx.stage.WindowEvent;
 import java.util.Optional;
 
 public class Main extends Application {
-    private static Stage mainStage;
 
+    //Prompts the user to save when they close the program if the character isn't saved
     private EventHandler<WindowEvent> promptSave = (event) -> {
+        //If character isn't saved
         if (!CharacterSheetController.getSavedState()) {
             Alert closeSave = new Alert(AlertType.CONFIRMATION);
             closeSave.setHeaderText("Do you want to save?");
@@ -43,7 +44,6 @@ public class Main extends Application {
 
     };
 
-    //Catch error when loading and not selecting?
 
     public Main() {
     }
@@ -56,7 +56,6 @@ public class Main extends Application {
         primaryStage.setOnCloseRequest(this.promptSave);
         primaryStage.setMinWidth(1250);
         primaryStage.setMinHeight(725);
-        mainStage = primaryStage;
         primaryStage.show();
     }
 

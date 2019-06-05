@@ -8,44 +8,44 @@ public class SavedToggler {
     public SavedToggler() {
     }
 
-    public static void changesTF(TextField t) {
-        t.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+    //Toggles saved state of the character if a text field is changed
+    public static void changesTextField(TextField field) {
+        field.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
                 CharacterSheetController.setUnSaved();
         });
     }
 
-    public static void changesTA(TextArea t) {
-        t.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+    //Toggles saved state of the character when a text area is changed
+    public static void changesTextArea(TextArea area) {
+        area.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
                 CharacterSheetController.setUnSaved();
         });
     }
 
-    public static void changesSp(Spinner t) {
-        t.getEditor().textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+    //Toggles saved state of the character when a spinner is changed
+    public static void changesSpinner(Spinner spinner) {
+        spinner.getEditor().textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
                 CharacterSheetController.setUnSaved();
         });
     }
 
-    public static void changesCh(ChoiceBox t) {
-        t.getSelectionModel().selectedIndexProperty().addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
+    //Toggles saved state of the character when a button is changed
+    public static void changesRadioButton(RadioButton button) {
+        button.selectedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
                 CharacterSheetController.setUnSaved();
         });
     }
 
-    public static void changesRb(RadioButton t) {
-        t.selectedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
+    //Toggles saved state of the character when a combo box is changed
+    public static void changesComboBox(ComboBox box) {
+        box.getSelectionModel().selectedIndexProperty().addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
                 CharacterSheetController.setUnSaved();
         });
     }
 
-    public static void changesCb(ComboBox t) {
-        t.getSelectionModel().selectedIndexProperty().addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
-                CharacterSheetController.setUnSaved();
-        });
-    }
-
-    public static void changesCb2(ChoiceBox t) {
-        t.getSelectionModel().selectedIndexProperty().addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
+    //Toggles saved state of the character when a choice box is changed
+    public static void changesChoiceBox(ChoiceBox box) {
+        box.getSelectionModel().selectedIndexProperty().addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
                 CharacterSheetController.setUnSaved();
         });
     }

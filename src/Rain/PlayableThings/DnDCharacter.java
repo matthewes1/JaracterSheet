@@ -2,11 +2,9 @@ package Rain.PlayableThings;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.io.Serializable;
 
 @XmlRootElement
-public class DnDCharacter implements Serializable {
-    private static final long serialVersionUID = 324234225L;
+public class DnDCharacter {
     private String strengthField;
     private String dexterityField;
     private String constitutionField;

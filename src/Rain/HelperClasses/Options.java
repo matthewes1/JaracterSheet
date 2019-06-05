@@ -10,9 +10,10 @@ import java.io.*;
 import java.util.Properties;
 
 public class Options {
-    //Add @FXML stuff etc.
-    public ColorPicker BackGroundColor;
-    public ColorPicker OctColor;
+    @FXML
+    private ColorPicker backgroundColor;
+    @FXML
+    private ColorPicker octagonColor;
     private Properties properties = new Properties();
     private File propertyFile = new File("saves/config.properties");
 
@@ -22,73 +23,76 @@ public class Options {
     @FXML
     public void initialize() {
         loadProperties();
-        this.BackGroundColor.setValue(Color.valueOf(properties.getProperty("MainBackgroundColor")));
-        this.OctColor.setValue(Color.valueOf(properties.getProperty("OctColor")));
+        //Sets the color pickers to the current color from config
+        backgroundColor.setValue(Color.valueOf(properties.getProperty("mainBackgroundColor")));
+        octagonColor.setValue(Color.valueOf(properties.getProperty("octagonColor")));
     }
 
     public void loadProperties() {
-        File file = new File("saves/");
-        if (!file.exists()) {
-            file.mkdir();
+        File saveFolder = new File("saves/");
+        if (!saveFolder.exists()) {
+            saveFolder.mkdir();
         }
 
         if (!propertyFile.exists()) {
-            this.properties.setProperty("MainBackgroundColor", "ALICEBLUE");
-            this.properties.setProperty("OctColor", "LIGHTSKYBLUE");
-            this.saveProps();
+            properties.setProperty("mainBackgroundColor", "ALICEBLUE");
+            properties.setProperty("octagonColor", "LIGHTSKYBLUE");
+            saveProperties();
         }
 
+        InputStream read = null;
         try {
-            InputStream in = new FileInputStream(propertyFile);
-            this.properties.load(in);
-        } catch (IOException var2) {
-            var2.printStackTrace();
-        }
-    }
-
-    public void saveProps() {
-        FileOutputStream out = null;
-
-        try {
-            out = new FileOutputStream(propertyFile);
-            this.properties.store(out, null);
-        } catch (IOException var11) {
-            var11.printStackTrace();
+            read = new FileInputStream(propertyFile);
+            properties.load(read);
+            read.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         } finally {
-            if (out != null) {
+            if (read != null) {
                 try {
-                    out.close();
-                } catch (IOException var10) {
-                    var10.printStackTrace();
+                    read.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
-
         }
-
     }
 
-    public void BackgroundColor() {
+
+    public void saveProperties() {
+        FileOutputStream output = null;
+        try {
+            output = new FileOutputStream(propertyFile);
+            properties.store(output, null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (output != null) {
+                try {
+                    output.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     public void Cancel() {
-        Stage t = (Stage)this.OctColor.getScene().getWindow();
-        t.close();
+        Stage options = (Stage) this.octagonColor.getScene().getWindow();
+        options.close();
     }
 
     public void Save() {
-        properties.setProperty("MainBackgroundColor", (this.BackGroundColor.getValue()).toString());
-        properties.setProperty("OctColor", (this.OctColor.getValue()).toString());
-        Stage t = (Stage)this.OctColor.getScene().getWindow();
-        saveProps();
-        t.fireEvent(
+        properties.setProperty("mainBackgroundColor", (this.backgroundColor.getValue()).toString());
+        properties.setProperty("octagonColor", (this.octagonColor.getValue()).toString());
+        Stage options = (Stage) this.octagonColor.getScene().getWindow();
+        saveProperties();
+        options.fireEvent(
                 new WindowEvent(
-                        t,
+                        options,
                         WindowEvent.WINDOW_CLOSE_REQUEST
                 )
         );
-        t.close();
-    }
-
-    public void OctColor() {
+        options.close();
     }
 }
