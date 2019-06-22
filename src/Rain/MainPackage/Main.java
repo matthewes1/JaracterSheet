@@ -20,7 +20,7 @@ public class Main extends Application {
      * Prompts the user to save when they close the program if the character isn't saved
      */
     private EventHandler<WindowEvent> promptSave = (event) -> {
-        if (!CharacterSheetController.getSavedState()) {
+        if (!JaracterSheetController.getSavedState()) {
             Alert closeSave = new Alert(AlertType.CONFIRMATION);
             closeSave.setHeaderText("Do you want to save?");
             ButtonType save = new ButtonType("Save");
@@ -31,7 +31,7 @@ public class Main extends Application {
             Optional<ButtonType> options = closeSave.showAndWait();
             if (options.get() == save) {
                 try {
-                    XmlHandler.convertToXML(CharacterSheetController.getChar());
+                    XmlHandler.convertToXML(JaracterSheetController.getChar());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -51,9 +51,9 @@ public class Main extends Application {
     }
 
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("CharacterSheet.fxml"));
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("JaracterSheet.fxml"));
         Parent root = loader.load();
-        primaryStage.setTitle("Dnd Character Creator Beta 1.5.0");
+        primaryStage.setTitle("Jaracter Sheet Beta 1.5.0");
         primaryStage.setScene(new Scene(root, 1250.0D, 725.0D));
         primaryStage.setOnCloseRequest(this.promptSave);
         primaryStage.setMinWidth(1250);

@@ -1,11 +1,9 @@
 package Rain.MainPackage;
 
-import Rain.HelperClasses.AutoFill;
-import Rain.HelperClasses.SavedToggler;
-import Rain.HelperClasses.Validation;
-import Rain.HelperClasses.XmlHandler;
+import Rain.HelperClasses.*;
 import Rain.PlayableThings.DnDCharacter;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,7 +28,7 @@ import java.util.Properties;
 /**
  * Controller for the main panel and all its tabs. Also houses many methods for assigning character data
  */
-public class CharacterSheetController {
+public class JaracterSheetController {
     //TODO Spell ui overhaul
     //TODO possible higher resolution version
     //TODO add Apache license after confirmation if controlsfx is needed and find SRD license
@@ -413,10 +411,29 @@ public class CharacterSheetController {
     @FXML
     private GridPane spellBookPane;
     //</editor-fold>
+    /**
+     * Called when options pane is closed so the colors update
+     */
+    private EventHandler<WindowEvent> loadPropertiesOnClose = (event) -> {
+        loadProperties();
+        event.consume();
+    };
 
-    public CharacterSheetController() {
+
+    public JaracterSheetController() {
     }
 
+    public static void setUnSaved() {
+        saved = false;
+    }
+
+    public static boolean getSavedState() {
+        return saved;
+    }
+
+    public static DnDCharacter getChar() {
+        return currentCharacter;
+    }
 
     @FXML
     protected void initialize() {
@@ -428,18 +445,7 @@ public class CharacterSheetController {
         levelSpinner.increment();
         setupTable();
         saved = true;
-    }
-
-    /**
-     * Called when options pane is closed so the colors update
-     */
-    private EventHandler<WindowEvent> loadPropertiesOnClose = (event) -> {
-        loadProperties();
-        event.consume();
-    };
-
-    public static void setUnSaved() {
-        saved = false;
+        License.printLicenses();
     }
 
     private void loadProperties() {
@@ -492,29 +498,40 @@ public class CharacterSheetController {
         }
     }
 
-    public static boolean getSavedState() {
-        return saved;
-    }
-
-    public static DnDCharacter getChar() {
-        return currentCharacter;
-    }
-
     /**
      * Opens pane containing options for program customization
      *
      * @throws IOException
      */
+    @FXML
     public void colorOptions() throws IOException {
         Stage optionsPopup = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Rain/MainPackage/Options.fxml"));
-        Parent load = loader.load();
+        FXMLLoader fxmlFile = new FXMLLoader(getClass().getResource("/Rain/MainPackage/Options.fxml"));
+        Parent parent = fxmlFile.load();
         optionsPopup.initModality(Modality.APPLICATION_MODAL);
         optionsPopup.initOwner(mainPane.getScene().getWindow());
         optionsPopup.centerOnScreen();
-        optionsPopup.setScene(new Scene(load, 600.0D, 400.0D));
+        optionsPopup.setScene(new Scene(parent, 600.0D, 400.0D));
         optionsPopup.show();
         optionsPopup.setOnCloseRequest(loadPropertiesOnClose);
+    }
+
+    /**
+     * Opens pane for licenses
+     *
+     * @param actionEvent
+     * @throws IOException
+     */
+    @FXML
+    private void showLicense(ActionEvent actionEvent) throws IOException {
+        Stage license = new Stage();
+        FXMLLoader fxmlFile = new FXMLLoader(getClass().getResource("/Rain/MainPackage/License.fxml"));
+        Parent parent = fxmlFile.load();
+        license.initModality(Modality.APPLICATION_MODAL);
+        license.initOwner(mainPane.getScene().getWindow());
+        license.centerOnScreen();
+        license.setScene(new Scene(parent, 600.0D, 400.0D));
+        license.show();
     }
 
     /**
@@ -604,30 +621,30 @@ public class CharacterSheetController {
     private void autoFill() {
         //Registers initiative selection
         strengthInitiative.selectedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
-            CharacterSheetController.this.updateInit();
+            JaracterSheetController.this.updateInit();
         });
         dexterityInitiative.selectedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
-            CharacterSheetController.this.updateInit();
+            JaracterSheetController.this.updateInit();
         });
         constitutionInitiative.selectedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
-            CharacterSheetController.this.updateInit();
+            JaracterSheetController.this.updateInit();
         });
         intelligenceInitiative.selectedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
-            CharacterSheetController.this.updateInit();
+            JaracterSheetController.this.updateInit();
         });
         wisdomInitiative.selectedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
-            CharacterSheetController.this.updateInit();
+            JaracterSheetController.this.updateInit();
         });
         charismaInitiative.selectedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
-            CharacterSheetController.this.updateInit();
+            JaracterSheetController.this.updateInit();
         });
         customInitiative.selectedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
-            CharacterSheetController.this.updateInit();
-            CharacterSheetController.setUnSaved();
+            JaracterSheetController.this.updateInit();
+            JaracterSheetController.setUnSaved();
         });
         customInitiativeField.getEditor().textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
-            CharacterSheetController.this.updateInit();
-            CharacterSheetController.setUnSaved();
+            JaracterSheetController.this.updateInit();
+            JaracterSheetController.setUnSaved();
         });
 
         //Register ability modifiers and ability scores
@@ -916,6 +933,7 @@ public class CharacterSheetController {
         initiativeField.setText(String.valueOf(initiative));
     }
 
+    @FXML
     public void saveButton() {
         save();
     }
@@ -1095,7 +1113,7 @@ public class CharacterSheetController {
 
         try {
             XmlHandler.convertToXML(currentCharacter);
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         saved = true;
@@ -1104,6 +1122,7 @@ public class CharacterSheetController {
     /**
      * Gets character from XMLHandler and applies the data to the fields
      */
+    @FXML
     public void load() {
         try {
             File character = chooser();
@@ -1279,7 +1298,7 @@ public class CharacterSheetController {
                 saved = true;
                 updateInit();
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
