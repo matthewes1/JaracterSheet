@@ -1,5 +1,12 @@
 package Rain.Spells;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+/**
+ * Spell object. Used to store the information of a spell with homebrew in mind
+ */
+@XmlRootElement
 public class Spell {
     private String spellName;
     private String level;
@@ -14,6 +21,7 @@ public class Spell {
     public void Spell() {
     }
 
+    @XmlElement
     public String getSpellName() {
         return spellName;
     }
@@ -22,6 +30,7 @@ public class Spell {
         this.spellName = spellName;
     }
 
+    @XmlElement
     public String getLevel() {
         return level;
     }
@@ -30,6 +39,7 @@ public class Spell {
         this.level = level;
     }
 
+    @XmlElement
     public String getSchool() {
         return school;
     }
@@ -38,6 +48,7 @@ public class Spell {
         this.school = school;
     }
 
+    @XmlElement
     public String getCastTime() {
         return castTime;
     }
@@ -46,6 +57,7 @@ public class Spell {
         this.castTime = castTime;
     }
 
+    @XmlElement
     public String getRange() {
         return range;
     }
@@ -54,6 +66,7 @@ public class Spell {
         this.range = range;
     }
 
+    @XmlElement
     public String getComponents() {
         return components;
     }
@@ -62,6 +75,7 @@ public class Spell {
         this.components = components;
     }
 
+    @XmlElement
     public String getDuration() {
         return duration;
     }
@@ -70,6 +84,7 @@ public class Spell {
         this.duration = duration;
     }
 
+    @XmlElement
     public String getDescription() {
         return description;
     }
@@ -78,6 +93,7 @@ public class Spell {
         this.description = description;
     }
 
+    @XmlElement
     public String getHigherLevelsDescription() {
         return higherLevelsDescription;
     }
