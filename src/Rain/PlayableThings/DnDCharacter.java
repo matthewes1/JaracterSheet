@@ -1025,7 +1025,6 @@ public class DnDCharacter {
         this.hitDieString = hitDieString;
     }
 
-
     @XmlElement
     public String getCopper() {
         return copper;
@@ -1466,7 +1465,6 @@ public class DnDCharacter {
     public void setSurvivalChoice(int survivalChoice) {
         this.survivalChoice = survivalChoice;
     }
-
 
     @XmlElement
     public int getHitDieType() {
