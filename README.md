@@ -18,6 +18,6 @@ Spellbook currently does not work.
 
 Other notes:
 Primarily uses JavaFX in Java 8.  
-Saves stored using JAXB.  
+Saves stored using JAXB.
 If you have any suggestions or issues, please post them! This is my first program outside of college projects and I hope to use it to become better at programming.  
 If my license is missing anything or I missed a license I needed to provide, please let me know via the issuetracker on github.
