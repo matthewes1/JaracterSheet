@@ -5,7 +5,7 @@ I personally did not like how information was displayed by the character sheets 
 I named it Jaracter Sheet because I am not creative and it is purely a mix between java and character.\
 
 Requirements and installation:\
-The download is located in the compiled folder in github or just click this link: https://github.com/matthewes1/JaracterSheet/tree/master/compiled\
+The download is located in the compiled folder in github or just click this link: https://github.com/matthewes1/JaracterSheet/tree/master/compiled<br>
 Uses Java 8 and I compile it in intellij idea.\
 The executable that I provide should be able to be run anywhere, but not that whatever directory it is in it will create a folder named saves. This will probably change, but for now that is where it stores saved character for ease of access.\
 
