@@ -2,7 +2,10 @@ package Rain.MainPackage;
 
 import Rain.HelperClasses.*;
 import Rain.PlayableThings.DnDCharacter;
+import Rain.Spells.Spell;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -11,7 +14,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
@@ -38,6 +40,7 @@ public class JaracterSheetController {
     private static boolean saved = true;
     private File propertyFile = new File("saves/config.properties");
     private Properties properties = new Properties();
+    private ObservableList<Spell> spells = FXCollections.observableArrayList();
 
     //<editor-fold desc="FXML declarations">
     @FXML
@@ -407,9 +410,35 @@ public class JaracterSheetController {
     @FXML
     private TextArea backStory;
     @FXML
-    private TableView spellTable;
-    @FXML
     private GridPane spellBookPane;
+    @FXML
+    private TableView preparedSpells;
+    @FXML
+    private TableColumn preparedSpellName;
+    @FXML
+    private TableColumn preparedSpellLevel;
+    @FXML
+    private TableColumn preparedSpellSchool;
+    @FXML
+    private TableColumn preparedSpellCastTime;
+    @FXML
+    private TableColumn preparedSpellRange;
+    @FXML
+    private TableColumn preparedSpellComponents;
+    @FXML
+    private TableView unpreparedSpells;
+    @FXML
+    private TableColumn unpreparedSpellName;
+    @FXML
+    private TableColumn unpreparedSpellLevel;
+    @FXML
+    private TableColumn unpreparedSpellSchool;
+    @FXML
+    private TableColumn unpreparedSpellCastTime;
+    @FXML
+    private TableColumn unpreparedSpellRange;
+    @FXML
+    private TableColumn unpreparedSpellComponents;
     //</editor-fold>
     /**
      * Called when options pane is closed so the colors update
@@ -418,7 +447,6 @@ public class JaracterSheetController {
         loadProperties();
         event.consume();
     };
-
 
     public JaracterSheetController() {
     }
@@ -1307,11 +1335,29 @@ public class JaracterSheetController {
      * Spellbook setup
      */
     private void setupTable() {
-        spellTable = new TableView();
-        TableColumn<String, String> column1 = new TableColumn<>("test");
-        column1.setCellValueFactory(new PropertyValueFactory<>("test"));
-        spellTable.getColumns().add(column1);
-        GridPane.setRowIndex(spellTable, 1);
-        spellBookPane.getChildren().add(spellTable);
+        Spell test = new Spell();
+        test.setCastTime("test");
+
+        spells.add(test);
+    }
+
+    @FXML
+    private void loadSpells(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    private void saveSpells(ActionEvent actionEvent) {
+    }
+
+    /**
+     * Creates a blank new spell
+     *
+     * @param actionEvent
+     */
+    @FXML
+    private void makeSpell(ActionEvent actionEvent) {
+        Spell newSpell = new Spell();
+        newSpell.setSpellName("New Spell");
+        spells.add(newSpell);
     }
 }

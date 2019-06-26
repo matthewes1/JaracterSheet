@@ -16,7 +16,6 @@ public class Spell {
     private String components;
     private String duration;
     private String description;
-    private String higherLevelsDescription;
 
     public void Spell() {
     }
@@ -91,14 +90,5 @@ public class Spell {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    @XmlElement
-    public String getHigherLevelsDescription() {
-        return higherLevelsDescription;
-    }
-
-    public void setHigherLevelsDescription(String higherLevelsDescription) {
-        this.higherLevelsDescription = higherLevelsDescription;
     }
 }
