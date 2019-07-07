@@ -13,7 +13,21 @@ Current features and issues:\
 All features of a standard 5e character sheet are implemented.\
 Custom initiative bonuses and modifiers, double proficiency, and custom proficiency bonuses are implemented.\
 Characters are saved in an XML format.\
+Currently you can change the size of the window but it does not scale the elements. I plan to add better screen size support later\
 Spellbook currently does not work.
+
+To Do:\
+Fully implement spell book\
+Move to a better release scheme, possibly using the github releases feature\
+Redesign of some of the core code to be more modular and readable\
+Check for updates button\
+Different resolution support\
+Add a changelog either on github or in the program itself
+
+Possible Features/ideas:\
+Possible ability to load character sheets from other sources\
+Possible recent characters feature\
+Any ideas users submit and maybe an FAQ
 
 Other notes:\
 Primarily uses JavaFX in Java 8.\
