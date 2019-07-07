@@ -578,14 +578,36 @@ public class JaracterSheetController {
     /**
      * Applies colors from the property file to the appropriate elements
      */
-    public void colors() {
+    private void colors() {
         characterPane.setBackground(new Background(new BackgroundFill[]{new BackgroundFill(Color.valueOf(properties.getProperty("mainBackgroundColor")), null, null)}));
-        speedOctagon.setFill(Color.valueOf(properties.getProperty("octagonColor")));
-        acOctagon.setFill(Color.valueOf(properties.getProperty("octagonColor")));
-        initiativeOctagon.setFill(Color.valueOf(properties.getProperty("octagonColor")));
-        hitDiceOctagon.setFill(Color.valueOf(properties.getProperty("octagonColor")));
-        currentHPOctagon.setFill(Color.valueOf(properties.getProperty("octagonColor")));
-        deathSavesOctagon.setFill(Color.valueOf(properties.getProperty("octagonColor")));
+
+        try {
+            speedOctagon.setFill(Color.valueOf(properties.getProperty("octagonColor")));
+            acOctagon.setFill(Color.valueOf(properties.getProperty("octagonColor")));
+            initiativeOctagon.setFill(Color.valueOf(properties.getProperty("octagonColor")));
+            hitDiceOctagon.setFill(Color.valueOf(properties.getProperty("octagonColor")));
+            currentHPOctagon.setFill(Color.valueOf(properties.getProperty("octagonColor")));
+            deathSavesOctagon.setFill(Color.valueOf(properties.getProperty("octagonColor")));
+        } catch (Exception x) {
+            propertyError();
+        }
+    }
+
+    /**
+     * SHows user an error window saying the properties file is corrupted/incorrect and then rewrites the file.
+     */
+    private void propertyError() {
+        Alert propertyAlert = new Alert(Alert.AlertType.ERROR);
+        propertyAlert.setTitle("Properties File Error");
+        propertyAlert.setHeaderText("The property file contains an error.");
+        propertyAlert.setContentText("The property file will now be recreated.");
+        propertyAlert.showAndWait();
+
+        if (propertyFile.exists()) {
+            propertyFile.delete();
+            properties.clear();
+            loadProperties();
+        }
     }
 
     /**
