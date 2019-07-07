@@ -1,0 +1,6 @@
+1.5.1
+-Properties file error handling implemented
+-Singular variable renamed that was leftover from decompiling the code
+
+1.5.0
+-Initial Public Release
