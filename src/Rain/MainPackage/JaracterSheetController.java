@@ -513,8 +513,8 @@ public class JaracterSheetController {
         try {
             output = new FileOutputStream(propertyFile);
             properties.store(output, null);
-        } catch (IOException var11) {
-            var11.printStackTrace();
+        } catch (IOException x) {
+            x.printStackTrace();
         } finally {
             if (output != null) {
                 try {
