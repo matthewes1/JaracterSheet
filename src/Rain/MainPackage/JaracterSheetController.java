@@ -409,36 +409,6 @@ public class JaracterSheetController {
     private TextArea feats;
     @FXML
     private TextArea backStory;
-    @FXML
-    private GridPane spellBookPane;
-    @FXML
-    private TableView preparedSpells;
-    @FXML
-    private TableColumn preparedSpellName;
-    @FXML
-    private TableColumn preparedSpellLevel;
-    @FXML
-    private TableColumn preparedSpellSchool;
-    @FXML
-    private TableColumn preparedSpellCastTime;
-    @FXML
-    private TableColumn preparedSpellRange;
-    @FXML
-    private TableColumn preparedSpellComponents;
-    @FXML
-    private TableView unpreparedSpells;
-    @FXML
-    private TableColumn unpreparedSpellName;
-    @FXML
-    private TableColumn unpreparedSpellLevel;
-    @FXML
-    private TableColumn unpreparedSpellSchool;
-    @FXML
-    private TableColumn unpreparedSpellCastTime;
-    @FXML
-    private TableColumn unpreparedSpellRange;
-    @FXML
-    private TableColumn unpreparedSpellComponents;
     //</editor-fold>
     /**
      * Called when options pane is closed so the colors update
@@ -471,7 +441,6 @@ public class JaracterSheetController {
         autoFill();
         registerSavedState();
         levelSpinner.increment();
-        setupTable();
         saved = true;
         License.printLicenses();
     }
@@ -1351,35 +1320,5 @@ public class JaracterSheetController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * Spellbook setup
-     */
-    private void setupTable() {
-        Spell test = new Spell();
-        test.setCastTime("test");
-
-        spells.add(test);
-    }
-
-    @FXML
-    private void loadSpells(ActionEvent actionEvent) {
-    }
-
-    @FXML
-    private void saveSpells(ActionEvent actionEvent) {
-    }
-
-    /**
-     * Creates a blank new spell
-     *
-     * @param actionEvent
-     */
-    @FXML
-    private void makeSpell(ActionEvent actionEvent) {
-        Spell newSpell = new Spell();
-        newSpell.setSpellName("New Spell");
-        spells.add(newSpell);
     }
 }
