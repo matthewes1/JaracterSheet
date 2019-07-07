@@ -53,7 +53,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("JaracterSheet.fxml"));
         Parent root = loader.load();
-        primaryStage.setTitle("Jaracter Sheet Beta 1.5.0");
+        primaryStage.setTitle("Jaracter Sheet Beta 1.5.1");
         primaryStage.setScene(new Scene(root, 1250.0D, 725.0D));
         primaryStage.setOnCloseRequest(this.promptSave);
         primaryStage.setMinWidth(1250);
