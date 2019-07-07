@@ -27,6 +27,7 @@ Add a changelog either on github or in the program itself
 Possible Features/ideas:\
 Possible ability to load character sheets from other sources\
 Possible recent characters feature\
+Support to print a paper copy\
 Any ideas users submit and maybe an FAQ
 
 Other notes:\
