@@ -16,6 +16,7 @@ public class Spell {
     private String components;
     private String duration;
     private String description;
+    private Boolean prepared;
 
     public void Spell() {
     }
@@ -90,5 +91,14 @@ public class Spell {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @XmlElement
+    public Boolean isPrepared() {
+        return prepared;
+    }
+
+    public void setPrepared(Boolean prepared) {
+        this.prepared = prepared;
     }
 }
