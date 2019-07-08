@@ -1,3 +1,16 @@
+1.6.0
+-Spellbook ui changed
+-Full spellbook functionality implemented
+-Some under the hood changes to how the program transfers data between controllers
+-Changed where some files are stored internally, no affect on saves
+-Spellbook features are as follows
+-Full ability to add custom information for all spells
+-Sorting of spells
+-Ability to edit, save, and load spells even across different characters
+    This is done by simply opening another characters spell book
+-No ability to delete spell, will be added in the next update
+-Having two spells with the exact same name will only save one of them. The next update will disallow you from creating the same spell name
+
 1.5.1
 -Properties file error handling implemented
 -Singular variable renamed that was leftover from decompiling the code

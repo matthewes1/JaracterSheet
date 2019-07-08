@@ -7,17 +7,31 @@ I named it Jaracter Sheet because I am not creative and it is purely a mix betwe
 Requirements and installation:\
 The download is located in the compiled folder in github or just click this link: https://github.com/matthewes1/JaracterSheet/tree/master/compiled<br>
 Uses Java 8 and I compile it in intellij idea.\
-The executable that I provide should be able to be run anywhere, but not that whatever directory it is in it will create a folder named saves. This will probably change, but for now that is where it stores saved character for ease of access.
+The executable that I provide should be able to be run anywhere, but note that whatever directory it is in it will create a folder named saves. This will probably change, but for now that is where it stores saved character for ease of access.
+
+Current version and most recent changelog:\
+1.6.0\
+-Spellbook ui changed\
+-Full spellbook functionality implemented\
+-Some under the hood changes to how the program transfers data between controllers\
+-Changed where some files are stored internally, no affect on saves\
+-Spellbook features are as follows\
+-Full ability to add custom information for all spells\
+-Sorting of spells\
+-Ability to edit, save, and load spells even across different characters\
+    This is done by simply opening another characters spell book\
+-No ability to delete spell, will be added in the next update\
+-Having two spells with the exact same name will only save one of them. The next update will disallow you from creating the same spell name\
 
 Current features and issues:\
 All features of a standard 5e character sheet are implemented.\
 Custom initiative bonuses and modifiers, double proficiency, and custom proficiency bonuses are implemented.\
 Characters are saved in an XML format.\
 Currently you can change the size of the window but it does not scale the elements. I plan to add better screen size support later\
-Spellbook currently does not work.
+Full spellbook, although spell deletion can only be done manually in the file system currently
 
 To Do:\
-Fully implement spell book\
+Finish small features missing from spellbook\
 Move to a better release scheme, possibly using the github releases feature\
 Redesign of some of the core code to be more modular and readable\
 Check for updates button\
