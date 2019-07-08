@@ -1131,6 +1131,7 @@ public class JaracterSheetController {
 
         try {
             XmlHandler.convertToXML(currentCharacter);
+            Main.getController().getSpellBookController().saveSpells();
         } catch (Exception e) {
             e.printStackTrace();
         }
