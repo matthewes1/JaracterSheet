@@ -2462,7 +2462,7 @@
                 </Tab>
                 <Tab closable="false" text="Spell Book">
                     <content>
-                        <fx:include source="SpellBook.fxml"/>
+                        <fx:include fx:id="spellBookTab" source="../Spells/SpellBook.fxml"/>
                     </content>
                 </Tab>
             </tabs>

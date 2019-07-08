@@ -502,7 +502,7 @@ public class JaracterSheetController {
     @FXML
     public void colorOptions() throws IOException {
         Stage optionsPopup = new Stage();
-        FXMLLoader fxmlFile = new FXMLLoader(getClass().getResource("/Rain/MainPackage/Options.fxml"));
+        FXMLLoader fxmlFile = new FXMLLoader(getClass().getResource("/Rain/HelperClasses/Options.fxml"));
         Parent parent = fxmlFile.load();
         optionsPopup.initModality(Modality.APPLICATION_MODAL);
         optionsPopup.initOwner(mainPane.getScene().getWindow());

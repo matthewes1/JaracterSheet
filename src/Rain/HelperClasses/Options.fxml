@@ -6,8 +6,8 @@
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="600.0"
             xmlns="http://javafx.com/javafx/8.0.211" fx:controller="Rain.HelperClasses.Options">
    <children>
-       <Button layoutX="534.0" layoutY="361.0" mnemonicParsing="false" onAction="#Cancel" text="Cancel"/>
-       <Button layoutX="474.0" layoutY="361.0" mnemonicParsing="false" onAction="#Save" text="Okay"/>
+       <Button layoutX="534.0" layoutY="361.0" mnemonicParsing="false" onAction="#cancel" text="Cancel"/>
+       <Button layoutX="474.0" layoutY="361.0" mnemonicParsing="false" onAction="#save" text="Okay"/>
        <ColorPicker fx:id="backgroundColor" layoutX="144.0" layoutY="14.0"/>
        <ColorPicker fx:id="octagonColor" layoutX="144.0" layoutY="43.0"/>
       <Label layoutX="4.0" layoutY="15.0" text="Background Color:">

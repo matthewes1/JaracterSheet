@@ -83,7 +83,7 @@ public class Options {
         }
     }
 
-    public void Cancel() {
+    public void cancel() {
         Stage options = (Stage) this.octagonColor.getScene().getWindow();
         options.close();
     }
@@ -91,7 +91,7 @@ public class Options {
     /**
      * Called when the user clicks save, triggers window close event so the main panel runs color assignment
      */
-    public void Save() {
+    public void save() {
         properties.setProperty("mainBackgroundColor", (this.backgroundColor.getValue()).toString());
         properties.setProperty("octagonColor", (this.octagonColor.getValue()).toString());
         Stage options = (Stage) this.octagonColor.getScene().getWindow();
