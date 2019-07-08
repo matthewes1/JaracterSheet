@@ -16,11 +16,13 @@ import javafx.stage.WindowEvent;
 import java.util.Optional;
 
 public class Main extends Application {
+    static JaracterSheetController controller;
+
     /**
      * Prompts the user to save when they close the program if the character isn't saved
      */
     private EventHandler<WindowEvent> promptSave = (event) -> {
-        if (!JaracterSheetController.getSavedState()) {
+        if (!Main.getController().getSavedState()) {
             Alert closeSave = new Alert(AlertType.CONFIRMATION);
             closeSave.setHeaderText("Do you want to save?");
             ButtonType save = new ButtonType("Save");
@@ -31,7 +33,7 @@ public class Main extends Application {
             Optional<ButtonType> options = closeSave.showAndWait();
             if (options.get() == save) {
                 try {
-                    XmlHandler.convertToXML(JaracterSheetController.getChar());
+                    XmlHandler.convertToXML(Main.getController().getChar());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -50,9 +52,14 @@ public class Main extends Application {
         launch(args);
     }
 
+    public static JaracterSheetController getController() {
+        return controller;
+    }
+
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("JaracterSheet.fxml"));
         Parent root = loader.load();
+        controller = (JaracterSheetController) loader.getController();
         primaryStage.setTitle("Jaracter Sheet Beta 1.5.1");
         primaryStage.setScene(new Scene(root, 1250.0D, 725.0D));
         primaryStage.setOnCloseRequest(this.promptSave);

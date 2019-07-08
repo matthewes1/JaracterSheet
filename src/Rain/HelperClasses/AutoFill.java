@@ -1,6 +1,6 @@
 package Rain.HelperClasses;
 
-import Rain.MainPackage.JaracterSheetController;
+import Rain.MainPackage.Main;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.ChoiceBox;
@@ -47,7 +47,7 @@ public class AutoFill {
                     initiativeUpdater.setSelected(!initiativeUpdater.isSelected());
                 }
 
-                JaracterSheetController.setUnSaved();
+                Main.getController().setUnSaved();
             }
         });
     }
@@ -111,7 +111,7 @@ public class AutoFill {
 
             //Toggles selection to auto update
             proficiencySelection.getSelectionModel().select(selected);
-            JaracterSheetController.setUnSaved();
+            Main.getController().setUnSaved();
         });
     }
 
@@ -142,7 +142,7 @@ public class AutoFill {
                 bonus = bonus.substring(0, bonus.indexOf(": ") + 2);
                 skillBonus.setText(bonus + score);
             }
-            JaracterSheetController.setUnSaved();
+            Main.getController().setUnSaved();
         });
     }
 
@@ -244,7 +244,6 @@ public class AutoFill {
                 }
 
                 experience.setText(experienceString);
-                JaracterSheetController.setUnSaved();
             }
         });
     }

@@ -36,8 +36,8 @@ public class JaracterSheetController {
     //TODO add Apache license after confirmation if controlsfx is needed and find SRD license
     //TODO save file loading filtering
 
-    private static DnDCharacter currentCharacter = new DnDCharacter();
-    private static boolean saved = true;
+    private DnDCharacter currentCharacter = new DnDCharacter();
+    private boolean saved = true;
     private File propertyFile = new File("saves/config.properties");
     private Properties properties = new Properties();
     private ObservableList<Spell> spells = FXCollections.observableArrayList();
@@ -421,15 +421,15 @@ public class JaracterSheetController {
     public JaracterSheetController() {
     }
 
-    public static void setUnSaved() {
+    public void setUnSaved() {
         saved = false;
     }
 
-    public static boolean getSavedState() {
+    public boolean getSavedState() {
         return saved;
     }
 
-    public static DnDCharacter getChar() {
+    public DnDCharacter getChar() {
         return currentCharacter;
     }
 
@@ -440,7 +440,6 @@ public class JaracterSheetController {
         inputValidation();
         autoFill();
         registerSavedState();
-        levelSpinner.increment();
         saved = true;
         License.printLicenses();
     }
@@ -659,11 +658,11 @@ public class JaracterSheetController {
         });
         customInitiative.selectedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
             JaracterSheetController.this.updateInit();
-            JaracterSheetController.setUnSaved();
+            Main.getController().setUnSaved();
         });
         customInitiativeField.getEditor().textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
             JaracterSheetController.this.updateInit();
-            JaracterSheetController.setUnSaved();
+            Main.getController().setUnSaved();
         });
 
         //Register ability modifiers and ability scores
