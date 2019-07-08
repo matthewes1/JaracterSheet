@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="spellPopup" prefHeight="375.0" prefWidth="600.0"
+            xmlns="http://javafx.com/javafx/8.0.211" fx:controller="Rain.Spells.NewSpellController">
+    <children>
+        <Text layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Spell Name:">
+            <font>
+                <Font size="15.0"/>
+            </font>
+        </Text>
+        <TextField fx:id="spellName" layoutX="81.0" text="New Spell"/>
+        <Text layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level:">
+            <font>
+                <Font size="15.0"/>
+            </font>
+        </Text>
+        <TextField fx:id="spellLevel" layoutX="81.0" layoutY="30.0"/>
+        <Text layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="School:">
+            <font>
+                <Font size="15.0"/>
+            </font>
+        </Text>
+        <TextField fx:id="spellSchool" layoutX="81.0" layoutY="60.0"/>
+        <Text layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cast Time:">
+            <font>
+                <Font size="15.0"/>
+            </font>
+        </Text>
+        <TextField fx:id="spellCastTime" layoutX="81.0" layoutY="90.0"/>
+        <Text layoutX="240.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Duration:">
+            <font>
+                <Font size="15.0"/>
+            </font>
+        </Text>
+        <TextField fx:id="spellDuration" layoutX="321.0"/>
+        <Text layoutX="240.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Range:">
+            <font>
+                <Font size="15.0"/>
+            </font>
+        </Text>
+        <TextField fx:id="spellRange" layoutX="321.0" layoutY="30.0"/>
+        <Text layoutX="240.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Components:">
+            <font>
+                <Font size="15.0"/>
+            </font>
+        </Text>
+        <TextArea fx:id="spellComponents" layoutX="240.0" layoutY="80.0" prefHeight="62.0" prefWidth="360.0"/>
+        <Text layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description:">
+            <font>
+                <Font size="15.0"/>
+            </font>
+        </Text>
+        <TextArea fx:id="spellDescription" layoutY="143.0" prefHeight="197.0" prefWidth="600.0"/>
+        <Button layoutX="494.0" layoutY="344.0" mnemonicParsing="false" onAction="#save" text="Add"/>
+        <Button layoutX="544.0" layoutY="344.0" mnemonicParsing="false" onAction="#cancel" text="Cancel"/>
+    </children>
+</AnchorPane>

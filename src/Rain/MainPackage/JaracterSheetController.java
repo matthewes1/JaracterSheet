@@ -2,10 +2,8 @@ package Rain.MainPackage;
 
 import Rain.HelperClasses.*;
 import Rain.PlayableThings.DnDCharacter;
-import Rain.Spells.Spell;
+import Rain.Spells.SpellBookController;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -40,7 +38,6 @@ public class JaracterSheetController {
     private boolean saved = true;
     private File propertyFile = new File("saves/config.properties");
     private Properties properties = new Properties();
-    private ObservableList<Spell> spells = FXCollections.observableArrayList();
 
     //<editor-fold desc="FXML declarations">
     @FXML
@@ -409,6 +406,10 @@ public class JaracterSheetController {
     private TextArea feats;
     @FXML
     private TextArea backStory;
+    @FXML
+    private GridPane spellBookTab;
+    @FXML
+    private SpellBookController spellBookTabController;
     //</editor-fold>
     /**
      * Called when options pane is closed so the colors update
@@ -430,6 +431,14 @@ public class JaracterSheetController {
     }
 
     public DnDCharacter getChar() {
+        return currentCharacter;
+    }
+
+    public SpellBookController getSpellBookController() {
+        return spellBookTabController;
+    }
+
+    public DnDCharacter getCurrentCharacter() {
         return currentCharacter;
     }
 
