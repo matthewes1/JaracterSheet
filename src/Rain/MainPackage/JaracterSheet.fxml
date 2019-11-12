@@ -10,7 +10,7 @@
 <?import java.lang.*?>
 <ScrollPane xmlns:fx="http://javafx.com/fxml/1" fx:id="mainPane" fitToHeight="true" fitToWidth="true" minHeight="725.0"
             minWidth="1250.0" pannable="true" prefHeight="721.0" prefWidth="1250.0"
-            xmlns="http://javafx.com/javafx/8.0.211" fx:controller="Rain.MainPackage.JaracterSheetController">
+            xmlns="http://javafx.com/javafx/8.0.172-ea" fx:controller="Rain.MainPackage.JaracterSheetController">
     <content>
         <TabPane minHeight="723.0" minWidth="1248.0">
             <tabs>
@@ -471,7 +471,7 @@
                                         <Pane style="-fx-border-color: BLACK;" GridPane.rowIndex="2">
                                             <children>
                                                 <Polygon fill="WHITE" layoutX="-532.0" layoutY="-518.0" stroke="BLACK"
-                                                         strokeType="INSIDE" style="-fx-fill: SIENNA;">
+                                                         strokeType="INSIDE" style="-fx-fill: BLUE;">
                                                     <points>
                                                         <Double fx:value="558"/>
                                                         <Double fx:value="532"/>
@@ -506,7 +506,7 @@
                                                     </font>
                                                 </Text>
                                                 <Polygon fill="WHITE" layoutX="-507.0" layoutY="-458.0" stroke="BLACK"
-                                                         strokeType="INSIDE" style="-fx-fill: SIENNA;">
+                                                         strokeType="INSIDE" style="-fx-fill: BLUE;">
                                                     <points>
                                                         <Double fx:value="558"/>
                                                         <Double fx:value="532"/>
@@ -532,7 +532,7 @@
                                                            prefHeight="35.0" prefWidth="53.0" promptText="0"
                                                            style="-fx-background-color: NULL;"/>
                                                 <Polygon fill="WHITE" layoutX="-507.0" layoutY="-493.0" stroke="BLACK"
-                                                         strokeType="INSIDE" style="-fx-fill: SIENNA;">
+                                                         strokeType="INSIDE" style="-fx-fill: BLUE;">
                                                     <points>
                                                         <Double fx:value="558"/>
                                                         <Double fx:value="532"/>
