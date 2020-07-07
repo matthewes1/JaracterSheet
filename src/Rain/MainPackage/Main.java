@@ -60,7 +60,7 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("JaracterSheet.fxml"));
         Parent root = loader.load();
         controller = (JaracterSheetController) loader.getController();
-        primaryStage.setTitle("Jaracter Sheet Beta 1.6.0");
+        primaryStage.setTitle("Jaracter Sheet Beta 1.6.1");
         primaryStage.setScene(new Scene(root, 1250.0D, 725.0D));
         primaryStage.setOnCloseRequest(this.promptSave);
         primaryStage.setMinWidth(1250);

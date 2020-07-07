@@ -1,3 +1,5 @@
+1.6.1
+-Set text to wrap on spell description
 1.6.0
 -Spellbook ui changed
 -Full spellbook functionality implemented
